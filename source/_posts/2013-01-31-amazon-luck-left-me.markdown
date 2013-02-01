@@ -12,6 +12,7 @@ I lived before, people did not have a lot of trust in the post, so in the
 beginning the British system truly amazed me.  Three years later I am 
 reconsidering this statement.
 
+<!-- more-->
 On the unrelated note, I had a discussion once with my German colleague
 and he was vastly complaining about the British post.  When I asked to
 explain the matter, he said that since he moved into the UK, eight years
