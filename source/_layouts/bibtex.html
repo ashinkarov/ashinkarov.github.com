@@ -1,0 +1,11 @@
+---
+layout: page
+comments: false
+sharing: false
+---
+  <h2>{{ page.entry.title }}</h2>
+  <h3>{{ page.entry.author }}</h3>
+  {% replacer %}
+    {{ page.entry.abstract }}
+  {% endreplacer %}
+  <pre>{{ page.entry.bibtex }}</pre>

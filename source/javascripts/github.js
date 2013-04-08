@@ -1,4 +1,6 @@
 var github = (function(){
+  var repos_exclude = ['ashinkarov.github.com'];
+
   function escapeHtml(str) {
     return $('<div/>').text(str).html();
   }
@@ -21,6 +23,7 @@ var github = (function(){
           if (!data || !data.data) { return; }
           for (var i = 0; i < data.data.length; i++) {
             if (options.skip_forks && data.data[i].fork) { continue; }
+            if (repos_exclude.indexOf (data.data[i].name) != -1) {continue; }
             repos.push(data.data[i]);
           }
           repos.sort(function(a, b) {
