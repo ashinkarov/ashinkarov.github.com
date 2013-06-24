@@ -9,8 +9,9 @@ sharing: false
 
 ### Here is a list of unpublished work
 
-Here I present a work that by some reasons was not publised on any conference
-but which still interests me and just waits to be finished.
+Here I present materials that by some reason were not published,
+or were submitted to some conference and await for reviews.  These materials are 
+still in the are of my interests -- they are just waiting for a good moment.
 
 {% bibliography -q @*[published=no] %}
 

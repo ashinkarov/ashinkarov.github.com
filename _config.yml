@@ -108,8 +108,8 @@ scholar:
   style: plugins/ieee.csl
   locale: en
 
-  sort_by: none
-  order: ascending
+  sort_by: year
+  order: descending
 
   source: ./source/publications
   bibliography: bib.bib

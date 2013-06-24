@@ -3,6 +3,28 @@
 References
 ==========
 
+@inproceedings{data-layouts,
+        Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
+        Title = {Data Layout Inference for Code Vectorisation},
+        BookTitle = {International Conference on High Performance Computing \& Simulation (HPCS'13)},
+        Year = {2013},
+        Abstract = 
+            {SIMD instructions of modern CPUs are crucially important for 
+            the performance of compute-intensive algorithms. Auto-vectorisation
+            often fails due to an unfortunate choice of data layout by the programmer.
+            This paper proposes a data layout inference for auto-vectorisation
+            which identifies layout transformations that convert SIMD-unfavorable
+            layouts of data structures into favorable ones.
+            We present a type system for layout transformations and we sketch an inference
+            algorithm for it. Finally, we present some initial performance figures
+            for the impact of the inferred layout transformations.
+            They show that non-intuitive layouts
+            that are inferred through our system can have a vast performance impact
+            on compute intensive programs.},
+        Note = {Accepted for publication at HPCS-2013},
+        Url = {/publications/data-layouts.pdf},
+}
+
 @inproceedings{sexynbody,
         Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo
         and Bernecky, Robert and Douma, Roeland and Grelck, Clemens},
@@ -67,25 +89,24 @@ References
         Url = {/publications/cpcgcc.pdf},
 }
 
-@unpublished{data-layouts,
+
+@unpublished{layout-correctness,
         Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
-        Title = {Data Layout Inference for Code Vectorisation},
+        Title = {Sematics-Preserving Data Layout Transformations for Improved Vectorisation},
         Year = {2013},
         Abstract = 
-            {SIMD instructions of modern CPUs are crucially important for 
-            the performance of compute-intensive algorithms. Auto-vectorisation
-            often fails due to an unfortunate choice of data layout by the programmer.
-            This paper proposes a data layout inference for auto-vectorisation
-            which identifies layout transformations that convert SIMD-unfavorable
-            layouts of data structures into favorable ones.
-            We present a type system for layout transformations and we sketch an inference
-            algorithm for it. Finally, we present some initial performance figures
-            for the impact of the inferred layout transformations.
-            They show that non-intuitive layouts
-            that are inferred through our system can have a vast performance impact
-            on compute intensive programs.},
-        Note = {Submitted for AMMP-2013 workshop},
-        Url = {/publications/data-layouts.pdf},
+            {Data-Layouts that are favourable from an algorithmic perspective often are less
+            suitable for vectorisation, i.e., for an effective use of modern processor's vector
+            instructions.  This paper presents work on a compiler driven approach towards 
+            automatically transforming data layouts into a form that is suitable for vectorisation.
+            In particular, we present a program transformation for a first-order functional
+            array programming language that systematically modifies they layouts of all
+            data structures.  At the same time, the transformation also adjusts the code 
+            that operates on these structures so that the overall computation remains 
+            unchanged.  We define a correctness criterion for layout modifying program 
+            transformations and we show that our transformation abides to this criterion.},
+        Note = {Submitted for FHPC-2013},
+        Url = {/publications/layout-correctness.pdf},
         published = {no},
 }
 
@@ -136,7 +157,7 @@ References
         Year = {2009},
         Abstract = 
         {There exist many well-known systems for the static analysis of C code.
-        Unfortunately, the majority of these tools only operate \textit{after} 
+        Unfortunately, the majority of these tools only operate after
         full or selective preprocessing, where preprocessor macros embedded in
         source files are converted into pure C-language code.
         The implicit assumption that sources may be fully or partially 
