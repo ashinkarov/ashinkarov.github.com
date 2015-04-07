@@ -7,11 +7,11 @@ sharing: false
 
 ### Welcome to my homepage 
 
-I am a PhD student in the 
+I work as a PostDoctoral Research Associate in the 
 [School of Mathematical and Computer Sciences](http://www.macs.hw.ac.uk/)
 at Heriot-Watt University, Scotland.
 
-My research focuses on high performance compilers for multi-core architectures.
+My research focuses on high performance compilers for heterogeneous architectures.
 Specifically, I am interested in SIMD style vectorisation of high-level 
 languages.
 
