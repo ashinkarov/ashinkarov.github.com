@@ -1,11 +1,64 @@
 
+@phdthesis{asv-thesis,
+        Author = {\v{S}inkarovs, Artjoms},
+        Title = {Data Layout Types: a type-based approach to automatic data layout transformations for improved SIMD vectorisation},
+        Year = {2015},
+        Month = {05},
+        School = {School of Mathematical and Computer Sciences, Heriot-Watt University},
+        Address = {Heriot-Watt University, Edinburgh Campus, Edinburgh, Scotland, EH14 4AS},
+        Abstract =
+        {The increasing complexity of modern hardware requires sophisticated programming
+        techniques for programs to run efficiently.  At the same time, increased power of
+        modern hardware enables more advanced analyses to be included in compilers.
+        This thesis focuses on one particular optimisation technique that
+        improves utilisation of vector units.  The foundation of this technique is
+        the ability to chose memory mappings for data structures of a given program.
+        
+        Usually programming languages use a fixed layout for logical data structures
+        in physical memory.  Such a static mapping often has a negative effect on
+        usability of vector units.  In this thesis we consider a compiler for a
+        programming language that allows every data structure in a program to have its
+        own data layout.  We make sure that data layouts across the program are sound,
+        and most importantly we solve a problem of automatic data layout reconstruction.
+        To consistently do this, we formulate this as a type inference problem, where type
+        encodes a data layout for a given structure as well as implied program
+        transformations.  We prove that type-implied transformations preserve semantics
+        of the original programs and we demonstrate significant performance improvements
+        when targeting SIMD-capable architectures.},
+        Url = {/publications/asv-thesis.pdf},
+}
+
+@article{ccpe-data-layouts,
+        Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
+        Title = {Type-driven data layouts for improved vectorisation},
+        Journal = {Concurrency and Computation: Practice and Experience},
+        Issn = {1532-0634},
+        Doi = {10.1002/cpe.3501},
+        Year = {2015},
+        Note = {cpe.3501},
+        Abstract = 
+        {Vector instructions of modern CPUs are crucially important for the
+        performance of compute-intensive algorithms. Auto-vectorisation often fails
+        because of an unfortunate choice of data layout by the programmer. This paper
+        proposes a data layout inference for auto-vectorisation that identifies layout
+        transformations that convert single instruction, multiple data-unfavourable
+        layouts of data structures into favourable ones. We present a type system for
+        layout transformations, and we sketch an inference algorithm for it. Finally,
+        we present some initial performance figures for the impact of the inferred
+        layout transformations. They show that non-intuitive layouts that are inferred
+        through our system can have a vast performance impact on compute intensive
+        programs.},
+        Url = {/publications/ccpe-data-layouts.pdf},
+}
+
+
 @inproceedings{data-layouts,
         Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
         Title = {Data Layout Inference for Code Vectorisation},
         BookTitle = {International Conference on High Performance Computing \& Simulation (HPCS'13)},
         Year = {2013},
-        Abstract = 
-            {SIMD instructions of modern CPUs are crucially important for 
+        Abstract =
+            {SIMD instructions of modern CPUs are crucially important for
             the performance of compute-intensive algorithms. Auto-vectorisation
             often fails due to an unfortunate choice of data layout by the programmer.
             This paper proposes a data layout inference for auto-vectorisation
@@ -24,13 +77,13 @@
 @inproceedings{sexynbody,
         Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo
         and Bernecky, Robert and Douma, Roeland and Grelck, Clemens},
-        Title = {SAC/C Formulations of the All-Pairs N-Body Problem 
-        and their Performance on SMPs and GPGPUs},
+        Title = {SAC/{C} Formulations of the All-Pairs N-Body Problem
+        and their Performance on {SMP}s and {GPGPU}s},
         Journal = {Concurrency and Computation: Practice and Experience},
         Year = {2012},
         Publisher = {Accepted for publication in ``Concurrency and Computation: Practice and Experience'' journal in 2012},
-        Abstract = 
-            {\v{T}his paper describes our experience in implementing the classical
+        Abstract =
+            {This paper describes our experience in implementing the classical
             N-body algorithm in SaC and analysing the runtime performance
             achieved on three different machines: a dual-processor 8-core Dell
             PowerEdge 2950 (a Beowulf cluster node, the reference machine), a
@@ -59,19 +112,19 @@
 
 @inproceedings{cpcgcc,
         Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
-        Title = {Portable Support for Explicit Vectorisation in C},
+        Title = {Portable Support for Explicit Vectorisation in {C}},
         BookTitle = {16th Workshop on Compilers for Parallel Computing (CPC'12)},
         Year = {2012},
-        Abstract = 
+        Abstract =
         {In pursuit of requirements of modern software, high-per\-for\-mance
         computing often offers a narrowly-tailored solutions that reduce
         portability of software.  As one of such examples in this paper,
         we consider the situation with SIMD accelerators, whose importance
         seriously increased in the last decade.
-        Firstly appeared in the early 90es, being oriented exclusively on 
+        Firstly appeared in the early 90es, being oriented exclusively on
         graphics acceleration, nowadays SIMD CPU extensions are used in a
         variety of fields.  The lack of standard and incompatibility of
-        instruction sets through the different types of CPUs substantially 
+        instruction sets through the different types of CPUs substantially
         increase the complexity of developing portable applications within
         the extensions.
         In this paper we present an abstraction layer implemented as a set of
@@ -91,16 +144,16 @@
         Title = {Semantics-Preserving Data Layout Transformations for Improved Vectorisation},
         BookTitle = {2nd Workshop on Functional High-Performance Computing (FHPC'13)},
         Year = {2013},
-        Abstract = 
+        Abstract =
             {Data-Layouts that are favourable from an algorithmic perspective often are less
             suitable for vectorisation, i.e., for an effective use of modern processor's vector
-            instructions.  This paper presents work on a compiler driven approach towards 
+            instructions.  This paper presents work on a compiler driven approach towards
             automatically transforming data layouts into a form that is suitable for vectorisation.
             In particular, we present a program transformation for a first-order functional
             array programming language that systematically modifies they layouts of all
-            data structures.  At the same time, the transformation also adjusts the code 
-            that operates on these structures so that the overall computation remains 
-            unchanged.  We define a correctness criterion for layout modifying program 
+            data structures.  At the same time, the transformation also adjusts the code
+            that operates on these structures so that the overall computation remains
+            unchanged.  We define a correctness criterion for layout modifying program
             transformations and we show that our transformation abides to this criterion.},
         Note = {Accepted for publication at FHPC'13},
         Url = {/publications/layout-correctness.pdf},
@@ -111,7 +164,7 @@
         Author = {\v{S}inkarovs, Artjoms and Pe\v{c}erska, Julija and Zai\v{c}enkovs, Pavels},
         Title = {On dynamic extensions of context-dependent parsers},
         Year = {2012},
-        Abstract = 
+        Abstract =
         {Modern programming languages define a syntax that cannot be described precisely
         using context free grammars. This problem is well known, and as a solution
         there are parser generators like ANTLR, which generates LL(*) parsers rather
@@ -147,17 +200,16 @@
 
 @mastersthesis{masters,
         Author = {\v{S}inkarovs, Artjoms},
-        Title = {C and C Preprocessor Static Analysis},
-        School = {University of Latvia},
-        Address = {Raiņa bulvāris 19, Rīga, Latvia, LV-1586},
+        Title = {C and {C} Preprocessor Static Analysis},
+        Address = {University of Latvia, Raiņa bulvāris 19, Rīga, Latvia, LV-1586},
         Year = {2009},
-        Abstract = 
+        Abstract =
         {There exist many well-known systems for the static analysis of C code.
         Unfortunately, the majority of these tools only operate after
         full or selective preprocessing, where preprocessor macros embedded in
         source files are converted into pure C-language code.
-        The implicit assumption that sources may be fully or partially 
-        stripped of preprocessing directives without consequence is 
+        The implicit assumption that sources may be fully or partially
+        stripped of preprocessing directives without consequence is
         harmful or even outright erroneous: the preprocessing phase collapses
         to a set of possible macro expressions, which may differ between
         compilations.  In this document, we introduce a tool generating the
@@ -166,21 +218,25 @@
         syntactic errors in mixed C and CPP code, where the produced
         combinations of C and collapsed preprocessor statements are analysed by
         a front-end, C-only static analysis tool.},
+        Url = {http://dspace.lu.lv/dspace/handle/7/25647},
 }
 
-@bachelorsthesis{bachelors,
+@mastersthesis{bachelors,
         Author = {\v{S}inkarovs, Artjoms},
-        Title = {Tool for user interface generation. Bachelor's thesis, University of Latvia, Raiņa bulvāris 19, Rīga, Latvia, LV-1586},
+        Title = {Tool for user interface generation},
+        Type = {Bachelor's thesis},
+        Address = {University of Latvia, Raiņa bulvāris 19, Rīga, Latvia, LV-1586},
         Year = {2007},
-        Abstract = 
-        {The Bachelor Paper under consideration deals with the problem of 
-        user interface creation and support. The paper studies the approach, 
-        which helps to create a user’s interface configuration and transform it 
+        Abstract =
+        {The Bachelor Paper under consideration deals with the problem of
+        user interface creation and support. The paper studies the approach,
+        which helps to create a user’s interface configuration and transform it
         into various kinds of user’s interfaces.
-        
-        The paper uses a specially developed library written in Python to 
-        create a user’s interface. The library has been made so that it can 
-        easily be adapted and enriched. The method can also be used for 
+
+        The paper uses a specially developed library written in Python to
+        create a user’s interface. The library has been made so that it can
+        easily be adapted and enriched. The method can also be used for
         devices other than personal computer, as well  as for programs with a
         different architecture type.},
+        Url = {https://dspace.lu.lv/dspace/handle/7/27400},
 }
