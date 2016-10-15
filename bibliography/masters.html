@@ -9,9 +9,7 @@
   <meta name="author" content="Artem Shinkarov">
 
   
-  <meta name="description" content="Welcome to my homepage I work as a PostDoctoral Research Associate in the
-School of Mathematical and Computer Sciences
-at Heriot-Watt University, &hellip;">
+  <meta name="description" content="C and C Preprocessor Static Analysis Šinkarovs, Artjoms There exist many well-known systems for the static analysis of C code. Unfortunately, the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ at Heriot-Watt University, &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ashinkarov.github.com/">
+  <link rel="canonical" href="http://ashinkarov.github.com/bibliography/masters.html">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -72,39 +70,46 @@ at Heriot-Watt University, &hellip;">
       <div>
 <article role="article">
   
-  <h3>Welcome to my homepage</h3>
-
-<p>I work as a PostDoctoral Research Associate in the
-<a href="http://www.macs.hw.ac.uk/">School of Mathematical and Computer Sciences</a>
-at Heriot-Watt University, Scotland.</p>
-
-<p>My research focuses on high performance compilers for heterogeneous architectures.
-Specifically, I am interested in SIMD style vectorisation of high-level
-languages.</p>
-
-<p>During my research I was actively involved in <a href="http://www.sac-home.org">SaC</a>
-and <a href="http://gcc.gnu.org">GNU GCC</a> development; I am still an active contributor
-in both projects.  I have a strong interest in high performance compilers,
-runtime systems, type systems, etc.</p>
-
-<p>Details of my work gets available in the publication section as soon as it gets
-available.  If you have similar interests or have some suggestions regarding any
-project I am involved, please do contact me.</p>
-
-<h3>Teaching</h3>
-
-<p>During the last three years I was participating in the various courses at the
-University of Hertfordshire and in the Heriot-Watt University.  Here is a page
-that summarises the courses that I did.</p>
-
-<h3>Other interests</h3>
-
-<p>Besides my main research focus I do enjoy well designed and well written
-software.  I do participate in a number of open-source projects fixing various
-bugs and implementing missing features.  I also have a number of programs under
-my github account which I find useful.</p>
-
-<p>Non-technical interests include: cycling/hiking, jazz music, reading.</p>
+    <h2>C and C Preprocessor Static Analysis</h2>
+  <h3>Šinkarovs, Artjoms</h3>
+  <p>
+    There exist many well-known systems for the static analysis of C code.
+        Unfortunately, the majority of these tools only operate after
+        full or selective preprocessing, where preprocessor macros embedded in
+        source files are converted into pure C-language code.
+        The implicit assumption that sources may be fully or partially
+        stripped of preprocessing directives without consequence is
+        harmful or even outright erroneous: the preprocessing phase collapses
+        to a set of possible macro expressions, which may differ between
+        compilations.  In this document, we introduce a tool generating the
+        full abstract syntax tree of both preprocessor and C statements. We then
+        consider a simple application of this tool for discovering
+        syntactic errors in mixed C and CPP code, where the produced
+        combinations of C and collapsed preprocessor statements are analysed by
+        a front-end, C-only static analysis tool.
+  </p>
+  <pre>@mastersthesis{masters,
+  author = {\v{S}inkarovs, Artjoms},
+  title = {C and {C} Preprocessor Static Analysis},
+  address = {University of Latvia, Raiņa bulvāris 19, Rīga, Latvia, LV-1586},
+  year = {2009},
+  abstract = {There exist many well-known systems for the static analysis of C code.
+          Unfortunately, the majority of these tools only operate after
+          full or selective preprocessing, where preprocessor macros embedded in
+          source files are converted into pure C-language code.
+          The implicit assumption that sources may be fully or partially
+          stripped of preprocessing directives without consequence is
+          harmful or even outright erroneous: the preprocessing phase collapses
+          to a set of possible macro expressions, which may differ between
+          compilations.  In this document, we introduce a tool generating the
+          full abstract syntax tree of both preprocessor and C statements. We then
+          consider a simple application of this tool for discovering
+          syntactic errors in mixed C and CPP code, where the produced
+          combinations of C and collapsed preprocessor statements are analysed by
+          a front-end, C-only static analysis tool.},
+  url = {http://dspace.lu.lv/dspace/handle/7/25647}
+}
+</pre>
 
   
     <footer>

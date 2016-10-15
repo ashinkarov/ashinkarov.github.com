@@ -9,9 +9,7 @@
   <meta name="author" content="Artem Shinkarov">
 
   
-  <meta name="description" content="Welcome to my homepage I work as a PostDoctoral Research Associate in the
-School of Mathematical and Computer Sciences
-at Heriot-Watt University, &hellip;">
+  <meta name="description" content="Portable Support for Explicit Vectorisation in C Šinkarovs, Artjoms and Scholz, Sven-Bodo In pursuit of requirements of modern software, high-per\- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ at Heriot-Watt University, &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ashinkarov.github.com/">
+  <link rel="canonical" href="http://ashinkarov.github.com/bibliography/cpcgcc.html">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -72,39 +70,56 @@ at Heriot-Watt University, &hellip;">
       <div>
 <article role="article">
   
-  <h3>Welcome to my homepage</h3>
-
-<p>I work as a PostDoctoral Research Associate in the
-<a href="http://www.macs.hw.ac.uk/">School of Mathematical and Computer Sciences</a>
-at Heriot-Watt University, Scotland.</p>
-
-<p>My research focuses on high performance compilers for heterogeneous architectures.
-Specifically, I am interested in SIMD style vectorisation of high-level
-languages.</p>
-
-<p>During my research I was actively involved in <a href="http://www.sac-home.org">SaC</a>
-and <a href="http://gcc.gnu.org">GNU GCC</a> development; I am still an active contributor
-in both projects.  I have a strong interest in high performance compilers,
-runtime systems, type systems, etc.</p>
-
-<p>Details of my work gets available in the publication section as soon as it gets
-available.  If you have similar interests or have some suggestions regarding any
-project I am involved, please do contact me.</p>
-
-<h3>Teaching</h3>
-
-<p>During the last three years I was participating in the various courses at the
-University of Hertfordshire and in the Heriot-Watt University.  Here is a page
-that summarises the courses that I did.</p>
-
-<h3>Other interests</h3>
-
-<p>Besides my main research focus I do enjoy well designed and well written
-software.  I do participate in a number of open-source projects fixing various
-bugs and implementing missing features.  I also have a number of programs under
-my github account which I find useful.</p>
-
-<p>Non-technical interests include: cycling/hiking, jazz music, reading.</p>
+    <h2>Portable Support for Explicit Vectorisation in C</h2>
+  <h3>Šinkarovs, Artjoms and Scholz, Sven-Bodo</h3>
+  <p>
+    In pursuit of requirements of modern software, high-per\-for\-mance
+        computing often offers a narrowly-tailored solutions that reduce
+        portability of software.  As one of such examples in this paper,
+        we consider the situation with SIMD accelerators, whose importance
+        seriously increased in the last decade.
+        Firstly appeared in the early 90es, being oriented exclusively on
+        graphics acceleration, nowadays SIMD CPU extensions are used in a
+        variety of fields.  The lack of standard and incompatibility of
+        instruction sets through the different types of CPUs substantially
+        increase the complexity of developing portable applications within
+        the extensions.
+        In this paper we present an abstraction layer implemented as a set of
+        C language extensions within the GNU GCC compiler which provides an
+        interface for SIMD vectors and operations independently from the
+        architecture.  First of all, these abstractions allow to exploit SIMD
+        extensions of a CPU explicitly, which is useful when auto-vectoriser
+        fails.  Secondly, the abstractions are general enough to be mapped to
+        any hardware supporting SIMD paradigms; hence the new abstractions
+        could be considered as a step forward to a new C language standard.
+  </p>
+  <pre>@inproceedings{cpcgcc,
+  author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
+  title = {Portable Support for Explicit Vectorisation in {C}},
+  booktitle = {16th Workshop on Compilers for Parallel Computing (CPC'12)},
+  year = {2012},
+  abstract = {In pursuit of requirements of modern software, high-per\-for\-mance
+          computing often offers a narrowly-tailored solutions that reduce
+          portability of software.  As one of such examples in this paper,
+          we consider the situation with SIMD accelerators, whose importance
+          seriously increased in the last decade.
+          Firstly appeared in the early 90es, being oriented exclusively on
+          graphics acceleration, nowadays SIMD CPU extensions are used in a
+          variety of fields.  The lack of standard and incompatibility of
+          instruction sets through the different types of CPUs substantially
+          increase the complexity of developing portable applications within
+          the extensions.
+          In this paper we present an abstraction layer implemented as a set of
+          C language extensions within the GNU GCC compiler which provides an
+          interface for SIMD vectors and operations independently from the
+          architecture.  First of all, these abstractions allow to exploit SIMD
+          extensions of a CPU explicitly, which is useful when auto-vectoriser
+          fails.  Secondly, the abstractions are general enough to be mapped to
+          any hardware supporting SIMD paradigms; hence the new abstractions
+          could be considered as a step forward to a new C language standard.},
+  url = {/publications/cpcgcc.pdf}
+}
+</pre>
 
   
     <footer>

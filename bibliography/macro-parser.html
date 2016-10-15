@@ -9,9 +9,7 @@
   <meta name="author" content="Artem Shinkarov">
 
   
-  <meta name="description" content="Welcome to my homepage I work as a PostDoctoral Research Associate in the
-School of Mathematical and Computer Sciences
-at Heriot-Watt University, &hellip;">
+  <meta name="description" content="On dynamic extensions of context-dependent parsers Šinkarovs, Artjoms and Pečerska, Julija and Zaičenkovs, Pavels Modern programming languages &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ at Heriot-Watt University, &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ashinkarov.github.com/">
+  <link rel="canonical" href="http://ashinkarov.github.com/bibliography/macro-parser.html">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -72,39 +70,63 @@ at Heriot-Watt University, &hellip;">
       <div>
 <article role="article">
   
-  <h3>Welcome to my homepage</h3>
-
-<p>I work as a PostDoctoral Research Associate in the
-<a href="http://www.macs.hw.ac.uk/">School of Mathematical and Computer Sciences</a>
-at Heriot-Watt University, Scotland.</p>
-
-<p>My research focuses on high performance compilers for heterogeneous architectures.
-Specifically, I am interested in SIMD style vectorisation of high-level
-languages.</p>
-
-<p>During my research I was actively involved in <a href="http://www.sac-home.org">SaC</a>
-and <a href="http://gcc.gnu.org">GNU GCC</a> development; I am still an active contributor
-in both projects.  I have a strong interest in high performance compilers,
-runtime systems, type systems, etc.</p>
-
-<p>Details of my work gets available in the publication section as soon as it gets
-available.  If you have similar interests or have some suggestions regarding any
-project I am involved, please do contact me.</p>
-
-<h3>Teaching</h3>
-
-<p>During the last three years I was participating in the various courses at the
-University of Hertfordshire and in the Heriot-Watt University.  Here is a page
-that summarises the courses that I did.</p>
-
-<h3>Other interests</h3>
-
-<p>Besides my main research focus I do enjoy well designed and well written
-software.  I do participate in a number of open-source projects fixing various
-bugs and implementing missing features.  I also have a number of programs under
-my github account which I find useful.</p>
-
-<p>Non-technical interests include: cycling/hiking, jazz music, reading.</p>
+    <h2>On dynamic extensions of context-dependent parsers</h2>
+  <h3>Šinkarovs, Artjoms and Pečerska, Julija and Zaičenkovs, Pavels</h3>
+  <p>
+    Modern programming languages define a syntax that cannot be described precisely
+        using context free grammars. This problem is well known, and as a solution
+        there are parser generators like ANTLR, which generates LL(*) parsers rather
+        than LALR/LR. Nevertheless, a lot of real-world parsers are implemented by
+        hand. A great difficulty arises when there appears a need to introduce some
+        changes to the grammar of the language. This implies that the parser
+        has to be rewritten to include new rules and resolve the created
+        ambiguities manually.</p><p>Whenever radical changes to the language are required, it is understood that
+        parser rewriting will be necessary. However, when syntax requires some
+        extensions to the convenience of the user, it is natural to allow her to adapt
+        the existing syntax of the selected programming language to her needs. In this
+        paper we present a way of building a system that allows introducing dynamic
+        changes to the grammar and that works on top of any recursive descent parser
+        that meets some minor restrictions.</p><p>The execution of the proposed system consists of 2 steps. First is matching a
+        list of tokens against a regular expression built on tokens and encoded
+        production names of the given grammar. And the second is transforming the
+        result using a functional language. We demonstrate that using this approach
+        makes it possible to i) give static guarantees regarding the transformation
+        rules; ii) safely express non-trivial syntactical constructions; and iii)
+        perform a restricted partial evaluation.
+  </p>
+  <pre>@unpublished{macro-parser,
+  author = {\v{S}inkarovs, Artjoms and Pe\v{c}erska, Julija and Zai\v{c}enkovs, Pavels},
+  title = {On dynamic extensions of context-dependent parsers},
+  year = {2012},
+  abstract = {Modern programming languages define a syntax that cannot be described precisely
+          using context free grammars. This problem is well known, and as a solution
+          there are parser generators like ANTLR, which generates LL(*) parsers rather
+          than LALR/LR. Nevertheless, a lot of real-world parsers are implemented by
+          hand. A great difficulty arises when there appears a need to introduce some
+          changes to the grammar of the language. This implies that the parser
+          has to be rewritten to include new rules and resolve the created
+          ambiguities manually.
+  
+          Whenever radical changes to the language are required, it is understood that
+          parser rewriting will be necessary. However, when syntax requires some
+          extensions to the convenience of the user, it is natural to allow her to adapt
+          the existing syntax of the selected programming language to her needs. In this
+          paper we present a way of building a system that allows introducing dynamic
+          changes to the grammar and that works on top of any recursive descent parser
+          that meets some minor restrictions.
+  
+          The execution of the proposed system consists of 2 steps. First is matching a
+          list of tokens against a regular expression built on tokens and encoded
+          production names of the given grammar. And the second is transforming the
+          result using a functional language. We demonstrate that using this approach
+          makes it possible to i) give static guarantees regarding the transformation
+          rules; ii) safely express non-trivial syntactical constructions; and iii)
+          perform a restricted partial evaluation.},
+  note = {Originally written for TFP-2012},
+  url = {https://github.com/junniest/bach_test_repo/blob/master/paper/paper.pdf},
+  published = {no}
+}
+</pre>
 
   
     <footer>

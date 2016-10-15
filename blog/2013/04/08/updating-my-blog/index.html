@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Updating my blog - ashinkarov.github.com</title>
+  <meta name="author" content="Artem Shinkarov">
+
+  
+  <meta name="description" content="Finally I found some time to turn my web-site on the github into personal
+homepage. I must say that I never liked web technologies, as I always have &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://ashinkarov.github.com/blog/2013/04/08/updating-my-blog/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="ashinkarov.github.com" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">ashinkarov.github.com</a></h1>
+  
+    <h2>thoughts and observations</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:ashinkarov.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/"><i class="icon-thumbs-up"></i> Welcome</a></li>
+  <li><a href="/publications"><i class="icon-cogs"></i> Publications</a></li>
+  <li><a href="/teaching"><i class="icon-group"></i> Teaching</a></li>
+
+  <li><a href="/blog"><i class="icon-file-alt"></i> Blog</a></li>
+
+  <!--li><a href="/blog/archives">Archives</a></li-->
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Updating My Blog</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-08T03:20:00+01:00" pubdate data-updated="true">Apr 8<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Finally I found some time to turn my web-site on the github into personal
+homepage.  I must say that I never liked web technologies, as I always have a
+feeling that I am digging through an enormous pile of shit when I just need to
+create a set of nice-looking html pages.  Having said that, I put a lot of hope into
+jekyll and octopress guys as they <em>only</em> produce static htmls on output.  One tiny
+thing that I didn&#8217;t consider was that the glorious technology uses ruby as an
+implementation language.</p>
+
+<!-- more-->
+
+
+<p>So what&#8217;s wrong with ruby?  Honestly speaking I didn&#8217;t quite understand yet.
+May be there&#8217;s nothing wrong with it and I just cannot use it properly.
+However, right now it feels like an overcomplicated technology that cannot function
+properly.  I must admit that I am looking at it through the prism of jekyll, and
+most of the time it throws exceptions, doing the wrong thing or eating-up my cpu
+without doing anything useful.  Mind you &#8211; I am just trying to generate static
+htmls :)</p>
+
+<p>Anyhow, we shall see later if I am going to change my mind or not.  For the time
+being, let&#8217;s look on the bright side.  On the bright side, I must say that I
+managed to configure my bibliography in a reasonable way.  The only reasonable
+way is to generate html from the bibtex.  You configure it once, and then you
+just keep adding entries into the bibliography file.</p>
+
+<p>Conversion from bibtex to html is taken by
+<a href="https://github.com/inukshuk/jekyll-scholar">jecyll-scholar plugin</a> which
+promised to work perfectly well.  As you may guess it didn&#8217;t.  At least not from
+the very beginning.  It managed to produce html looking exactly as bibtex+latex
+would produce.  It is perfectly fine if you write a paper, but for your web-page
+you want some more.  For instance, you wan to include some links: like a path to
+the paper to make sure that people can download it, a bibtex entry, to make sure
+that people can add it in their paper, etc.  As it turns out jekyll-scholar
+didn&#8217;t do that, instead people suggested to use jekyll-scholar-extras, which
+granted most of the missing functionality, but everything was hard-coded.  Mind
+you, I didn&#8217;t want to touch ruby at this point.</p>
+
+<p>So I managed to solve generation of additional fields by modifying the
+style-file I was using (yeah, you need to pick-up a style-file from
+<a href="https://github.com/inukshuk/csl-ruby">here</a> which
+is equivalent to the parameter you pass to bibliography in latex).  But then I
+came across the problem that jekyll-scholar does not preserve original formating
+of the bibtex, which makes it impossible to generate correct bibtex entry.  That
+was the point when I decided to investigate.</p>
+
+<p>As far as I&#8217;ve never seen ruby in my life, it took me some three hours to find
+the problem and to come-up with <em>a</em> solution which I wasn&#8217;t particularly happy
+about, but at least it worked fine.  After that I thought that it would be stupid
+to keep the changes only for myself, and I decided to notify the author.  By the
+way it&#8217;s not that I am so altruistic, I just figured out that whenever I&#8217;ll
+update my ruby packages, my changes will be gone :)</p>
+
+<p>Well, then I notified the author without much of a hope, and to my surprise he
+was very enthusiastic about the changes I made, he even didn&#8217;t consider my way
+being wrong, which was quite surprising.  Then I explained some more details, found
+out some answers, and got really stuck in fixing jekyll-scholar :)  But, I must
+pay my true respect to <a href="https://github.com/inukshuk">Sylvester Keil</a> who was very
+patient and very active when it came to bug-fixing and implementing new
+features.</p>
+
+<p>To conclude, I think that the current state of jekyll-scholar is quite
+satisfying, and assuming that we will finish merging scholar-extras, it would be
+a very decent and configurable bibtex-html converter.  In essence, such moments
+make you believe that open source movement is not just a brand, it really works
+and works pretty well.</p>
+
+<p>Finally, if you have any comments or notes, or feature-requests regarding
+jekyll-scholar, please don&#8217;t hesitate to create a github issue or contact an
+author.  Every single contribution helps.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Artem Shinkarov</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-08T03:20:00+01:00" pubdate data-updated="true">Apr 8<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/blog/'>blog</a>, <a class='category' href='/blog/categories/html/'>html</a>, <a class='category' href='/blog/categories/jekyll/'>jekyll</a>, <a class='category' href='/blog/categories/jekyll-scholar/'>jekyll-scholar</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://ashinkarov.github.com/blog/2013/04/08/updating-my-blog/" data-via="" data-counturl="http://ashinkarov.github.com/blog/2013/04/08/updating-my-blog/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/02/01/teaching-operating-systems/" title="Previous Post: Teaching operating systems">&laquo; Teaching operating systems</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/04/09/firefox-in-gentoo/" title="Next Post: Firefox on Gentoo">Firefox on Gentoo &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1 style="padding-bottom: 15px;">About Me</h1>
+  <table>
+    <tr class="spaceunder">
+        <td colspan="2" style="text-align:right;">
+        <img src="/images/me.jpg" width="200" height="300" /></td>
+    </tr>
+    <tr class="spaceunder">
+        <td width="10%"><i class="icon-user"></i></td>
+        <td><b>Artem Shinkarov</b></td>
+    </tr>
+    <tr class="spaceunder">
+        <td><i class="icon-envelope-alt"></i></td>
+        <td><a href="mailto:artyom.shinkaroff@gmail.com">artyom.shinkaroff@gmail.com</a></td>
+    </tr>
+    <tr>
+        <td style="vertical-align: text-top"><i class="icon-building"></i></td>
+        <td><p>G.26, Earl Mountbatten Building<br/>
+               Heriot-Watt University<br/>
+               Riccarton, Edinburgh<br/>
+               EH14 4AS, United Kingdom</p>
+        </td>
+    </tr>
+  </table>
+</section>
+
+<section>
+  <h1><i class="icon-github icon-large"></i> GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/ashinkarov">@ashinkarov</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'ashinkarov',
+            count: 8,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Artem Shinkarov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ashinkarov-github-com';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://ashinkarov.github.com/blog/2013/04/08/updating-my-blog/';
+        var disqus_url = 'http://ashinkarov.github.com/blog/2013/04/08/updating-my-blog/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

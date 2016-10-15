@@ -1,0 +1,282 @@
+
+
+@inproceedings{bgs-fortran,
+        Author = {Vie{\ss}mann, Hans-Nikolai and Scholz, Sven-Bodo and
+                 \v{S}inkarovs, Artjoms and Bainbridge, Brian and Hamilton, Brian and Flower,
+                 Simon},
+        Title = {Making Fortran Legacy Code More Functional: Using the BGS
+                 Geomagnetic Field Modelling System As an Example},
+        BookTitle = {Proceedings of the 27th Symposium on the Implementation
+                    and Application of Functional Programming Languages},
+        Series = {IFL '15},
+        Year = {2015},
+        ISBN = {978-1-4503-4273-5},
+        Location = {Koblenz, Germany},
+        Pages = {11:1--11:13},
+        ArticleNo = {11},
+        NumPages = {13},
+        URL = {/publications/bgs-fortran.pdf},
+        DOI = {10.1145/2897336.2897348},
+        ACMId = {2897348},
+        Publisher = {ACM},
+        Address = {New York, NY, USA},
+        Keywords = {eigensystem, foreign function interface, fortran, functional programming, high-performance computing, single-assignment C},
+        Abstract =
+        {This paper presents an application case study of the British
+        Geological Survey's (BGS) Geomagnetic Field Modelling System code.  The program
+        consists of roughly 20000 lines of highly-tuned Fortran MPI code
+        that has a runtime of about 12 hours for a signal execution cycle on a cluster
+        utilising approximately 100 CPU cores. The program contains a sequential
+        bottleneck that executes on a single node of the cluster and takes up to 50\%
+        of the overall runtime. We describe an experiment in which we rewrote the
+        bottleneck Fortran code in SaC, to make use of auto-parallelisation
+        provided by the SaC compiler.  The paper also presents an implementation of
+        a foreign-function interface, to link the SaC kernel with the Fortran
+        application.  Our initial performance measurements compare the SaC kernel
+        performance with the Fortran bottleneck code; we also present results using
+        an OpenMP Fortran implementation.  Our figures show that the
+        SaC-based implementation achieves roughly a 12.5\% runtime improvement, and
+        outperforms the OpenMP implementation.},
+}
+
+@phdthesis{asv-thesis,
+        Author = {\v{S}inkarovs, Artjoms},
+        Title = {Data Layout Types: a type-based approach to automatic data layout transformations for improved SIMD vectorisation},
+        Year = {2015},
+        Month = {05},
+        School = {School of Mathematical and Computer Sciences, Heriot-Watt University},
+        Address = {Heriot-Watt University, Edinburgh Campus, Edinburgh, Scotland, EH14 4AS},
+        Abstract =
+        {The increasing complexity of modern hardware requires sophisticated programming
+        techniques for programs to run efficiently.  At the same time, increased power of
+        modern hardware enables more advanced analyses to be included in compilers.
+        This thesis focuses on one particular optimisation technique that
+        improves utilisation of vector units.  The foundation of this technique is
+        the ability to chose memory mappings for data structures of a given program.
+
+        Usually programming languages use a fixed layout for logical data structures
+        in physical memory.  Such a static mapping often has a negative effect on
+        usability of vector units.  In this thesis we consider a compiler for a
+        programming language that allows every data structure in a program to have its
+        own data layout.  We make sure that data layouts across the program are sound,
+        and most importantly we solve a problem of automatic data layout reconstruction.
+        To consistently do this, we formulate this as a type inference problem, where type
+        encodes a data layout for a given structure as well as implied program
+        transformations.  We prove that type-implied transformations preserve semantics
+        of the original programs and we demonstrate significant performance improvements
+        when targeting SIMD-capable architectures.},
+        Url = {/publications/asv-thesis.pdf},
+}
+
+@article{ccpe-data-layouts,
+        Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
+        Title = {Type-driven data layouts for improved vectorisation},
+        Journal = {Concurrency and Computation: Practice and Experience},
+        Issn = {1532-0634},
+        Doi = {10.1002/cpe.3501},
+        Year = {2015},
+        Note = {cpe.3501},
+        Abstract =
+        {Vector instructions of modern CPUs are crucially important for the
+        performance of compute-intensive algorithms. Auto-vectorisation often fails
+        because of an unfortunate choice of data layout by the programmer. This paper
+        proposes a data layout inference for auto-vectorisation that identifies layout
+        transformations that convert single instruction, multiple data-unfavourable
+        layouts of data structures into favourable ones. We present a type system for
+        layout transformations, and we sketch an inference algorithm for it. Finally,
+        we present some initial performance figures for the impact of the inferred
+        layout transformations. They show that non-intuitive layouts that are inferred
+        through our system can have a vast performance impact on compute intensive
+        programs.},
+        Url = {/publications/ccpe-data-layouts.pdf},
+}
+
+
+@inproceedings{data-layouts,
+        Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
+        Title = {Data Layout Inference for Code Vectorisation},
+        BookTitle = {International Conference on High Performance Computing \& Simulation (HPCS'13)},
+        Year = {2013},
+        Abstract =
+            {SIMD instructions of modern CPUs are crucially important for
+            the performance of compute-intensive algorithms. Auto-vectorisation
+            often fails due to an unfortunate choice of data layout by the programmer.
+            This paper proposes a data layout inference for auto-vectorisation
+            which identifies layout transformations that convert SIMD-unfavorable
+            layouts of data structures into favorable ones.
+            We present a type system for layout transformations and we sketch an inference
+            algorithm for it. Finally, we present some initial performance figures
+            for the impact of the inferred layout transformations.
+            They show that non-intuitive layouts
+            that are inferred through our system can have a vast performance impact
+            on compute intensive programs.},
+        Note = {Accepted for publication at HPCS'13},
+        Url = {/publications/data-layouts.pdf},
+}
+
+@inproceedings{sexynbody,
+        Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo
+        and Bernecky, Robert and Douma, Roeland and Grelck, Clemens},
+        Title = {SAC/{C} Formulations of the All-Pairs N-Body Problem
+        and their Performance on {SMP}s and {GPGPU}s},
+        Journal = {Concurrency and Computation: Practice and Experience},
+        Year = {2012},
+        Publisher = {Accepted for publication in ``Concurrency and Computation: Practice and Experience'' journal in 2012},
+        Abstract =
+            {This paper describes our experience in implementing the classical
+            N-body algorithm in SaC and analysing the runtime performance
+            achieved on three different machines: a dual-processor 8-core Dell
+            PowerEdge 2950 (a Beowulf cluster node, the reference machine), a
+            quad-core hyper-threaded Intel Core-i7 based system equipped with
+            an NVidia GTX-480 graphics accelerator and an Oracle Sparc T4-4
+            server with a total of 256 hardware threads.  We contrast our
+            findings with those resulting from the reference C code and a few
+            variants of it that employ OpenMP pragmas as well as explicit
+            vectorisation.
+
+            Our experiments demonstrate that the SaC implementation
+            successfully combines a high-level of abstraction, very close to
+            the mathematical specification, with very competitive runtimes.  In
+            fact, SaC matches or outperforms the hand-vectorised and
+            hand-parallelised C codes on all three systems under investigation
+            without the need for any source code modification.  Furthermore,
+            only SaC is able to effectively harness the advanced compute power
+            of the graphics accelerator, again by mere recompilation of the
+            same source code.  Our results illustrate the benefits that SaC
+            provides to application programmers in terms of coding
+            productivity, source code and performance portability among
+            different machine architectures, as well as long-term
+            maintainability in evolving hardware environments.},
+        Url = {/publications/sexynbody.pdf},
+}
+
+@inproceedings{cpcgcc,
+        Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
+        Title = {Portable Support for Explicit Vectorisation in {C}},
+        BookTitle = {16th Workshop on Compilers for Parallel Computing (CPC'12)},
+        Year = {2012},
+        Abstract =
+        {In pursuit of requirements of modern software, high-per\-for\-mance
+        computing often offers a narrowly-tailored solutions that reduce
+        portability of software.  As one of such examples in this paper,
+        we consider the situation with SIMD accelerators, whose importance
+        seriously increased in the last decade.
+        Firstly appeared in the early 90es, being oriented exclusively on
+        graphics acceleration, nowadays SIMD CPU extensions are used in a
+        variety of fields.  The lack of standard and incompatibility of
+        instruction sets through the different types of CPUs substantially
+        increase the complexity of developing portable applications within
+        the extensions.
+        In this paper we present an abstraction layer implemented as a set of
+        C language extensions within the GNU GCC compiler which provides an
+        interface for SIMD vectors and operations independently from the
+        architecture.  First of all, these abstractions allow to exploit SIMD
+        extensions of a CPU explicitly, which is useful when auto-vectoriser
+        fails.  Secondly, the abstractions are general enough to be mapped to
+        any hardware supporting SIMD paradigms; hence the new abstractions
+        could be considered as a step forward to a new C language standard.},
+        Url = {/publications/cpcgcc.pdf},
+}
+
+
+@inproceedings{layout-correctness,
+        Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
+        Title = {Semantics-Preserving Data Layout Transformations for Improved Vectorisation},
+        BookTitle = {2nd Workshop on Functional High-Performance Computing (FHPC'13)},
+        Year = {2013},
+        Abstract =
+            {Data-Layouts that are favourable from an algorithmic perspective often are less
+            suitable for vectorisation, i.e., for an effective use of modern processor's vector
+            instructions.  This paper presents work on a compiler driven approach towards
+            automatically transforming data layouts into a form that is suitable for vectorisation.
+            In particular, we present a program transformation for a first-order functional
+            array programming language that systematically modifies they layouts of all
+            data structures.  At the same time, the transformation also adjusts the code
+            that operates on these structures so that the overall computation remains
+            unchanged.  We define a correctness criterion for layout modifying program
+            transformations and we show that our transformation abides to this criterion.},
+        Note = {Accepted for publication at FHPC'13},
+        Url = {/publications/layout-correctness.pdf},
+}
+
+
+@unpublished{macro-parser,
+        Author = {\v{S}inkarovs, Artjoms and Pe\v{c}erska, Julija and Zai\v{c}enkovs, Pavels},
+        Title = {On dynamic extensions of context-dependent parsers},
+        Year = {2012},
+        Abstract =
+        {Modern programming languages define a syntax that cannot be described precisely
+        using context free grammars. This problem is well known, and as a solution
+        there are parser generators like ANTLR, which generates LL(*) parsers rather
+        than LALR/LR. Nevertheless, a lot of real-world parsers are implemented by
+        hand. A great difficulty arises when there appears a need to introduce some
+        changes to the grammar of the language. This implies that the parser
+        has to be rewritten to include new rules and resolve the created
+        ambiguities manually.
+
+        Whenever radical changes to the language are required, it is understood that
+        parser rewriting will be necessary. However, when syntax requires some
+        extensions to the convenience of the user, it is natural to allow her to adapt
+        the existing syntax of the selected programming language to her needs. In this
+        paper we present a way of building a system that allows introducing dynamic
+        changes to the grammar and that works on top of any recursive descent parser
+        that meets some minor restrictions.
+
+        The execution of the proposed system consists of 2 steps. First is matching a
+        list of tokens against a regular expression built on tokens and encoded
+        production names of the given grammar. And the second is transforming the
+        result using a functional language. We demonstrate that using this approach
+        makes it possible to i) give static guarantees regarding the transformation
+        rules; ii) safely express non-trivial syntactical constructions; and iii)
+        perform a restricted partial evaluation.},
+        Note = {Originally written for TFP-2012},
+        Url = {https://github.com/junniest/bach_test_repo/blob/master/paper/paper.pdf},
+        published = {no},
+}
+
+
+
+# These are my thesises which noone should ever read :)
+
+@mastersthesis{masters,
+        Author = {\v{S}inkarovs, Artjoms},
+        Title = {C and {C} Preprocessor Static Analysis},
+        Address = {University of Latvia, Raiņa bulvāris 19, Rīga, Latvia, LV-1586},
+        Year = {2009},
+        Abstract =
+        {There exist many well-known systems for the static analysis of C code.
+        Unfortunately, the majority of these tools only operate after
+        full or selective preprocessing, where preprocessor macros embedded in
+        source files are converted into pure C-language code.
+        The implicit assumption that sources may be fully or partially
+        stripped of preprocessing directives without consequence is
+        harmful or even outright erroneous: the preprocessing phase collapses
+        to a set of possible macro expressions, which may differ between
+        compilations.  In this document, we introduce a tool generating the
+        full abstract syntax tree of both preprocessor and C statements. We then
+        consider a simple application of this tool for discovering
+        syntactic errors in mixed C and CPP code, where the produced
+        combinations of C and collapsed preprocessor statements are analysed by
+        a front-end, C-only static analysis tool.},
+        Url = {http://dspace.lu.lv/dspace/handle/7/25647},
+}
+
+@mastersthesis{bachelors,
+        Author = {\v{S}inkarovs, Artjoms},
+        Title = {Tool for user interface generation},
+        Type = {Bachelor's thesis},
+        Address = {University of Latvia, Raiņa bulvāris 19, Rīga, Latvia, LV-1586},
+        Year = {2007},
+        Abstract =
+        {The Bachelor Paper under consideration deals with the problem of
+        user interface creation and support. The paper studies the approach,
+        which helps to create a user’s interface configuration and transform it
+        into various kinds of user’s interfaces.
+
+        The paper uses a specially developed library written in Python to
+        create a user’s interface. The library has been made so that it can
+        easily be adapted and enriched. The method can also be used for
+        devices other than personal computer, as well  as for programs with a
+        different architecture type.},
+        Url = {https://dspace.lu.lv/dspace/handle/7/27400},
+}
