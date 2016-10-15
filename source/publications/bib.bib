@@ -1,4 +1,44 @@
 
+
+@inproceedings{bgs-fortran,
+        Author = {Vie{\ss}mann, Hans-Nikolai and Scholz, Sven-Bodo and
+                 \v{S}inkarovs, Artjoms and Bainbridge, Brian and Hamilton, Brian and Flower,
+                 Simon},
+        Title = {Making Fortran Legacy Code More Functional: Using the BGS
+                 Geomagnetic Field Modelling System As an Example},
+        BookTitle = {Proceedings of the 27th Symposium on the Implementation
+                    and Application of Functional Programming Languages},
+        Series = {IFL '15},
+        Year = {2015},
+        ISBN = {978-1-4503-4273-5},
+        Location = {Koblenz, Germany},
+        Pages = {11:1--11:13},
+        ArticleNo = {11},
+        NumPages = {13},
+        URL = {/publications/bgs-fortran.pdf},
+        DOI = {10.1145/2897336.2897348},
+        ACMId = {2897348},
+        Publisher = {ACM},
+        Address = {New York, NY, USA},
+        Keywords = {eigensystem, foreign function interface, fortran, functional programming, high-performance computing, single-assignment C},
+        Abstract =
+        {This paper presents an application case study of the British
+        Geological Survey's (BGS) Geomagnetic Field Modelling System code.  The program
+        consists of roughly 20000 lines of highly-tuned Fortran MPI code
+        that has a runtime of about 12 hours for a signal execution cycle on a cluster
+        utilising approximately 100 CPU cores. The program contains a sequential
+        bottleneck that executes on a single node of the cluster and takes up to 50\%
+        of the overall runtime. We describe an experiment in which we rewrote the
+        bottleneck Fortran code in SaC, to make use of auto-parallelisation
+        provided by the SaC compiler.  The paper also presents an implementation of
+        a foreign-function interface, to link the SaC kernel with the Fortran
+        application.  Our initial performance measurements compare the SaC kernel
+        performance with the Fortran bottleneck code; we also present results using
+        an OpenMP Fortran implementation.  Our figures show that the
+        SaC-based implementation achieves roughly a 12.5\% runtime improvement, and
+        outperforms the OpenMP implementation.},
+}
+
 @phdthesis{asv-thesis,
         Author = {\v{S}inkarovs, Artjoms},
         Title = {Data Layout Types: a type-based approach to automatic data layout transformations for improved SIMD vectorisation},
@@ -13,7 +53,7 @@
         This thesis focuses on one particular optimisation technique that
         improves utilisation of vector units.  The foundation of this technique is
         the ability to chose memory mappings for data structures of a given program.
-        
+
         Usually programming languages use a fixed layout for logical data structures
         in physical memory.  Such a static mapping often has a negative effect on
         usability of vector units.  In this thesis we consider a compiler for a
@@ -36,7 +76,7 @@
         Doi = {10.1002/cpe.3501},
         Year = {2015},
         Note = {cpe.3501},
-        Abstract = 
+        Abstract =
         {Vector instructions of modern CPUs are crucially important for the
         performance of compute-intensive algorithms. Auto-vectorisation often fails
         because of an unfortunate choice of data layout by the programmer. This paper
