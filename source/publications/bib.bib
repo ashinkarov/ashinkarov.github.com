@@ -1,5 +1,74 @@
 
 
+@inproceedings{rosetta-stone,
+         Author = {\v{S}inkarovs, Artjoms and Bernecky, Robert
+                   and Vie{\ss}mann, Hans-Nikolai and Scholz, Sven-Bodo},
+         Title = {A Rosetta Stone for Array Languages},
+         BookTitle = {Proceedings of the 5th ACM SIGPLAN International Workshop on Libraries, Languages, and Compilers for Array Programming},
+         Series = {ARRAY 2018},
+         Year = {2018},
+         ISBN = {978-1-4503-5852-1},
+         Location = {Philadelphia, PA, USA},
+         Pages = {1--10},
+         NumPages = {10},
+         URL = {/publications/rosetta-stone.pdf},
+         DOI = {10.1145/3219753.3219754},
+         ACMID = {3219754},
+         Publisher = {ACM},
+         Address = {New York, NY, USA},
+         Keywords = {array languages, functional languages, performance portability},
+}
+
+
+@article{transfinite,
+          Author    = {{\v{S}}inkarovs, Artjoms and Scholz, Sven{-}Bodo},
+          Title     = {A Lambda Calculus for Transfinite Arrays: Unifying Arrays and Streams},
+          Journal   = {CoRR},
+          Volume    = {abs/1710.03832},
+          Year      = {2017},
+          URL       = {http://arxiv.org/abs/1710.03832},
+          ArchivePrefix = {arXiv},
+          Eprint    = {1710.03832},
+          Timestamp = {Wed, 01 Nov 2017 19:05:43 +0100},
+          BibUrl    = {https://dblp.org/rec/bib/journals/corr/abs-1710-03832},
+          BibSource = {dblp computer science bibliography, https://dblp.org}
+}
+
+
+@inproceedings{array-comp,
+        Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo and
+                  Stewart, Robert and Vie{\ss}mann, Hans-Nikolai},
+        Title = {Recursive Array Comprehensions in a Call-by-Value Language},
+        BookTitle = {Proceedings of the  29th Symposium on the Implementation and
+                     Application of Functional Programming Languages},
+        Series = {IFL '17},
+        Year = {2017},
+        ISBN = {978-1-4503-6343-3/17/08},
+        Location = {Bristol, United Kingdom},
+        URL = {/publications/array-comp.pdf},
+        DOI = {10.1145/3205368.3205373},
+        Publisher = {ACM},
+        Address = {New York, NY, USA},
+        Keywords = {Functional languages, Array programming, Call by value,
+                    Array comprehensions},
+        Abstract =
+        {Recursive value definitions in the context of functional programming languages
+         that are based on a call-by-value semantics are known to be challenging.  A lot
+         of prior work exists in the context of languages such as Scheme and {OCaml}.
+
+         In this paper, we look at the problem of recursive array definitions within a
+         call-by-value setting.  We propose a solution that enables recursive array
+         definitions as long as there are no cyclic dependences between array elements.
+         The paper provides a formal semantics definition, sketches possible
+         compiler implementations and relates to a prototypical implementation of an
+         interpreter in {OCaml}.
+         Furthermore, we briefly discuss how this approach could be extended to other
+         data structures and how it could serve as a basis to further extend mutually
+         recursive value definitions in a call-by-value setting in general.},
+}
+
+
+
 @inproceedings{bgs-fortran,
         Author = {Vie{\ss}mann, Hans-Nikolai and Scholz, Sven-Bodo and
                  \v{S}inkarovs, Artjoms and Bainbridge, Brian and Hamilton, Brian and Flower,
@@ -75,7 +144,11 @@
         Issn = {1532-0634},
         Doi = {10.1002/cpe.3501},
         Year = {2015},
-        Note = {cpe.3501},
+        Volume = {28},
+        Number = {7},
+        Pages = {2092--2119},
+        Month = {May},
+        Publisher = {Wiley-Blackwell},
         Abstract =
         {Vector instructions of modern CPUs are crucially important for the
         performance of compute-intensive algorithms. Auto-vectorisation often fails
@@ -114,14 +187,18 @@
         Url = {/publications/data-layouts.pdf},
 }
 
-@inproceedings{sexynbody,
+
+@article{sexynbody,
         Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo
-        and Bernecky, Robert and Douma, Roeland and Grelck, Clemens},
+                  and Bernecky, Robert and Douma, Roeland and Grelck, Clemens},
         Title = {SAC/{C} Formulations of the All-Pairs N-Body Problem
-        and their Performance on {SMP}s and {GPGPU}s},
+                 and their Performance on {SMP}s and {GPGPU}s},
         Journal = {Concurrency and Computation: Practice and Experience},
-        Year = {2012},
-        Publisher = {Accepted for publication in ``Concurrency and Computation: Practice and Experience'' journal in 2012},
+        Year = {2014},
+        Volume = {26},
+        Number = {4},
+        Pages = {952--971},
+        DOI = {10.1002/cpe.3078},
         Abstract =
             {This paper describes our experience in implementing the classical
             N-body algorithm in SaC and analysing the runtime performance
@@ -149,6 +226,7 @@
             maintainability in evolving hardware environments.},
         Url = {/publications/sexynbody.pdf},
 }
+
 
 @inproceedings{cpcgcc,
         Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
@@ -179,11 +257,41 @@
 }
 
 
+@inproceedings{Sinkarovs:2013:SDL:2502323.2502332,
+ author = {Sinkarovs, Artjoms and Scholz, Sven-Bodo},
+ title = {Semantics-preserving Data Layout Transformations for Improved Vectorisation},
+ booktitle = {Proceedings of the 2Nd ACM SIGPLAN Workshop on Functional High-performance Computing},
+ series = {FHPC '13},
+ year = {2013},
+ isbn = {978-1-4503-2381-9},
+ location = {Boston, Massachusetts, USA},
+ pages = {59--70},
+ numpages = {12},
+ url = {http://doi.acm.org/10.1145/2502323.2502332},
+ doi = {10.1145/2502323.2502332},
+ acmid = {2502332},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {correctness, program transformation, type systems, vectorisation},
+} 
+
+
 @inproceedings{layout-correctness,
         Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
         Title = {Semantics-Preserving Data Layout Transformations for Improved Vectorisation},
         BookTitle = {2nd Workshop on Functional High-Performance Computing (FHPC'13)},
+        Booktitle = {Proceedings of the 2Nd ACM SIGPLAN Workshop on Functional High-performance Computing},
+        Series = {FHPC '13},
         Year = {2013},
+        ISBN = {978-1-4503-2381-9},
+        Location = {Boston, Massachusetts, USA},
+        Pages = {59--70},
+        NumPages = {12},
+        DOI = {10.1145/2502323.2502332},
+        ACMID = {2502332},
+        Publisher = {ACM},
+        Address = {New York, NY, USA},
+        Keywords = {correctness, program transformation, type systems, vectorisation},
         Abstract =
             {Data-Layouts that are favourable from an algorithmic perspective often are less
             suitable for vectorisation, i.e., for an effective use of modern processor's vector
@@ -195,7 +303,6 @@
             that operates on these structures so that the overall computation remains
             unchanged.  We define a correctness criterion for layout modifying program
             transformations and we show that our transformation abides to this criterion.},
-        Note = {Accepted for publication at FHPC'13},
         Url = {/publications/layout-correctness.pdf},
 }
 
