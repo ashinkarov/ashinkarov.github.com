@@ -44,15 +44,15 @@ bibToContext b@(Bib ty name items) =
   constField "itemtype" ty
     <> mconcat (fmap (\e -> constField (key e) (value e)) items')
     <> constField "name" name
-    <> constField "bib" (showBib $ filterKeys b ["url", "parsed", "abstract"])
+    <> constField "bib" (showBib $ filterKeys b ["url", "parsed", "abstract", "addinfo"])
     <> constField "img" ("/pubs/" <> name <> ".png")
   where
     -- XXX(artem) I am not sure what the rules should be. 
     -- * we don't want to latexify "parsed" (as it is in Html already)
     -- * we want to Htmlify "abstract", as there miht be some symbols 
     -- * we want to Plaintext the rest?
-    items' = mapEntriesIfKey (`notElem` ["parsed","abstract"]) latexifyPlain'
-             $ mapEntriesIfKey (`elem` ["abstract"]) latexifyHtml' items
+    items' = mapEntriesIfKey (`notElem` ["parsed","abstract","addinfo"]) latexifyPlain'
+             $ mapEntriesIfKey (`elem` ["abstract","addinfo"]) latexifyHtml' items
     latexifyHtml' = fromRight (error "bibToContext for entry " <> name) . latexifyHtml 
     latexifyPlain' = fromRight (error "bibToContext for entry " <> name) . latexifyPlain 
 
