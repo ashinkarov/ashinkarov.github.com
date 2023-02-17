@@ -1,0 +1,33 @@
+<!--h2>Publication Information</h2-->
+
+<!--div class="pub-title">$title$</div-->
+<div class="paper-img-desc">
+  <!--div class="paper-img"-->
+    <a class="paper-img" href="$url$">
+    $if(img)$
+      <img src="$img$" style="width:30rem">
+    $endif$
+    </a>
+  <!--/div-->
+  <h2>$title$</h2>
+  
+  <!div class="parsed"-->
+  $parsed$
+  <!/div-->
+
+  <p class="bibpdf">
+    <a href="$url$">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">$bib$</code>
+$if(abstract)$
+<h3>Abstract</h3>
+<p>$abstract$</p>
+$endif$
+
+$if(addinfo)$
+<h2>Additional Information</h2>
+<p>$addinfo$</p>
+$endif$

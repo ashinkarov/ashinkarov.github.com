@@ -1,0 +1,76 @@
+---
+layout: post
+title: "Updating my blog"
+date: 2013-04-08 03:20
+comments: true
+categories: [blog, ruby, html, jekyll, jekyll-scholar]
+---
+
+Finally I found some time to turn my web-site on the github into personal 
+homepage.  I must say that I never liked web technologies, as I always have a
+feeling that I am digging through an enormous pile of shit when I just need to
+create a set of nice-looking html pages.  Having said that, I put a lot of hope into
+jekyll and octopress guys as they *only* produce static htmls on output.  One tiny
+thing that I didn't consider was that the glorious technology uses ruby as an
+implementation language.
+
+<!-- more-->
+So what's wrong with ruby?  Honestly speaking I didn't quite understand yet.
+May be there's nothing wrong with it and I just cannot use it properly.
+However, right now it feels like an overcomplicated technology that cannot function
+properly.  I must admit that I am looking at it through the prism of jekyll, and
+most of the time it throws exceptions, doing the wrong thing or eating-up my cpu
+without doing anything useful.  Mind you -- I am just trying to generate static
+htmls :)
+
+Anyhow, we shall see later if I am going to change my mind or not.  For the time
+being, let's look on the bright side.  On the bright side, I must say that I
+managed to configure my bibliography in a reasonable way.  The only reasonable
+way is to generate html from the bibtex.  You configure it once, and then you
+just keep adding entries into the bibliography file.
+
+Conversion from bibtex to html is taken by 
+[jecyll-scholar plugin](https://github.com/inukshuk/jekyll-scholar) which
+promised to work perfectly well.  As you may guess it didn't.  At least not from
+the very beginning.  It managed to produce html looking exactly as bibtex+latex
+would produce.  It is perfectly fine if you write a paper, but for your web-page
+you want some more.  For instance, you wan to include some links: like a path to
+the paper to make sure that people can download it, a bibtex entry, to make sure
+that people can add it in their paper, etc.  As it turns out jekyll-scholar
+didn't do that, instead people suggested to use jekyll-scholar-extras, which
+granted most of the missing functionality, but everything was hard-coded.  Mind
+you, I didn't want to touch ruby at this point.
+
+So I managed to solve generation of additional fields by modifying the
+style-file I was using (yeah, you need to pick-up a style-file from 
+[here](https://github.com/inukshuk/csl-ruby) which
+is equivalent to the parameter you pass to bibliography in latex).  But then I
+came across the problem that jekyll-scholar does not preserve original formating
+of the bibtex, which makes it impossible to generate correct bibtex entry.  That
+was the point when I decided to investigate.
+
+As far as I've never seen ruby in my life, it took me some three hours to find
+the problem and to come-up with *a* solution which I wasn't particularly happy 
+about, but at least it worked fine.  After that I thought that it would be stupid 
+to keep the changes only for myself, and I decided to notify the author.  By the
+way it's not that I am so altruistic, I just figured out that whenever I'll
+update my ruby packages, my changes will be gone :)
+
+Well, then I notified the author without much of a hope, and to my surprise he
+was very enthusiastic about the changes I made, he even didn't consider my way
+being wrong, which was quite surprising.  Then I explained some more details, found
+out some answers, and got really stuck in fixing jekyll-scholar :)  But, I must
+pay my true respect to [Sylvester Keil](https://github.com/inukshuk) who was very
+patient and very active when it came to bug-fixing and implementing new
+features.
+
+To conclude, I think that the current state of jekyll-scholar is quite
+satisfying, and assuming that we will finish merging scholar-extras, it would be
+a very decent and configurable bibtex-html converter.  In essence, such moments
+make you believe that open source movement is not just a brand, it really works
+and works pretty well.  
+
+Finally, if you have any comments or notes, or feature-requests regarding
+jekyll-scholar, please don't hesitate to create a github issue or contact an
+author.  Every single contribution helps.
+
