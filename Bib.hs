@@ -6,14 +6,15 @@ import Text.Parsec
 import Text.Parsec.String 
 import Data.List
 import Data.Text (toLower, pack, unpack)
-import GHC.SourceGen (where')
+import Data.Typeable
+--import Data.Generics (Generic)
 --import Data.List.Safe (safeHead)
 
 
 data Entry = Entry  {
   key :: String,
   value :: String
-} deriving Show
+} deriving (Show, Typeable)
 
 -- Not trying to be smart in understanding
 -- semantics of bib files.
@@ -21,7 +22,7 @@ data Bib = Bib {
   entrytype :: String,
   name :: String,
   entries :: [ Entry ]
-} deriving Show
+} deriving (Show, Typeable)
 
 -- Normalise key to lowercase for now.
 normaliseKey :: String -> String
