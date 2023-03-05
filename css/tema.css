@@ -7,7 +7,7 @@ nav {
 }
 
 nav a {
-  font-size: 2.6rem;
+  font-size: 1.6rem;
   font-weight: bold;
   text-decoration: none;
   text-transform: uppercase;
@@ -31,6 +31,84 @@ main {
 
 main h1 {
   margin-top: 0;
+}
+
+
+/* The game of making responsive logo and menu.
+   The main idea is to consider three cases of
+   the sceen size:
+   1. x <= 38rem;
+   2. 38 <= x < 80rem;
+   3. >= 80rem.
+
+   38 rem is the setting coming from sacura.css,
+   which is the max width of the body.
+
+   The problem is that "Artem Shinkarov" does not
+   stay on the same line when the size of the window
+   changes.  These three cases pick the fonts in such
+   a way that it stays on the same line in (2) and (3),
+   and when it has to be broken into two words, it
+   does so with reasonable gaps.
+
+   Tip: it is convenient to enable mobile view in
+   developer tools of the browser.  Go to "inspect" and
+   click the mobile phone icon.
+ */
+/* Small screen, e.g. mobile phone.  */
+@media screen and (max-width: 38rem) {
+  .logo a { 
+    line-height: 1.2;
+    font-size: 4.6rem;
+    letter-spacing: .25rem;
+  }
+  .logo {
+    margin-bottom: 1.2rem;
+  }
+
+  nav a {
+    font-size: 2rem;
+    margin-right: 1.3rem;
+    letter-spacing: .12rem;
+  }
+  body {
+    font-size: 1.55rem;
+  }
+}
+
+/* Medium-sized screen, e.g. rotated mobile phone
+   where we have some margins, but they are reasonably
+   small.  */
+@media screen and (min-width: 38rem) {
+  .logo a { 
+    font-size: 5.2rem;
+    letter-spacing: .35rem;
+    line-height: 1.45;
+  }
+  nav a {
+    font-size: 2.2rem;
+    margin-right: 1.4rem;
+    letter-spacing: .15rem;
+  }
+}
+
+
+/* This is for a big screen (kind of).  */
+@media screen and (min-width: 80rem) {
+  .logo a { 
+    font-size: 7rem;
+  }
+  nav a {
+    font-size: 2.6rem;
+    margin-right: 2rem;
+    letter-spacing: .14rem;
+  }
+}
+
+
+figcaption {
+  text-align: center;
+  font-style: italic;
 }
 
 /*
