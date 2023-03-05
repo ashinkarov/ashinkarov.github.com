@@ -18,6 +18,7 @@ import Text.Pandoc.Readers
 import qualified Text.Pandoc.Walk as B
 import Text.Pandoc.Writers
 import Text.Parsec
+import Data.Time (defaultTimeLocale, UTCTime (UTCTime), parseTimeOrError, formatTime)
 
 instance Binary Bib.Entry where
   put (Entry k v) = do
@@ -55,6 +56,10 @@ bibCls bib = do
   res <- runIO $ do
     -- FIXME(artem) The "ieee" can be lifted into dependency.
     doc <-
+      -- Trying to fix a few problems, the up-to-date version of
+      -- the csl file is here: https://github.com/citation-style-language/styles/blob/master/ieee.csl
+      -- FIXME(artem) Fix the insertion of the url in ArXiv links. 
+      -- I have no ide why is it doing this and how...
       B.setMeta (T.pack "citation-style") (T.pack "ieee")
         <$> readBibLaTeX def (T.pack s)
     processed <- cleanup <$> processCitations doc
@@ -80,19 +85,20 @@ bibContext =
     let str s = return $ StringField s
     let strPlain = str . latexifyPlain':: String -> Compiler ContextField
     let strHtml = str . latexifyHtml' :: String -> Compiler ContextField
+    let lookup key = case bibIndex b key of
+          Nothing ->
+            noResult $
+              "No key " <> key <> " in bibitem " <> name
+          Just x | key `elem` ["abstract", "addinfo"] -> return $ latexifyHtml' x
+          Just x -> return $ latexifyPlain' x
     case key of
       "name" -> str name
       "entrytype" -> str $ entrytype b
       "parsed" -> str parsed
-      "bib" -> str (showBib $ filterKeys b ["url", "parsed", "abstract", "addinfo"])
+      "bib" -> str (showBib $ filterKeys b ["url", "parsed", "abstract", "addinfo", "date"])
       -- XXX(artem) should we simply put this into template?
       "img" -> str ("/pubs/" <> name <> ".png")
-      _ -> case bibIndex b key of
-        Nothing ->
-          noResult $
-            "No key " <> key <> " in bibitem " <> name
-        Just x | key `elem` ["abstract", "addinfo"] -> strHtml x
-        Just x -> strPlain x
+      _ -> str =<< lookup key
 
 newtype Bibs = Bibs [Bib]
   deriving (Show, Typeable)
@@ -111,5 +117,7 @@ parseBibFile s = case parse parseBibs "" s of
   Left p -> error $ "Parse error: " <> show p
 
 bibFileCompiler :: Compiler (Item Bibs)
-bibFileCompiler = fmap parseBibFile <$> getResourceString
+bibFileCompiler = do
+   debugCompiler "--- bibCompiler called! ---"
+   fmap parseBibFile <$> getResourceString
 

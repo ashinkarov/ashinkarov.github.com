@@ -67,7 +67,7 @@ parseComment = do
       <|> (char '*' >> rest)
       <|> (anyChar >> rest) 
 
-ws = spaces >> skipMany parseComment >> spaces
+ws = spaces >> skipMany (parseComment >> spaces)
 
 -- Make the key lowercase, just to normalise it to something. 
 -- Can choose any other normalform later. 
@@ -92,7 +92,7 @@ parseBib = do
 
 
 parseBibs :: Parser [Bib]
-parseBibs = ws *> many (parseBib <* ws)
+parseBibs = ws *> many (parseBib <* ws) <* eof
 
 
 loadBibs :: FilePath -> IO (Either String [Bib])
@@ -120,6 +120,10 @@ filterKey b kk = filterKeys b [kk]
 mapEntriesIfKey :: (String -> Bool) -> (String -> String) -> [Entry] -> [Entry]
 mapEntriesIfKey p f = fmap (\e@(Entry k v) -> if p k then Entry k (f v) else e)
 
+bibsIndex :: [Bib] -> String -> Maybe Bib
+bibsIndex [] _ = Nothing
+bibsIndex (b:xs) k | normaliseKey k == name b = return b
+bibsIndex (b:xs) k = bibsIndex xs k
 
 
 

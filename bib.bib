@@ -1,4 +1,458 @@
 
+/*
+   Some rules on what is recognised by my bib parser.
+
+   * Any fields can go, as long as they satisfy ieee.csl, which
+     means that you need to have some bare informations such as
+     author, title, etc.
+
+   * The field "url" is the link to the pdf of the paper.
+     It can be called arbitrarily, but it has to lead to a valid
+     *local* pdf file.  The reason for this is that we generate
+     thumbnail from this file.
+
+   * The field "date" must be included in evey bib item for paper
+     sorting purposes.  The year in the date must match the "year"
+     field.  The "date" field will be removed from the resulting
+     bib on the webpage.
+
+   * The field "addinfo" can be used to supply some additional
+     information that will be published at the end of the paper
+     description.  The content of that field can be arbitrary latex
+     that will be passed to pandoc.  For ecample:
+         AddInfo = {
+            I Like to use this field to add extra informoation regarding about my
+            publications.
+
+
+            \subsubsection*{Subsubsection}
+
+            This should hopefully include:
+            \begin{itemize}
+            \item Links \href{https://homotopytypetheory.org/}{LINK}
+            \item Some math $\alpha^2 \times \beta_n$
+            \item Surely some brackets {}, and parenthesis (), [], whatever.
+            \item Hopefully this can be turned into a separate paragraph.
+            \end{itemize}
+         },
+
+    That's it!
+*/
+@inproceedings{2022-scan,
+  author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
+  title = {Parallel Scan as  a Multidimensional Array Problem},
+  year = {2022},
+  isbn = {9781450392693},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {/pubs/2022-scan.pdf},
+  doi = {10.1145/3520306.3534500},
+  abstract = {For many algorithms, it is challenging to identify a suitable parallel version, as the design space is typically very large. In this paper we demonstrate how rank-polymorphic array languages can be used as a tool to explore such design spaces through concise high-level specifications. If input data can be organised into a multi-dimensional array, and the algorithm can be stated as a recursive traversal over sub-arrays, array languages offer a lot of expressive power. The reason for this is that array shapes can be used to guide recursive traversals. Conciseness of specifications comes from array reshapes that move the desired elements into canonical hyperplanes. As a case study, we discuss several variants of implementing prefix sums (also known as scans) in SaC. We demonstrate how small code adjustments suffice to change the concurrency pattern exposed to the compiler. It turns out that variability that is typically achieved by generic inductive data types such as binary trees is a special case of what is offered by the array paradigm.},
+  booktitle = {Proceedings of the 8th ACM SIGPLAN International Workshop on Libraries, Languages and Compilers for Array Programming},
+  pages = {1–11},
+  numpages = {11},
+  keywords = {algorithms, prefix sum, functional programming, array languages, rank polymorphism, parallelism},
+  location = {San Diego, CA, USA},
+  series = {ARRAY 2022},
+  date = {2022-06-21},
+  abstract = {
+    For many algorithms, it is challenging to identify a suitable parallel version,
+    as the design space is typically very large. In this paper we demonstrate how
+    rank-polymorphic array languages can be used as a tool to explore such
+    design spaces through concise high-level specifications. If input data can
+    be organised into a multi-dimensional array, and the algorithm can be
+    stated as a recursive traversal over sub-arrays, array languages offer a
+    lot of expressive power. The reason for this is that array shapes can be
+    used to guide recursive traversals. Conciseness of specifications comes
+    from array reshapes that move the desired elements into canonical
+    hyperplanes.
+
+    As a case study, we discuss several variants of implementing prefix sums (also
+    known as scans) in SaC. We demonstrate how small code adjustments
+    suffice to change the concurrency pattern exposed to the compiler. It turns out
+    that variability that is typically achieved by generic inductive data types
+    such as binary trees is a special case of what is offered by the array
+    paradigm.
+  },
+}
+@inproceedings{2021-gpce,
+  author = {\textbf{Artjoms \v{S}inkarovs} and Cockx, Jesper},
+  title = {Extracting the Power of Dependent Types},
+  year = {2021},
+  isbn = {9781450391122},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {/pubs/2021-gpce.pdf},
+  doi = {10.1145/3486609.3487201},
+  booktitle = {Proceedings of the 20th ACM SIGPLAN International Conference on Generative Programming: Concepts and Experiences},
+  pages = {83–95},
+  numpages = {13},
+  keywords = {program extraction, embedded languages, program verification, dependent types, Agda, reflection},
+  location = {Chicago, IL, USA},
+  series = {GPCE 2021},
+  date = {2021-10-01},
+  abstract = {
+    Most existing programming languages provide little support to formally state
+    and prove properties about programs. Adding such capabilities is far from
+    trivial, as it requires significant re-engineering of the existing
+    compilers and tools. This paper proposes a novel technique to write
+    correct-by-construction programs in languages without built-in verification
+    capabilities, while maintaining the ability to use existing tools. This is
+    achieved in three steps. Firstly, we give a shallow embedding of the
+    language (or a subset) into a dependently typed language. Secondly, we
+    write a program in that embedding, and we use dependent types to guarantee
+    correctness properties of interest within the embedding. Thirdly, we
+    extract a program written in the original language, so it can be used with
+    existing compilers and tools.
+
+    Our main insight is that it is possible to express all three steps in a single
+    language that supports both dependent types and reflection. Essentially, this
+    allows us to express a program, its formal properties, and a compiler for it
+    hand-in-hand, offering a lot of flexibility to programmers. We demonstrate this
+    three-step approach by embedding a subset of the PostScript language in Agda,
+    and illustrating it with several short examples. Thus we use the power of
+    reflection to bring the benefits of dependent types to languages that had
+    to go without them so far.
+  },
+  addinfo = {
+    The sources of the paper and the accompanying code
+    \href{https://github.com/ashinkarov/agda-stacklang}{are available here}. 
+  },
+}
+
+@article{2021-extraction,
+  author    = {\textbf{Artjoms {\v{S}inkarovs}} and
+               Jesper Cockx},
+  title     = {Choosing is Losing: How to combine the benefits of shallow and deep
+               embeddings through reflection},
+  journal   = {CoRR},
+  volume    = {abs/2105.10819},
+  year      = {2021},
+  url       = {/pubs/2021-extraction.pdf},
+  archivePrefix = {arXiv},
+  eprint    = {2105.10819},
+  timestamp = {Mon, 31 May 2021 16:16:57 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2105-10819.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org},
+  date      = {2021-05-30},
+  abstract  = {
+    Dependently-typed host languages empower users to verify a wide range of
+    properties of embedded languages and programs written in them. Designers of
+    such embedded languages are faced with a difficult choice between using a
+    shallow or a deep embedding. The former is easier to use because the entire
+    infrastructure of the host langauge is immediately available. Meanwhile,
+    the latter gives full access to the structure of embedded programs, but is
+    difficult to use in practice, especially when the embedded language is
+    itself dependently typed. The main insight presented in this paper is that
+    the choice between shallow and deep embedding can be eliminated by working
+    in a host language with reflection capabilities: we start from a shallow
+    embedding that can use all libraries and tools of the host language, and
+    later use reflection to expose the deep structure of the embedded programs.
+    Concretely, we apply this technique to embed three programming languages ---
+    Kaleidoscope, SaC, and (a subset of) APL --- into the dependently typed
+    theorem prover Agda, using dependent types to statically enforce several
+    properties of interest. We then use Agda's reflection capabilities to
+    extract the embedded programs back into the original language, so that the
+    existing toolchain can be leveraged. In this process, statically verified
+    properties of the host language are mapped onto runtime checks in the
+    target language, allowing extracted programs to interact safely with
+    existing code. Finally, we demonstrate the feasibility of our approach with
+    the implementation and extraction of a convolutional neural network in our
+    embedding of APL.
+  },
+  addinfo = {
+    The sources of the paper with the code
+    \href{https://github.com/ashinkarov/2021-extraction-paper}{are available here}.
+  },
+}
+
+
+@inproceedings{2021-cnn,
+  author = {\textbf{Artjoms {\v{S}inkarovs}} and Vie\ss{}mann, Hans-Nikolai and Scholz, Sven-Bodo},
+  title = {Array Languages Make Neural Networks Fast},
+  year = {2021},
+  isbn = {9781450384667},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {/pubs/2021-cnn.pdf},
+  doi = {10.1145/3460944.3464312},
+  abstract = {Most implementations of machine learning algorithms are based on special-purpose frameworks
+  such as TensorFlow or PyTorch. While these frameworks are convenient to use, they
+  introduce multi-million lines of code dependency that one has to trust, understand
+  and potentially modify. As an alternative, this paper investigates a direct implementation
+  of a state of the art Convolutional Neural Network (CNN) in an array language. While
+  our implementation requires 150 lines of code to define the special-purpose operators
+  needed for CNNs, which are readily provided through frameworks such as TensorFlow
+  and PyTorch, our implementation outperforms these frameworks by factors 2 and 3 on
+  a fixed set of hardware — a 64-core GPU-accelerated machine; for a simple example
+  network. The resulting specification is written in a rank-polymorphic data-parallel
+  style, and it can be immediately leveraged by optimising compilers. Indeed, array
+  languages make neural networks fast.},
+  booktitle = {Proceedings of the 7th ACM SIGPLAN International Workshop on Libraries, Languages and Compilers for Array Programming},
+  pages = {39–50},
+  numpages = {12},
+  keywords = {array language, machine learning},
+  location = {Virtual, Canada},
+  series = {ARRAY 2021},
+  date = {2021-06-01},
+  addinfo = {
+    This talk is recorded and \href{https://www.pldi21.org/prerecorded_array.3.html}{is available here}.
+    The code \href{https://github.com/SacBase/array-2021-supmaterial}{is available here}.
+  },
+}
+
+@inproceedings{2020-msfp,
+  author    = {\textbf{Artjoms {\v{S}}inkarovs}},
+  editor    = {Max S. New and
+               Sam Lindley},
+  title     = {Multi-dimensional Arrays with Levels},
+  booktitle = {Proceedings Eighth Workshop on Mathematically Structured Functional
+               Programming, MSFP@ETAPS 2020, Dublin, Ireland, 25th April 2020},
+  series    = {{EPTCS}},
+  volume    = {317},
+  pages     = {57--71},
+  year      = {2020},
+  doi       = {10.4204/EPTCS.317.4},
+  url       = {/pubs/2020-msfp.pdf},
+  timestamp = {Fri, 08 May 2020 16:00:57 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2005-00198.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org},
+  date      = {2020-05-01},
+  abstract  = {
+    We explore a data structure that generalises rectangular multi-dimensional
+    arrays. The shape of an n-dimensional array is typically given by a tuple
+    of n natural numbers. Each element in that tuple defines the length of the
+    corresponding axis. If we treat this tuple as an array, the shape of that
+    array is described by the single natural number n. A natural number itself
+    can be also treated as an array with the shape described by the natural
+    number 1 (or the element of any singleton set). This observation gives rise
+    to the hierarchy of array types where the shape of an array of level l+1 is
+    a level-l array of natural numbers. Such a hierarchy occurs naturally when
+    treating arrays as containers, which makes it possible to define both rank-
+    and level-polymorphic operations. The former can be found in most array
+    languages, whereas the latter gives rise to partial selections on a large
+    set of hyperplanes, which is often useful in practice. In this paper we
+    present an Agda formalisation of arrays with levels. We show that the
+    proposed formalism supports standard rank-polymorphic array operations,
+    while type system gives static guarantees that indexing is within bounds.
+    We generalise the notion of ranked operator so that it becomes applicable
+    on arrays of arbitrary levels and we show why this may be useful in
+    practice.
+  },
+  addinfo = {
+    Here is \href{https://www.youtube.com/watch?v=RqMtrGtvKKo}{a recording of this talk available at YouTube}.
+    Agda code \href{https://github.com/ashinkarov/agda-arrays-with-levels}{is available here}.
+  },
+}
+
+/* 
+  url       = {https://doi.org/10.4204/EPTCS.317.4},
+*/
+
+
+@inproceedings{2019-conv-apl,
+  author    = {\textbf{Artjoms {\v{S}}inkarovs} and
+               Robert Bernecky and
+               Sven{-}Bodo Scholz},
+  editor    = {Jeremy Gibbons},
+  title     = {Convolutional neural networks in {APL}},
+  booktitle = {Proceedings of the 6th {ACM} {SIGPLAN} International Workshop on Libraries,
+               Languages and Compilers for Array Programming, ARRAY@PLDI 2019, Phoenix,
+               AZ, USA, June 22, 2019},
+  pages     = {69--79},
+  publisher = {{ACM}},
+  year      = {2019},
+  url       = {/pubs/2019-conv-apl.pdf},
+  doi       = {10.1145/3315454.3329960},
+  timestamp = {Fri, 14 Jun 2019 11:37:28 +0200},
+  biburl    = {https://dblp.org/rec/conf/pldi/SinkarovsBS19.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org},
+  date      = {2019-06-22},
+  abstract  = {
+    This paper shows how a Convolutional Neural Network (CNN) can be
+    implemented in APL. Its first-class array support ideally fits that
+    domain, and the operations of APL facilitate rapid and concise creation
+    of generically reusable building blocks. For our example, only ten
+    blocks are needed, and they can be expressed as ten lines of native
+    APL. All these blocks are purely functional, and they are built out of
+    a small number of builtin operators, resulting in a highly portable
+    specification that is immediately runnable and should be suitable for
+    high-performance optimizations and parallel execution. This implies
+    that APL can be seen as a framework to define shallowly-embedded
+    machine learning DSLs without any external dependencies, making them
+    useful at least for experiments and prototyping. We explain the
+    construction of each CNN building block, and briefly discuss the
+    performance of the resulting specification.
+  },
+  addinfo  = {
+    Recording of this talk \href{https://youtu.be/9vIZ7d3-GBw}{is available on YouTube}.
+    The implementation of the CNN in APL
+    \href{https://github.com/ashinkarov/cnn-in-apl}{is available here}.
+  },
+}
+
+@InProceedings{2019-max-resilience,
+  author={Baird, Max
+  and Scholz, Sven-Bodo
+  and \textbf{{\v{S}}inkarovs, Artjoms}
+  and Bautista-Gomez, Leonardo},
+  editor={Schwardmann, Ulrich
+  and Boehme, Christian
+  and B. Heras, Dora
+  and Cardellini, Valeria
+  and Jeannot, Emmanuel
+  and Salis, Antonio
+  and Schifanella, Claudio
+  and Manumachu, Ravi Reddy
+  and Schwamborn, Dieter
+  and Ricci, Laura
+  and Sangyoon, Oh
+  and Gruber, Thomas
+  and Antonelli, Laura
+  and Scott, Stephen L.},
+  title={Checkpointing Kernel Executions of MPI+CUDA Applications},
+  booktitle={Euro-Par 2019: Parallel Processing Workshops},
+  year={2020},
+  publisher={Springer International Publishing},
+  address={Cham},
+  pages={694--706},
+  abstract={
+      This paper proposes a new approach to checkpointing MPI applications that
+      use long-running CUDA kernels. It becomes possible to take snapshots
+      of data residing on the GPUs without waiting for kernels to complete.
+      The proposed technique is implemented in the context of the state of
+      the art high performance fault tolerance library FTI. As a result we
+      get an elegant solution to the problem of developing resilient MPI
+      applications where GPU kernels run longer than the mean time between
+      hardware failures. We describe in detail how we checkpoint/restart
+      collaborative MPI-CUDA applications, and we provide an initial
+      evaluation of the proposed approach using the Livermore Unstructured
+      Lagrangian Explicit Shock Hydrodynamics (LULESH) application as a
+      case study.
+  },
+  isbn={978-3-030-48340-1},
+  url={/pubs/2019-max-resilience.pdf},
+  date={2020-05-29},
+}
+
+
+@inproceedings{2019-ifl-tensorcomp,
+  author = {Scholz, Sven-Bodo and \textbf{Artjoms {\v{S}inkarovs}}},
+  title = {Tensor Comprehensions in SaC},
+  year = {2019},
+  isbn = {9781450375627},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {/pubs/2019-ifl-tensorcomp.pdf},
+  doi = {10.1145/3412932.3412947},
+  booktitle = {Proceedings of the 31st Symposium on Implementation and Application of Functional Languages},
+  articleno = {15},
+  numpages = {13},
+  location = {Singapore, Singapore},
+  series = {IFL '19},
+  date = {2019-09-01},
+  abstract = {
+      We propose a new notation for data parallel operators on multi-dimensional
+      arrays named tensor comprehensions. This notation combines the basic
+      principle of array-comprehensions with syntactical shortcuts very close to
+      those found in the so-called Tensor Notations used in Physics and
+      Mathematics. As a result, complex operators with rich semantics can be
+      defined concisely. The key to this conciseness lies in the ability to
+      define shape-polymorphic operations combined with the ability to infer
+      array shapes from the immediate context. The paper provides a definition of
+      the proposed notation, a formal shape inference process, as well as a set
+      of re-write rules that translates tensor comprehensions as a zero-cost
+      syntactic sugar into standard SaC expressions.
+   },
+}
+
+
+@inproceedings{2018-ifl-memreuse,
+  author    = {Hans{-}Nikolai Vie{\ss}mann and
+               \textbf{Artjoms {\v{S}}inkarovs} and
+               Sven{-}Bodo Scholz},
+  editor    = {Matteo Cimini and
+               Jay McCarthy},
+  title     = {Extended Memory Reuse: An Optimisation for Reducing Memory Allocations},
+  booktitle = {Proceedings of the 30th Symposium on Implementation and Application
+               of Functional Languages, {IFL} 2018, Lowell, MA, USA, September 5-7,
+               2018},
+  abstract  = {
+     In this paper we present an optimisation for reference counting based
+     garbage collection. The optimisation aims at reducing the total number
+     of calls to the heap manager while preserving the key benefits of
+     reference counting, i.e. the opportunities for in-place updates as
+     well as memory deallocation without global garbage collection. The key
+     idea is to carefully extend the lifetime of variables so that memory
+     deallocations followed by memory allocations of the same size can be
+     replaced by a direct memory reuse. Such memory reuse turns out
+     particularly useful in the context of innermost loops of
+     compute-intensive applications. It leads to a runtime behaviour that
+     performs pointer swaps between buffers in the same way it would be
+     implemented manually in languages that require explicit memory
+     management, e.g. C.
+
+     We have implemented the proposed optimisation in the context of the
+     Single-Assignment C compiler tool chain. The paper provides an
+     algorithmic description of our optimisation and an evaluation of its
+     effectiveness over a collection of benchmarks including a subset of
+     the Rodinia benchmarks and the NAS Parallel Benchmarks. We show that
+     for several benchmarks with allocations within loops our optimisation
+     reduces the amount of allocations by a few orders of magnitude. We
+     also observe no negative impact on the overall memory footprint nor on
+     the overall runtime. Instead, for some sequential executions we find
+     mild improvement, and on GPU devices we observe speedups of up to a
+     factor of 4x.
+  },
+  pages     = {107--118},
+  publisher = {{ACM}},
+  year      = {2018},
+  doi       = {10.1145/3310232.3310242},
+  url       = {/pubs/2018-ifl-memreuse.pdf},
+  timestamp = {Wed, 25 Sep 2019 18:12:17 +0200},
+  biburl    = {https://dblp.org/rec/conf/ifl/ViessmannSS18.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org},
+  date      = {2018-09-05},
+}
+
+@inproceedings{2018-max-resilience,
+  author    = {Max Baird and
+               Christian Fensch and
+               Sven{-}Bodo Scholz and
+               \textbf{Artjoms {\v{S}}inkarovs}},
+  editor    = {Gabriele Mencagli and
+               Dora B. Heras and
+               et al},
+  title     = {A Lightweight Approach to {GPU} Resilience},
+  booktitle = {Euro-Par 2018: Parallel Processing Workshops - Euro-Par 2018 International
+               Workshops, Turin, Italy, August 27-28, 2018, Revised Selected Papers},
+  abstract  = {
+    Resilience for HPC applications typically is implemented as a CPU-based
+    rollback-recovery technique. In this context, long running accelerator
+    computations on GPUs pose a major challenge as these devices usually do not
+    offer any means of interrupt. This paper proposes a solution to the
+    aforementioned problem: it suggests a novel approach that rewrites GPU
+    kernels so that a soft interrupt of their execution becomes possible. Our
+    approach is based on the Compute Unified Device Architecture (CUDA) by
+    Nvidia and works by taking advantage of CUDA’s execution model of
+    partitioning threads into blocks. In essence, we re-write the kernel so
+    that each block determines whether it should continue execution or return
+    control to the CPU. By doing so we are able to perform a premature
+    interrupt of kernels.
+  },
+  series    = {Lecture Notes in Computer Science},
+  volume    = {11339},
+  pages     = {826--838},
+  publisher = {Springer},
+  year      = {2018},
+  url       = {/pubs/2018-max-resilience.pdf},
+  doi       = {10.1007/978-3-030-10549-5_64},
+  timestamp = {Fri, 27 Dec 2019 21:26:53 +0100},
+  biburl    = {https://dblp.org/rec/conf/europar/BairdFSS18.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org},
+  date      = {2018-12-31},
+}
+
 
 @inproceedings{rosetta-stone,
          Author = {\v{S}inkarovs, Artjoms and Bernecky, Robert
@@ -17,40 +471,64 @@
          Publisher = {ACM},
          Address = {New York, NY, USA},
          Keywords = {array languages, functional languages, performance portability},
-         AddInfo = {
-            I Like to use this field to add extra informoation regarding about my
-            publications.
-
-
-            \subsubsection*{Subsubsection}
-
-            This should hopefully include:
-            \begin{itemize}
-            \item Links \href{https://homotopytypetheory.org/}{LINK}
-            \item Some math $\alpha^2 \times \beta_n$
-            \item Surely some brackets {}, and parenthesis (), [], whatever.
-            \item Hopefully this can be turned into a separate paragraph.
-            \end{itemize}
+         Date = {2018-07-19},
+         Abstract = {
+             This paper aims to foster cross-fertilisation between programming
+             language and compiler research performed on different array
+             programming language infrastructures. We study how to enable
+             better comparability of concepts and techniques by looking
+             into generic translations between array languages. Our
+             approach is based on the idea of a basic core language Heh
+             which only captures the absolute essentials of array
+             languages: multi-dimensional arrays and shape-invariant
+             operations on them. Subsequently, we investigate how to map
+             these constructs into several existing languages: SaC, APL,
+             Julia, Python, and C. This approach provides us with some first
+             understanding on how the peculiarities of these languages
+             affect their suitability for expressing the basic
+             building-blocks of array languages. We show that the existing
+             tool-chains by-and-large are very sensitive to the way code is
+             specified. Furthermore, we expose several fundamental
+             programming patterns where optimisations missing in one or the
+             other tool chain inhibit fair comparisons and, with it,
+             cross-fertilisation.
          },
-
 }
 
-/* TODO!!
+/* The sources of the paper are under doc/2016-popl-ordinals.  */
 @article{transfinite,
           Author    = {{\v{S}}inkarovs, Artjoms and Scholz, Sven{-}Bodo},
           Title     = {A Lambda Calculus for Transfinite Arrays: Unifying Arrays and Streams},
           Journal   = {CoRR},
           Volume    = {abs/1710.03832},
           Year      = {2017},
-          URL       = {http://arxiv.org/abs/1710.03832},
+          URL       = {/pubs/transfinite/2017-transfinite.pdf},
           ArchivePrefix = {arXiv},
           Eprint    = {1710.03832},
           Timestamp = {Wed, 01 Nov 2017 19:05:43 +0100},
           BibUrl    = {https://dblp.org/rec/bib/journals/corr/abs-1710-03832},
-          BibSource = {dblp computer science bibliography, https://dblp.org}
-}
-*/
+          BibSource = {dblp computer science bibliography, https://dblp.org},
+          Date      = {2017-10-10},
+          AddInfo   = {
+            We have tried to publish this paper multiple times without much
+            success.
 
+            \href{http://arxiv.org/abs/1710.03832}{This is a 2017 version}, which is
+            one on ArXiv.  Supplementary materials include
+            \href{https://github.com/ashinkarov/heh}{The Heh language implemenation} and
+            \href{/pubs/transfinite/lambda-omega-semantics.pdf}{Semantics as a separate document}.
+
+            After that 
+            \href{/pubs/transfinite/2018-transfinite.pdf}{we attempted to send it to POPL'18}.
+            We tried to explain our motivation in a clearer way.
+
+            Then \href{/pubs/transfinite/2020-transfinite.pdf}{I attempted POPL'20}.
+            This is a complete rewrite of the same idea but in the langauge of
+            dependent types.
+
+            I still hope to publish it one day.
+          },
+}
 
 @inproceedings{array-comp,
         Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo and
@@ -82,6 +560,7 @@
          Furthermore, we briefly discuss how this approach could be extended to other
          data structures and how it could serve as a basis to further extend mutually
          recursive value definitions in a call-by-value setting in general.},
+        date={2017-08-30},
 }
 
 
@@ -123,6 +602,7 @@
         an OpenMP Fortran implementation.  Our figures show that the
         SaC-based implementation achieves roughly a 12.5\% runtime improvement, and
         outperforms the OpenMP implementation.},
+        Date = {2015-09-15},
 }
 
 @phdthesis{asv-thesis,
@@ -152,6 +632,7 @@
         of the original programs and we demonstrate significant performance improvements
         when targeting SIMD-capable architectures.},
         Url = {/pubs/asv-thesis.pdf},
+        Date = {2015-05-01},
 }
 
 @article{ccpe-data-layouts,
@@ -166,6 +647,7 @@
         Pages = {2092--2119},
         Month = {May},
         Publisher = {Wiley-Blackwell},
+        URL = {/pubs/2015-ccpe.pdf},
         Abstract =
         {Vector instructions of modern CPUs are crucially important for the
         performance of compute-intensive algorithms. Auto-vectorisation often fails
@@ -179,34 +661,8 @@
         through our system can have a vast performance impact on compute intensive
         programs.},
         Url = {/pubs/ccpe-data-layouts.pdf},
+        Date = {2015-05-18},
 }
-
-
-
-@inproceedings{data-layouts,
-        Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
-        Title = {Data Layout Inference for Code Vectorisation},
-        Booktitle={2013 International Conference on High Performance Computing Simulation (HPCS)},
-        Year = {2013},
-        Pages = {527-534},
-        DOI = {10.1109/HPCSim.2013.6641464},
-        Month = {July},
-        Abstract =
-            {SIMD instructions of modern CPUs are crucially important for
-            the performance of compute-intensive algorithms. Auto-vectorisation
-            often fails due to an unfortunate choice of data layout by the programmer.
-            This paper proposes a data layout inference for auto-vectorisation
-            which identifies layout transformations that convert SIMD-unfavorable
-            layouts of data structures into favorable ones.
-            We present a type system for layout transformations and we sketch an inference
-            algorithm for it. Finally, we present some initial performance figures
-            for the impact of the inferred layout transformations.
-            They show that non-intuitive layouts
-            that are inferred through our system can have a vast performance impact
-            on compute intensive programs.},
-        Url = {/pubs/data-layouts.pdf},
-}
-
 
 @article{sexynbody,
         Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo
@@ -221,7 +677,7 @@
         DOI = {10.1002/cpe.3078},
         Abstract =
             {This paper describes our experience in implementing the classical
-            $N \alpha \beta \sum^2 a \times b_n$-body algorithm in SaC and analysing the runtime performance
+            $N$-body algorithm in SaC and analysing the runtime performance
             achieved on three different machines: a dual-processor 8-core Dell
             PowerEdge 2950 (a Beowulf cluster node, the reference machine), a
             quad-core hyper-threaded Intel Core-i7 based system equipped with
@@ -245,7 +701,35 @@
             different machine architectures, as well as long-term
             maintainability in evolving hardware environments.},
         Url = {/pubs/sexynbody.pdf},
+        Date = {2014-08-07},
 }
+
+@inproceedings{data-layouts,
+        Author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
+        Title = {Data Layout Inference for Code Vectorisation},
+        Booktitle={2013 International Conference on High Performance Computing Simulation (HPCS)},
+        Year = {2013},
+        Pages = {527-534},
+        DOI = {10.1109/HPCSim.2013.6641464},
+        Month = {July},
+        Abstract =
+            {SIMD instructions of modern CPUs are crucially important for
+            the performance of compute-intensive algorithms. Auto-vectorisation
+            often fails due to an unfortunate choice of data layout by the programmer.
+            This paper proposes a data layout inference for auto-vectorisation
+            which identifies layout transformations that convert SIMD-unfavorable
+            layouts of data structures into favorable ones.
+            We present a type system for layout transformations and we sketch an inference
+            algorithm for it. Finally, we present some initial performance figures
+            for the impact of the inferred layout transformations.
+            They show that non-intuitive layouts
+            that are inferred through our system can have a vast performance impact
+            on compute intensive programs.},
+        Url = {/pubs/data-layouts.pdf},
+        Date = {2013-10-21},
+}
+
+
 
 
 @inproceedings{cpcgcc,
@@ -274,6 +758,7 @@
         any hardware supporting SIMD paradigms; hence the new abstractions
         could be considered as a step forward to a new C language standard.},
         Url = {/pubs/cpcgcc.pdf},
+        Date = {2012-01-17},
 }
 
 
@@ -306,8 +791,11 @@
             unchanged.  We define a correctness criterion for layout modifying program
             transformations and we show that our transformation abides to this criterion.},
         Url = {/pubs/layout-correctness.pdf},
+        Date = {2013-09-01},
 }
 
+/* I don't know if I want to publish this.  This is dead for all practical
+   purposes, and the ideas there are not so novel and exciting.  */
 /*
 @unpublished{macro-parser,
         Author = {\v{S}inkarovs, Artjoms and Pe\v{c}erska, Julija and Zai\v{c}enkovs, Pavels},
