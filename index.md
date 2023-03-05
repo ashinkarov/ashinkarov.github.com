@@ -18,9 +18,13 @@ high-performance compilers.
 
 ### Contact
 
+
 * Email: <a href="mailto:tema@pm.me">tema@pm.me</a>
 * My code is on the [Github](https://github.com/ashinkarov/) and [SaC Gitlab](https://gitlab.sac-home.org/public)
 * I am on [Facebook](https://www.facebook.com/ashinkarov)
+
+In the official documents, e.g. my publications, the spelling of my name is *Artjoms Šinkarovs*.
+While it is unusual to have multiple spellings of your name, [here is why I do](/name.html).
 
 
 
