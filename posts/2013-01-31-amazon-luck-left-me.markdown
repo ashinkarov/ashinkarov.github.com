@@ -83,7 +83,7 @@ part of your sellers?  Or would it create more work for you?   I doubt it.
 Case Study
 ==========
 
-In the middle of December I bought a backpack from Amaon marketplace,
+In the middle of December I bought a backpack from Amazon marketplace,
 as I needed a replacement for my old one.  After some googling I have
 chosen [this one](http://www.amazon.co.uk/gp/product/B001IBHSUK/ref=oh_details_o06_s00_i00) 
 with a nice red cross.  Then I left the country for Christmas holidays and

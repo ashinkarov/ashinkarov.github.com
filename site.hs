@@ -96,6 +96,7 @@ bibPdf b@(Bib ty name items) =
 main :: IO ()
 main = do
   hakyll $ do
+
     match "images/*" $ do
       route idRoute
       compile copyFileCompiler
@@ -104,7 +105,8 @@ main = do
       route idRoute
       compile compressCssCompiler
 
-    match (fromList ["about.rst", "contact.markdown", "name.md"]) $ do
+    match (fromList ["about.rst", "contact.markdown", 
+                     "name.md", "links.md"]) $ do
       route $ setExtension "html"
       compile $
         pandocCompiler
