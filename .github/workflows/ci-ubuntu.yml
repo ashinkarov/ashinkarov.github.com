@@ -14,9 +14,10 @@ jobs:
     steps:
 
       - name: Install imagemagick
-        run: |
-          sudo apt-get install -y imagemagick
-          sudo sed -i_bak 's/rights="none" pattern="PDF"/rights="read | write" pattern="PDF"/' /etc/ImageMagick-6/policy.xml
+        run: sudo apt-get install -y imagemagick
+
+      - name: Update stupid imagemagick policy
+        run: sudo sed -i_bak 's/rights="none" pattern="PDF"/rights="read | write" pattern="PDF"/' /etc/ImageMagick-6/policy.xml
 
 ########################################################################
 ## INSTALLATION STEP
