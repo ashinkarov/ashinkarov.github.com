@@ -52,6 +52,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.3
 
         with:
-          branch: source
+          branch: master
           folder: _site
           git-config-name: Github Actions
