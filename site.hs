@@ -26,7 +26,7 @@ import Text.Pandoc.Citeproc
 import Text.Pandoc.Readers
 import Text.Pandoc.Writers
 import qualified Data.Map.Lazy as M
-import Data.Time (UTCTime(UTCTime), parseTimeOrError, defaultTimeLocale, parseTimeM, parseTime)
+import Data.Time (UTCTime(UTCTime), parseTimeOrError, defaultTimeLocale) --, parseTimeM, parseTime)
 
 
 myFeedConfiguration :: FeedConfiguration
