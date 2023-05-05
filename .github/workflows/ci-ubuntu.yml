@@ -16,9 +16,7 @@ jobs:
       - name: Install imagemagick
         run: |
           sudo apt-get install -y imagemagick
-          sudo sed -i_bak \
-            's/rights="none" pattern="PDF"/rights="read | write" pattern="PDF"/' \
-            /etc/ImageMagick-6/policy.xml
+          sudo sed -i_bak 's/rights="none" pattern="PDF"/rights="read | write" pattern="PDF"/' /etc/ImageMagick-6/policy.xml
 
 ########################################################################
 ## INSTALLATION STEP
