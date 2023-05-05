@@ -22,6 +22,11 @@ jobs:
       - name: Test fucking config
         run: cat /etc/ImageMagick-6/policy.xml
 
+      - name: Checkout site
+        uses: actions/checkout@v2
+
+      - name: Try convert
+        run: convert -density 80 -flatten ./pubs/2018-ifl-memreuse.pdf[0] PNG32:- > x.png
 # ########################################################################
 # ## INSTALLATION STEP
 # ########################################################################
