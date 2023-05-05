@@ -1,6 +1,0 @@
----
-title: S.P.Q.R.
----
-
-Mauris in lorem nisl. Maecenas tempus facilisis ante, eget viverra nisl
-tincidunt et. Donec turpis lectus, mattis ac malesuada a, accumsan eu libero.
