@@ -28,7 +28,7 @@ jobs:
       - name: Try convert
         run: |
           convert --version
-          convert -density 80 -flatten ./pubs/2018-ifl-memreuse.pdf[0] x.png
+          convert -density 80 -flatten ./pubs/2018-ifl-memreuse.pdf[0] x.jpg
 # ########################################################################
 # ## INSTALLATION STEP
 # ########################################################################
