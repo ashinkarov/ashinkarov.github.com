@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Artem Shinkarov - Teaching operating systems</title>
+        <link href="//fonts.googleapis.com/css?family=Merriweather:900italic,900,700italic,400italic,700,400,300italic,300|Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/sakura.css" />
+        <link rel="stylesheet" href="../css/tema.css" />
+    </head>
+    <script>
+      function visibilityToggle(id) {
+         var x = document.getElementById(id);
+         //alert("display of " + id + " = " + x.style.display)
+         if (x.style.display === "none") {
+           x.style.display = "block";
+         } else {
+           x.style.display = "none";
+         }
+      }
+    </script>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">Artem Shinkarov</a>
+            </div>
+            <nav>
+                <a href="../">About</a>
+                <a href="../publications.html">Publications</a>
+                <a href="../archive.html">Posts</a>
+                <a href="../links.html">Links</a>
+            </nav>
+        </header>
+        <hr style="border:1px solid #e4e4e4;" />
+        <main role="main">
+            <article>
+    <section class="header">
+        Posted on February  1, 2013
+        
+    </section>
+    <section>
+        <p>Teaching process should be fun and enjoyable for both parties: students and
+teachers, otherwise it doesn’t make much of a sense. Studying operating systems
+might become relatively complex endeavour as it normally includes a lot of
+technical details, alternatives in designs and some low level programming. Also,
+the amount of code that one might have to deal with could be really frightening.</p>
+<p>In order to compensate the overall struggle, I’ve decided to concentrate on
+the way things are named in UNIX-flavoured OS-es. The naming convention of
+different types of processes is pretty much amusing if you think about it.
+I don’t know who started it, but it has very noticeable demoniacal connotations:
+<em>daemons</em>, <em>zombies</em>, <em>killing parents</em>, <em>orphans</em>, etc. Sounds quite scary,
+isn’t it? Following that train of thought, I managed to come up with the
+following assignment:</p>
+<pre><code>Answer the following questions providing reasonable explanations:
+
+1. What happens when a child kills its parent?
+2. Can a zombie do so, or it is too dead for that?
+3. Can a daemon become a zombie?
+4. How long can an orphan live on it's own, if at all?</code></pre>
+<p>I hope that it would add some giggle to the overall struggle.</p>
+    </section>
+</article>
+
+        </main>
+    </body>
+</html>

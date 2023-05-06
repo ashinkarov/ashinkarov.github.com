@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Artem Shinkarov - 2019-max-resilience</title>
+        <link href="//fonts.googleapis.com/css?family=Merriweather:900italic,900,700italic,400italic,700,400,300italic,300|Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/sakura.css" />
+        <link rel="stylesheet" href="../css/tema.css" />
+    </head>
+    <script>
+      function visibilityToggle(id) {
+         var x = document.getElementById(id);
+         //alert("display of " + id + " = " + x.style.display)
+         if (x.style.display === "none") {
+           x.style.display = "block";
+         } else {
+           x.style.display = "none";
+         }
+      }
+    </script>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">Artem Shinkarov</a>
+            </div>
+            <nav>
+                <a href="../">About</a>
+                <a href="../publications.html">Publications</a>
+                <a href="../archive.html">Posts</a>
+                <a href="../links.html">Links</a>
+            </nav>
+        </header>
+        <hr style="border:1px solid #e4e4e4;" />
+        <main role="main">
+            <div class="paper-img-desc">
+  <a class="paper-img" href="../pubs/2019-max-resilience.pdf
+">
+  
+    <img src="../pubs/2019-max-resilience.png" style="width:30rem">
+  
+  </a>
+  <h2>Checkpointing Kernel Executions of MPI+CUDA Applications
+</h2>
+  
+  <p>M. Baird, S.-B. Scholz, Šinkarovs, Artjoms, and L. Bautista-Gomez,
+<span>“Checkpointing kernel executions of MPI+CUDA applications,”</span>
+in <em>Euro-par 2019: Parallel processing workshops</em>, May 2020, pp.
+694–706.</p>
+
+  <p class="bibpdf">
+    <a href="../pubs/2019-max-resilience.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@InProceedings{2019-max-resilience,
+	author = {Baird, Max
+  and Scholz, Sven-Bodo
+  and \textbf{{\v{S}}inkarovs, Artjoms}
+  and Bautista-Gomez, Leonardo},
+	editor = {Schwardmann, Ulrich
+  and Boehme, Christian
+  and B. Heras, Dora
+  and Cardellini, Valeria
+  and Jeannot, Emmanuel
+  and Salis, Antonio
+  and Schifanella, Claudio
+  and Manumachu, Ravi Reddy
+  and Schwamborn, Dieter
+  and Ricci, Laura
+  and Sangyoon, Oh
+  and Gruber, Thomas
+  and Antonelli, Laura
+  and Scott, Stephen L.},
+	title = {Checkpointing Kernel Executions of MPI+CUDA Applications},
+	booktitle = {Euro-Par 2019: Parallel Processing Workshops},
+	year = {2020},
+	publisher = {Springer International Publishing},
+	address = {Cham},
+	pages = {694--706},
+	isbn = {978-3-030-48340-1}}</code>
+
+
+<h3>Abstract</h3>
+<p><p><span> This paper proposes a new approach to checkpointing MPI
+applications that use long-running CUDA kernels. It becomes possible to
+take snapshots of data residing on the GPUs without waiting for kernels
+to complete. The proposed technique is implemented in the context of the
+state of the art high performance fault tolerance library FTI. As a
+result we get an elegant solution to the problem of developing resilient
+MPI applications where GPU kernels run longer than the mean time between
+hardware failures. We describe in detail how we checkpoint/restart
+collaborative MPI-CUDA applications, and we provide an initial
+evaluation of the proposed approach using the Livermore Unstructured
+Lagrangian Explicit Shock Hydrodynamics (LULESH) application as a case
+study. </span></p></p>
+
+
+
+
+        </main>
+    </body>
+</html>

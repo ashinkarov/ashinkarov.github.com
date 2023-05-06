@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Artem Shinkarov - asv-thesis</title>
+        <link href="//fonts.googleapis.com/css?family=Merriweather:900italic,900,700italic,400italic,700,400,300italic,300|Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/sakura.css" />
+        <link rel="stylesheet" href="../css/tema.css" />
+    </head>
+    <script>
+      function visibilityToggle(id) {
+         var x = document.getElementById(id);
+         //alert("display of " + id + " = " + x.style.display)
+         if (x.style.display === "none") {
+           x.style.display = "block";
+         } else {
+           x.style.display = "none";
+         }
+      }
+    </script>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">Artem Shinkarov</a>
+            </div>
+            <nav>
+                <a href="../">About</a>
+                <a href="../publications.html">Publications</a>
+                <a href="../archive.html">Posts</a>
+                <a href="../links.html">Links</a>
+            </nav>
+        </header>
+        <hr style="border:1px solid #e4e4e4;" />
+        <main role="main">
+            <div class="paper-img-desc">
+  <a class="paper-img" href="../pubs/asv-thesis.pdf
+">
+  
+    <img src="../pubs/asv-thesis.png" style="width:30rem">
+  
+  </a>
+  <h2>Data Layout Types: a type-based approach to automatic data layout
+transformations for improved SIMD vectorisation
+</h2>
+  
+  <p>A. Šinkarovs, <span>“Data layout types: A type-based approach to
+automatic data layout transformations for improved SIMD
+vectorisation,”</span> PhD thesis, School of Mathematical; Computer
+Sciences, Heriot-Watt University, Heriot-Watt University, Edinburgh
+Campus, Edinburgh, Scotland, EH14 4AS, 2015.</p>
+
+  <p class="bibpdf">
+    <a href="../pubs/asv-thesis.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@phdthesis{asv-thesis,
+	author = {\v{S}inkarovs, Artjoms},
+	title = {Data Layout Types: a type-based approach to automatic data layout transformations for improved SIMD vectorisation},
+	year = {2015},
+	month = {05},
+	school = {School of Mathematical and Computer Sciences, Heriot-Watt University},
+	address = {Heriot-Watt University, Edinburgh Campus, Edinburgh, Scotland, EH14 4AS}}</code>
+
+
+<h3>Abstract</h3>
+<p><p>The increasing complexity of modern hardware requires sophisticated
+programming techniques for programs to run efficiently. At the same
+time, increased power of modern hardware enables more advanced analyses
+to be included in compilers. This thesis focuses on one particular
+optimisation technique that improves utilisation of vector units. The
+foundation of this technique is the ability to chose memory mappings for
+data structures of a given program.</p>
+<p>Usually programming languages use a fixed layout for logical data
+structures in physical memory. Such a static mapping often has a
+negative effect on usability of vector units. In this thesis we consider
+a compiler for a programming language that allows every data structure
+in a program to have its own data layout. We make sure that data layouts
+across the program are sound, and most importantly we solve a problem of
+automatic data layout reconstruction. To consistently do this, we
+formulate this as a type inference problem, where type encodes a data
+layout for a given structure as well as implied program transformations.
+We prove that type-implied transformations preserve semantics of the
+original programs and we demonstrate significant performance
+improvements when targeting SIMD-capable architectures.</p></p>
+
+
+
+
+        </main>
+    </body>
+</html>

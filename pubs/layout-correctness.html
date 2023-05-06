@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Artem Shinkarov - layout-correctness</title>
+        <link href="//fonts.googleapis.com/css?family=Merriweather:900italic,900,700italic,400italic,700,400,300italic,300|Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/sakura.css" />
+        <link rel="stylesheet" href="../css/tema.css" />
+    </head>
+    <script>
+      function visibilityToggle(id) {
+         var x = document.getElementById(id);
+         //alert("display of " + id + " = " + x.style.display)
+         if (x.style.display === "none") {
+           x.style.display = "block";
+         } else {
+           x.style.display = "none";
+         }
+      }
+    </script>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">Artem Shinkarov</a>
+            </div>
+            <nav>
+                <a href="../">About</a>
+                <a href="../publications.html">Publications</a>
+                <a href="../archive.html">Posts</a>
+                <a href="../links.html">Links</a>
+            </nav>
+        </header>
+        <hr style="border:1px solid #e4e4e4;" />
+        <main role="main">
+            <div class="paper-img-desc">
+  <a class="paper-img" href="../pubs/layout-correctness.pdf
+">
+  
+    <img src="../pubs/layout-correctness.png" style="width:30rem">
+  
+  </a>
+  <h2>Semantics-Preserving Data Layout Transformations for Improved
+Vectorisation
+</h2>
+  
+  <p>A. Šinkarovs and S.-B. Scholz, <span>“Semantics-preserving data
+layout transformations for improved vectorisation,”</span> in
+<em>Proceedings of the 2Nd ACM SIGPLAN workshop on functional
+high-performance computing</em>, Sep. 2013, pp. 59–70. doi: <a href="https://doi.org/10.1145/2502323.2502332">10.1145/2502323.2502332</a>.</p>
+
+  <p class="bibpdf">
+    <a href="../pubs/layout-correctness.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@inproceedings{layout-correctness,
+	author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
+	title = {Semantics-Preserving Data Layout Transformations for Improved Vectorisation},
+	booktitle = {2nd Workshop on Functional High-Performance Computing (FHPC'13)},
+	booktitle = {Proceedings of the 2Nd ACM SIGPLAN Workshop on Functional High-performance Computing},
+	series = {FHPC '13},
+	year = {2013},
+	isbn = {978-1-4503-2381-9},
+	location = {Boston, Massachusetts, USA},
+	pages = {59--70},
+	numpages = {12},
+	doi = {10.1145/2502323.2502332},
+	acmid = {2502332},
+	publisher = {ACM},
+	address = {New York, NY, USA},
+	keywords = {correctness, program transformation, type systems, vectorisation}}</code>
+
+
+<h3>Abstract</h3>
+<p><p><span>Data-Layouts that are favourable from an algorithmic
+perspective often are less suitable for vectorisation, i.e., for an
+effective use of modern processor’s vector instructions. This paper
+presents work on a compiler driven approach towards automatically
+transforming data layouts into a form that is suitable for
+vectorisation. In particular, we present a program transformation for a
+first-order functional array programming language that systematically
+modifies they layouts of all data structures. At the same time, the
+transformation also adjusts the code that operates on these structures
+so that the overall computation remains unchanged. We define a
+correctness criterion for layout modifying program transformations and
+we show that our transformation abides to this criterion.</span></p></p>
+
+
+
+
+        </main>
+    </body>
+</html>

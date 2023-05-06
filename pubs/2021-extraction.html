@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Artem Shinkarov - 2021-extraction</title>
+        <link href="//fonts.googleapis.com/css?family=Merriweather:900italic,900,700italic,400italic,700,400,300italic,300|Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/sakura.css" />
+        <link rel="stylesheet" href="../css/tema.css" />
+    </head>
+    <script>
+      function visibilityToggle(id) {
+         var x = document.getElementById(id);
+         //alert("display of " + id + " = " + x.style.display)
+         if (x.style.display === "none") {
+           x.style.display = "block";
+         } else {
+           x.style.display = "none";
+         }
+      }
+    </script>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">Artem Shinkarov</a>
+            </div>
+            <nav>
+                <a href="../">About</a>
+                <a href="../publications.html">Publications</a>
+                <a href="../archive.html">Posts</a>
+                <a href="../links.html">Links</a>
+            </nav>
+        </header>
+        <hr style="border:1px solid #e4e4e4;" />
+        <main role="main">
+            <div class="paper-img-desc">
+  <a class="paper-img" href="../pubs/2021-extraction.pdf
+">
+  
+    <img src="../pubs/2021-extraction.png" style="width:30rem">
+  
+  </a>
+  <h2>Choosing is Losing: How to combine the benefits of shallow and deep
+embeddings through reflection
+</h2>
+  
+  <p>Artjoms Šinkarovs and J. Cockx, <span>“Choosing is losing: How to
+combine the benefits of shallow and deep embeddings through
+reflection,”</span> <em>CoRR</em>, vol. abs/2105.10819, May 2021,
+Available: <a href="https://arxiv.org/abs/2105.10819">https://arxiv.org/abs/2105.10819</a></p>
+
+  <p class="bibpdf">
+    <a href="../pubs/2021-extraction.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@article{2021-extraction,
+	author = {\textbf{Artjoms {\v{S}inkarovs}} and
+               Jesper Cockx},
+	title = {Choosing is Losing: How to combine the benefits of shallow and deep
+               embeddings through reflection},
+	journal = {CoRR},
+	volume = {abs/2105.10819},
+	year = {2021},
+	archiveprefix = {arXiv},
+	eprint = {2105.10819},
+	timestamp = {Mon, 31 May 2021 16:16:57 +0200},
+	biburl = {https://dblp.org/rec/journals/corr/abs-2105-10819.bib},
+	bibsource = {dblp computer science bibliography, https://dblp.org}}</code>
+
+
+<h3>Abstract</h3>
+<p><p><span> Dependently-typed host languages empower users to verify a
+wide range of properties of embedded languages and programs written in
+them. Designers of such embedded languages are faced with a difficult
+choice between using a shallow or a deep embedding. The former is easier
+to use because the entire infrastructure of the host langauge is
+immediately available. Meanwhile, the latter gives full access to the
+structure of embedded programs, but is difficult to use in practice,
+especially when the embedded language is itself dependently typed. The
+main insight presented in this paper is that the choice between shallow
+and deep embedding can be eliminated by working in a host language with
+reflection capabilities: we start from a shallow embedding that can use
+all libraries and tools of the host language, and later use reflection
+to expose the deep structure of the embedded programs. Concretely, we
+apply this technique to embed three programming languages —
+Kaleidoscope, SaC, and (a subset of) APL — into the dependently typed
+theorem prover Agda, using dependent types to statically enforce several
+properties of interest. We then use Agda’s reflection capabilities to
+extract the embedded programs back into the original language, so that
+the existing toolchain can be leveraged. In this process, statically
+verified properties of the host language are mapped onto runtime checks
+in the target language, allowing extracted programs to interact safely
+with existing code. Finally, we demonstrate the feasibility of our
+approach with the implementation and extraction of a convolutional
+neural network in our embedding of APL. </span></p></p>
+
+
+
+<h2>Additional Information</h2>
+<p><p><span> The sources of the paper with the code <a href="https://github.com/ashinkarov/2021-extraction-paper">are available
+here</a>. </span></p></p>
+
+
+        </main>
+    </body>
+</html>

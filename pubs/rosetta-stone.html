@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Artem Shinkarov - rosetta-stone</title>
+        <link href="//fonts.googleapis.com/css?family=Merriweather:900italic,900,700italic,400italic,700,400,300italic,300|Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/sakura.css" />
+        <link rel="stylesheet" href="../css/tema.css" />
+    </head>
+    <script>
+      function visibilityToggle(id) {
+         var x = document.getElementById(id);
+         //alert("display of " + id + " = " + x.style.display)
+         if (x.style.display === "none") {
+           x.style.display = "block";
+         } else {
+           x.style.display = "none";
+         }
+      }
+    </script>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">Artem Shinkarov</a>
+            </div>
+            <nav>
+                <a href="../">About</a>
+                <a href="../publications.html">Publications</a>
+                <a href="../archive.html">Posts</a>
+                <a href="../links.html">Links</a>
+            </nav>
+        </header>
+        <hr style="border:1px solid #e4e4e4;" />
+        <main role="main">
+            <div class="paper-img-desc">
+  <a class="paper-img" href="../pubs/rosetta-stone.pdf
+">
+  
+    <img src="../pubs/rosetta-stone.png" style="width:30rem">
+  
+  </a>
+  <h2>A Rosetta Stone for Array Languages
+</h2>
+  
+  <p>A. Šinkarovs, R. Bernecky, H.-N. Vießmann, and S.-B. Scholz, <span>“A
+rosetta stone for array languages,”</span> in <em>Proceedings of the 5th
+ACM SIGPLAN international workshop on libraries, languages, and
+compilers for array programming</em>, Jul. 2018, pp. 1–10. doi: <a href="https://doi.org/10.1145/3219753.3219754">10.1145/3219753.3219754</a>.</p>
+
+  <p class="bibpdf">
+    <a href="../pubs/rosetta-stone.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@inproceedings{rosetta-stone,
+	author = {\v{S}inkarovs, Artjoms and Bernecky, Robert
+                   and Vie{\ss}mann, Hans-Nikolai and Scholz, Sven-Bodo},
+	title = {A Rosetta Stone for Array Languages},
+	booktitle = {Proceedings of the 5th ACM SIGPLAN International Workshop on Libraries, Languages, and Compilers for Array Programming},
+	series = {ARRAY 2018},
+	year = {2018},
+	isbn = {978-1-4503-5852-1},
+	location = {Philadelphia, PA, USA},
+	pages = {1--10},
+	numpages = {10},
+	doi = {10.1145/3219753.3219754},
+	acmid = {3219754},
+	publisher = {ACM},
+	address = {New York, NY, USA},
+	keywords = {array languages, functional languages, performance portability}}</code>
+
+
+<h3>Abstract</h3>
+<p><p><span> This paper aims to foster cross-fertilisation between
+programming language and compiler research performed on different array
+programming language infrastructures. We study how to enable better
+comparability of concepts and techniques by looking into generic
+translations between array languages. Our approach is based on the idea
+of a basic core language Heh which only captures the absolute essentials
+of array languages: multi-dimensional arrays and shape-invariant
+operations on them. Subsequently, we investigate how to map these
+constructs into several existing languages: SaC, APL, Julia, Python, and
+C. This approach provides us with some first understanding on how the
+peculiarities of these languages affect their suitability for expressing
+the basic building-blocks of array languages. We show that the existing
+tool-chains by-and-large are very sensitive to the way code is
+specified. Furthermore, we expose several fundamental programming
+patterns where optimisations missing in one or the other tool chain
+inhibit fair comparisons and, with it, cross-fertilisation. </span></p></p>
+
+
+
+
+        </main>
+    </body>
+</html>

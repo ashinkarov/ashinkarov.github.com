@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Artem Shinkarov - 2021-cnn</title>
+        <link href="//fonts.googleapis.com/css?family=Merriweather:900italic,900,700italic,400italic,700,400,300italic,300|Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/sakura.css" />
+        <link rel="stylesheet" href="../css/tema.css" />
+    </head>
+    <script>
+      function visibilityToggle(id) {
+         var x = document.getElementById(id);
+         //alert("display of " + id + " = " + x.style.display)
+         if (x.style.display === "none") {
+           x.style.display = "block";
+         } else {
+           x.style.display = "none";
+         }
+      }
+    </script>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">Artem Shinkarov</a>
+            </div>
+            <nav>
+                <a href="../">About</a>
+                <a href="../publications.html">Publications</a>
+                <a href="../archive.html">Posts</a>
+                <a href="../links.html">Links</a>
+            </nav>
+        </header>
+        <hr style="border:1px solid #e4e4e4;" />
+        <main role="main">
+            <div class="paper-img-desc">
+  <a class="paper-img" href="../pubs/2021-cnn.pdf
+">
+  
+    <img src="../pubs/2021-cnn.png" style="width:30rem">
+  
+  </a>
+  <h2>Array Languages Make Neural Networks Fast
+</h2>
+  
+  <p>Artjoms Šinkarovs, H.-N. Vießmann, and S.-B. Scholz, <span>“Array
+languages make neural networks fast,”</span> in <em>Proceedings of the
+7th ACM SIGPLAN international workshop on libraries, languages and
+compilers for array programming</em>, Jun. 2021, pp. 39–50. doi: <a href="https://doi.org/10.1145/3460944.3464312">10.1145/3460944.3464312</a>.</p>
+
+  <p class="bibpdf">
+    <a href="../pubs/2021-cnn.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@inproceedings{2021-cnn,
+	author = {\textbf{Artjoms {\v{S}inkarovs}} and Vie\ss{}mann, Hans-Nikolai and Scholz, Sven-Bodo},
+	title = {Array Languages Make Neural Networks Fast},
+	year = {2021},
+	isbn = {9781450384667},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	doi = {10.1145/3460944.3464312},
+	booktitle = {Proceedings of the 7th ACM SIGPLAN International Workshop on Libraries, Languages and Compilers for Array Programming},
+	pages = {39–50},
+	numpages = {12},
+	keywords = {array language, machine learning},
+	location = {Virtual, Canada},
+	series = {ARRAY 2021}}</code>
+
+
+<h3>Abstract</h3>
+<p><p><span>Most implementations of machine learning algorithms are based
+on special-purpose frameworks such as TensorFlow or PyTorch. While these
+frameworks are convenient to use, they introduce multi-million lines of
+code dependency that one has to trust, understand and potentially
+modify. As an alternative, this paper investigates a direct
+implementation of a state of the art Convolutional Neural Network (CNN)
+in an array language. While our implementation requires 150 lines of
+code to define the special-purpose operators needed for CNNs, which are
+readily provided through frameworks such as TensorFlow and PyTorch, our
+implementation outperforms these frameworks by factors 2 and 3 on a
+fixed set of hardware — a 64-core GPU-accelerated machine; for a simple
+example network. The resulting specification is written in a
+rank-polymorphic data-parallel style, and it can be immediately
+leveraged by optimising compilers. Indeed, array languages make neural
+networks fast.</span></p></p>
+
+
+
+<h2>Additional Information</h2>
+<p><p><span> This talk is recorded and <a href="https://www.pldi21.org/prerecorded_array.3.html">is available
+here</a>. The code <a href="https://github.com/SacBase/array-2021-supmaterial">is available
+here</a>. </span></p></p>
+
+
+        </main>
+    </body>
+</html>

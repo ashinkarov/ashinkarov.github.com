@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Artem Shinkarov - 2020-msfp</title>
+        <link href="//fonts.googleapis.com/css?family=Merriweather:900italic,900,700italic,400italic,700,400,300italic,300|Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/sakura.css" />
+        <link rel="stylesheet" href="../css/tema.css" />
+    </head>
+    <script>
+      function visibilityToggle(id) {
+         var x = document.getElementById(id);
+         //alert("display of " + id + " = " + x.style.display)
+         if (x.style.display === "none") {
+           x.style.display = "block";
+         } else {
+           x.style.display = "none";
+         }
+      }
+    </script>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">Artem Shinkarov</a>
+            </div>
+            <nav>
+                <a href="../">About</a>
+                <a href="../publications.html">Publications</a>
+                <a href="../archive.html">Posts</a>
+                <a href="../links.html">Links</a>
+            </nav>
+        </header>
+        <hr style="border:1px solid #e4e4e4;" />
+        <main role="main">
+            <div class="paper-img-desc">
+  <a class="paper-img" href="../pubs/2020-msfp.pdf
+">
+  
+    <img src="../pubs/2020-msfp.png" style="width:30rem">
+  
+  </a>
+  <h2>Multi-dimensional Arrays with Levels
+</h2>
+  
+  <p>Artjoms Šinkarovs, <span>“Multi-dimensional arrays with
+levels,”</span> in <em>Proceedings eighth workshop on mathematically
+structured functional programming, MSFP@ETAPS 2020, dublin, ireland,
+25th april 2020</em>, May 2020, vol. 317, pp. 57–71. doi: <a href="https://doi.org/10.4204/EPTCS.317.4">10.4204/EPTCS.317.4</a>.</p>
+
+  <p class="bibpdf">
+    <a href="../pubs/2020-msfp.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@inproceedings{2020-msfp,
+	author = {\textbf{Artjoms {\v{S}}inkarovs}},
+	editor = {Max S. New and
+               Sam Lindley},
+	title = {Multi-dimensional Arrays with Levels},
+	booktitle = {Proceedings Eighth Workshop on Mathematically Structured Functional
+               Programming, MSFP@ETAPS 2020, Dublin, Ireland, 25th April 2020},
+	series = {{EPTCS}},
+	volume = {317},
+	pages = {57--71},
+	year = {2020},
+	doi = {10.4204/EPTCS.317.4},
+	timestamp = {Fri, 08 May 2020 16:00:57 +0200},
+	biburl = {https://dblp.org/rec/journals/corr/abs-2005-00198.bib},
+	bibsource = {dblp computer science bibliography, https://dblp.org}}</code>
+
+
+<h3>Abstract</h3>
+<p><p><span> We explore a data structure that generalises rectangular
+multi-dimensional arrays. The shape of an n-dimensional array is
+typically given by a tuple of n natural numbers. Each element in that
+tuple defines the length of the corresponding axis. If we treat this
+tuple as an array, the shape of that array is described by the single
+natural number n. A natural number itself can be also treated as an
+array with the shape described by the natural number 1 (or the element
+of any singleton set). This observation gives rise to the hierarchy of
+array types where the shape of an array of level l+1 is a level-l array
+of natural numbers. Such a hierarchy occurs naturally when treating
+arrays as containers, which makes it possible to define both rank- and
+level-polymorphic operations. The former can be found in most array
+languages, whereas the latter gives rise to partial selections on a
+large set of hyperplanes, which is often useful in practice. In this
+paper we present an Agda formalisation of arrays with levels. We show
+that the proposed formalism supports standard rank-polymorphic array
+operations, while type system gives static guarantees that indexing is
+within bounds. We generalise the notion of ranked operator so that it
+becomes applicable on arrays of arbitrary levels and we show why this
+may be useful in practice. </span></p></p>
+
+
+
+<h2>Additional Information</h2>
+<p><p><span> Here is <a href="https://www.youtube.com/watch?v=RqMtrGtvKKo">a recording of this
+talk available at YouTube</a>. Agda code <a href="https://github.com/ashinkarov/agda-arrays-with-levels">is
+available here</a>. </span></p></p>
+
+
+        </main>
+    </body>
+</html>

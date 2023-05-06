@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: 
-
-Sitemap: http://ashinkarov.github.com/sitemap.xml 

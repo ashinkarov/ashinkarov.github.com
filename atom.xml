@@ -1,597 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
-  <title><![CDATA[ashinkarov.github.com]]></title>
-  <link href="http://ashinkarov.github.com/atom.xml" rel="self"/>
-  <link href="http://ashinkarov.github.com/"/>
-  <updated>2018-07-16T07:27:53+00:00</updated>
-  <id>http://ashinkarov.github.com/</id>
-  <author>
-    <name><![CDATA[Artem Shinkarov]]></name>
-    
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
-
+    <title>Posts by Artem</title>
+    <link href="http://ashinkarov.github.io//atom.xml" rel="self" />
+    <link href="http://ashinkarov.github.io/" />
+    <id>http://ashinkarov.github.io//atom.xml</id>
+    <author>
+        <name>Artem Shinkarov</name>
+        
+        <email>tema@pm.me</email>
+        
+    </author>
+    <updated>false</updated>
+    <entry>
+    <title>Portable Support for Explicit Vectorisation in C
+</title>
+    <link href="http://ashinkarov.github.io//pubs/cpcgcc.html" />
+    <id>http://ashinkarov.github.io//pubs/cpcgcc.html</id>
+    <published>2012-01-17
+</published>
+    <updated>false</updated>
+    <summary type="html"><![CDATA[<div class="paper-img-desc">
+  <a class="paper-img" href="/pubs/cpcgcc.pdf
+">
   
-  <entry>
-    <title type="html"><![CDATA[Чем занимаются британские ученые (2)]]></title>
-    <link href="http://ashinkarov.github.com/blog/2016/05/12/british-scientists-2/"/>
-    <updated>2016-05-12T15:07:00+00:00</updated>
-    <id>http://ashinkarov.github.com/blog/2016/05/12/british-scientists-2</id>
-    <content type="html"><![CDATA[<p><a href="blog/2016/03/23/british-scientists-1/">Предыдущая часть</a></p>
-
-<p>Предположим, что я вас убедил, и вы хотите попробовать себя в науке. С чего
-начать и как к этому подступить? К сожалению, бeспроигрышного рецепта тут не
-существует. Поэтому, как и прежде, я поделюсь лишь собственными наблюдениями.</p>
-
-<!-- more -->
-
-
-<p>Обычно все начинается с того, что вы, как студент, ищете руководителя, который
-будет готов вас «нанять» на работу. Я говорю «нанять», потому что работа над
-диссертацией похожа скорее на нормальную работу, где платят небольшую зарплату,
-в отличие от классического обучения, с лекциями и экзаменами. Найти бюджет, из
-которого вам будут платить зарплату, задача руководителя. В целом, хороший
-руководитель &#8212; это уже 80 процентов успеха. Поэтому его нужно выбирать очень и
-очень тщательно. Не столь важно насколько престижен университет, важно, чтобы
-руководитель в вас верил и чтобы ваше общение приносило удовольствие.
-Руководитель будет человеком, с которым ближайшие три, четыре, пять лет придется
-сталкиваться практически каждый день. Так что, если контакт не наладился, или
-коммуникация неэффективна, то что-то явно не так.</p>
-
-<p>Как же найти хорошего руководителя? Для начала можно осмотреться в родном
-университете. Если за время бакалавра/магистра вы встретили человека, с которым
-приятно общаться и научная деятельность которого вам интересна, попробуйте с ним
-поговорить. Поймите также, что хорошие аспиранты (PhD студенты), это очень
-ценный ресурс. Поэтому, если вы сможете убедить потенциального руководителя в
-том, что вы из себя что-то представляете, то дальше все случится автоматически.
-Если в родном университете вас никто не привлекает, или же вы хотите сменить
-страну, то начните искать людей, исходя из публикаций. Сформулируйте тему, в
-рамках которой вы хотели бы заниматься исследованиями, найдите несколько
-конференций с высоким рейтингом, где публикуются работы по выбранной теме.
-Почитайте статьи и посмотрите на авторов. Рано или поздно найдется множество
-людей, которые делают что-то, что вам будет очень интересно. При этом отнеситесь
-серьезно к этому поиску &#8212; это будет не очень легко, но это вполне осуществимо.
-Далее, найдите контакты этих людей (обычно у всех есть персональные страницы) и
-начинайте писать письма всем подряд. Рано или поздно вам ответят. Ответят,
-потому что хорошие руководители и хорошие студенты обоюдно заинтересованы друг в
-друге. Расскажите немного о себе, скажите, что вы хотели бы сделать докторскую
-работу на такую-то тему. Спросите, есть ли возможность сделать PhD с этим
-человеком, и обязательно упомяните, какие его/ее статьи вы прочитали и что
-именно вас там заинтересовало. Не бойтесь общаться с людьми и писать им письма.
-Не бойтесь просить совета. Просто опишите подробно свою ситуацию.</p>
-
-<p>Что же происходит после того как нашелся руководитель, который согласен взять
-вас под свою опеку? Далее следуют четыре-пять лет довольно интенсивной работы,
-которая в идеале приведет к тому самому расширению общечеловеческих знаний, о
-которых я упоминал раньше. За это время придется очень много чего выучить.
-Бакалаврская/магистерская степень в университете не всегда дает достаточно
-знаний, чтобы сразу же заниматься наукой. Это нормально, и, скорее всего, с вами
-будет именно так. Именно поэтому на протяжении всей докторской постоянно
-придется осваивать что-то новое, чтобы в итоге создать что-то свое. Первый год
-вы будете находится в странном состоянии нерешительности. Вроде, примерно
-понятно что вас интересует, но как именно сделать это на самом деле &#8212;
-неизвестно. Плюс, гигантский объем информации, к которому непонятно как
-подступиться, будет давить все сильнее и сильнее. В этот момент руководитель
-должен прийти на помощь. Не бойтесь делиться своими ощущениями. Это очень важно.
-При этом  не ждите чудес. Чтобы написать хорошую диссертацию, идея должна
-возникнуть  именно у  вас, а не у руководителя. Это странная дилемма, но, к
-сожалению, тут ничего не поделаешь. Хороший руководитель, как буддийский мастер,
-в основном должен бить вас бамбуковой палкой до тех пор, пока просветление не
-снизойдет на вас. Это устроенно именно так и никак иначе. Если аспиранту
-говорят, что именно делать, то тогда получается, что это не докторская, а
-механическое исполнение приказов.</p>
-
-<p>В процессе докторской нужно будет писать много технического текста. Я говорю
-про статьи, которые имеет смысл опубликовать до финальной диссертации. Ну и сама
-диссертация, разумеется. Очень неочевидный факт &#8212; писать хорошие статьи
-неимоверно трудно, даже прекрасно владея материалом. Проблема в том, чтобы
-представить мысли на бумаге четко и структурировано. Это искусство. Искусство,
-которым можно овладеть, лишь, базируясь на примерах, и методом проб и ошибок.
-В хорошей статье всегда нужно рассказать увлекательную историю. Человек, который
-будет рецензировать статью, может вполне бросить чтение на середине и не принять
-статью, сказав, что он ничего не понял, потому что идеи представлены
-недостаточно ясно. С другой стороны, не нужно слишком увлекаться литературой,
-потому что вы все-таки хотите сообщить о некотором результате. Тонкая грань
-между представлением идей очень доступно и очень строго и есть главный фокус.
-Теперь, зачем вообще писать статьи? Некоторые университеты требуют это,
-некоторые нет, но тут есть абсолютно прагматическая причина. Во-первых, статья,
-поданная на конференцию, (особенно на конференцию с высоким рейтингом) будет
-читаться людьми, являющиеся, скорее всего, экспертами в вашей области. Любые их
-комментарии, даже негативные, будут весьма полезны, потому что это в некотором
-смысле благословение. Это определенная гарантия, что вы не занимаетесь полной
-ерундой. Во-вторых, опубликованные статьи можно использовать в финальной
-диссертации. Просто все распечатать и приклеить титульный лист сверху не
-получится, однако вставлять куски текста из статей в диссертацию вполне
-допустимо. После того, как диссертация готова, вам нужно будет защититься. В
-зависимости от страны, в которой находится университет, процедуры могут
-отличаться, но, грубо говоря, научный руководитель выбирает несколько человек,
-которые будут вашими оппонентами. Они читают вашу работу. После этого
-устраивается что-то вроде устного экзамена, длящегося обычно несколько часов: вы
-отвечаете на вопросы и комментарии оппонентов и обсуждаете с ними проделанную
-работу. Если оппоненты остались довольны ответами и тем, что вы говорили на
-протяжении этих нескольких часов, вам присуждается звание.</p>
-
-<p>Что дальше? Дальше все зависит от вас. С одной стороны, вы сделали первый шаг по
-лестнице академической карьеры, с другой стороны, еще не поздно пойти поработать
-в индустрию. В некоторых компаниях докторская степень является минимальным
-требованием, чтобы просто попасть на интервью. Учтите также, что у многих
-больших компаний: Intel, Google, Mozilla есть research департаменты, которые
-нанимают именно ученых, и которые ведут исследования для нужд этих компаний.
-Куда бы вы не пошли дальше, я думаю, что, закончив докторскую, вы наверняка не
-пропадете.</p>
-
-<p>Закончить я бы хотел вот как. Я не знаю, заинтересовало ли вас занятие наукой
-после прочтения этого текста. Я лишь надеюсь, что вам стало чуть понятнее, о чем
-это все, и что британские ученые на самом деле должны делать. Я надеюсь, что это
-даст достаточно пищи для размышления, при выборе карьеры. Если вы спросите меня,
-то я скажу, что докторская &#8212; это одна из самых увлекательных вещей, которая
-когда либо со мной случались.</p>
-
-<h3>Постскриптум</h3>
-
-<p>Если у вас остались вопросы или вы хотели бы обсудить реальные
-возможности работы, напишите мне письмо на
-<a href="mailto:artyom.shinkaroff@gmail.com">artyom.shinkaroff@gmail.com</a>.</p>
-]]></content>
-  </entry>
+    <img src="/pubs/cpcgcc.png" style="width:30rem">
   
-  <entry>
-    <title type="html"><![CDATA[Чем занимаются британские ученые (1)]]></title>
-    <link href="http://ashinkarov.github.com/blog/2016/03/23/british-scientists-1/"/>
-    <updated>2016-03-23T16:31:00+00:00</updated>
-    <id>http://ashinkarov.github.com/blog/2016/03/23/british-scientists-1</id>
-    <content type="html"><![CDATA[<p>Progmeistars решил <a href="http://progmeistars.lv/kw/kursovik-137.htm">издать меня</a>
-в нескольких томах, перед вами том первый.</p>
-
-<p><em>Артем &#8212; наш талантливый выпускник  2002 года. Работал преподавателем на курсах c
-cентября 2003 года до февраля 2006 года. Он выпускник Латвийского университета
-2009 года. В мае 2015 года защитил диссертацию &#8220;Data Layout Types: a type-based
-approach to automatic data layout transformations for improved SIMD
-vectorisation&#8221; на  ученую степень PhD in Computer Science  в университете
-Heriot-Watt  в Эдинбурге и  продолжает   там же работать postdoc&#8217;ом.
-Диссертация Артема была признана лучшей среди диссертаций докторов наук, которые
-выпускались  в ноябре 2015 года и ему была вручена специальная университетская
-премия MacFarlane prize.</em></p>
-
-<!-- more -->
-
-
-<p>Наверное, стоит представиться.  Меня зовут Артем Шинкаров, я из Риги. Я закончил
-сороковую школу, курсы, после чего  поступил в Латвийский университет  на
-компьютерное отделение (datorika). Окончив его в 2009 году, я отправился в
-Великобританию работать над своей  докторской диссертацией. Защитившись (<em>PhD in
-Computer Science  ред.</em>) через 6 лет, я по сей день продолжаю работать в
-университете Heriot-Watt, в Эдинбурге.</p>
-
-<p>Получив степень, я смотрю на себя шестилетней давности и понимаю, что
-представления об академической жизни, докторской работе и устройстве научной
-деятельности у меня либо отсутствовали, либо были до безобразия искаженными.  В
-этом смысле я не уникален, подобное утверждение сделает любой человек с
-докторской степенью.  Однако, мне кажется, что чужой опыт в самом начале мог бы
-помочь мне сформировать более адекватную картину действительности и уберечь от
-некоторых разочарований.</p>
-
-<p>Именно для этого я пишу этот текст. Возможно, что после прочтения вы скажете:
-«Ничего себе, я думаю, что академическая деятельность это ровно то, чем я бы
-хотел/хотела заниматься». Но возможно, вы скажете: «Я никогда не пойду в науку,
-это не для меня».  Любая из этих позиций представляет из себя ценность.  Вы как
-минимум задумаетесь. Наверное, не стоит делать скоропостижных выводов: все, что
-здесь написано – это мое субъективное мнение. Просто помните, что академическая
-карьера &#8212; это абсолютно реальный выбор, который доступен практически каждому. К
-сожалению, в Риге, по крайней мере, в университете в мое время, царило ощущение
-радикального отрицания целесообразности занятия наукой.  Когда я сообщил свои
-сокурсникам, что меня взяли в университет в Великобритании, нормальной реакцией
-было:  «Ты что, с ума сошел, тебе было мало лекций в университете?  Найди себе
-лучше нормальную работу и не занимайся ерундой».  Я, в целом, не против такого
-взгляда, но я против, когда такая  точка зрения абсолютна.</p>
-
-<p>Простое наблюдение: решения о том, чем заниматься в жизни, имеют срок годности.
-Рано или поздно наступит момент, когда кардинально что-то менять у вас не будет
-возможности или сил.  Тут возможны контрпримеры, но они скорее будут
-исключением, подтверждающим правило. Именно поэтому, и я уже заканчиваю
-философствовать, просто задумайтесь, действительно ли то, что вы выбрали или
-собираетесь выбрать в качестве вашей профессии, наполняет вашу жизнь смыслом в
-достаточной степени.</p>
-
-<p>Перейдем к конкретике.  Я начну с некоторых наблюдений.  Во-первых, нужно четко
-понимать, что в университете есть два принципиально значимых рода деятельности:
-исследования и преподавание.  Глядя на университет «снаружи», например, будучи
-студентом, исследовательская деятельность порой остается в стороне.  В Латвии, в
-частности, в ЛУ на компьютерном факультете, про исследования вообще никто особо
-никогда не упоминал, потому что весь акцент был на преподавании.  При этом, не
-поймите меня превратно, уровень образования Латвийского университета очень
-конкурентоспособен за пределами Латвии.  В Латвийском университете очень много
-адекватных преподавателей, которые хорошо учат базовым вещам.  Система
-образования предусматривает то, что вы можете «вылететь» (или по ротации попасть
-с бесплатного обучения на платное), что очень заметно повышает студенческую
-мотивацию.  Например, в университетах Великобритании, прагматически говоря, это
-не так.  Тут царит идея, что если уж студента приняли, то его нужно довести до
-конца, несмотря ни на что. Может это и более гуманно, но это точно не улучшает
-качество выпускаемых студентов.  Также, как и отсутствие устных экзаменов,
-трехлетняя бакалаврская программа и многое другое.  Так что ЛУ хороший
-университет, просто там практически не занимаются исследованиями.  Это довольно
-печально, поскольку, на мой взгляд, это и есть самое интересная часть
-университетской деятельности.</p>
-
-<p>Что же такое исследования, и чем занимаются британские ученые?  Очевидно, что
-для комфортной человеческой жизни существует ряд задач, которые нужно просто
-брать и делать. Например: строить дороги, сажать картошку, лечить людей. Но есть
-также мета-деятельность: как сделать так, чтобы построенные дороги служили в два
-раза дольше; как вылечить СПИД; как сделать так, чтобы посаженная картошка не
-погибла от нашествия колорадского жука. Эта мета-деятельность и есть
-исследования.  Это то, над чем люди днями и ночами размышляют в университетах;
-то о чем пишутся статьи и книги.  Это то, что позволяет человечеству
-развиваться.</p>
-
-<p>Небольшое отступление. Если буквально посмотреть на последний параграф, то
-получается, что у исследований должен быть сугубо практический интерес. Но в чем
-же тогда смысл доказательства теоремы Ферма?  Или какая польза от астрономии?
-Какая разница, был ли большой взрыв или не было, что толку? Разница тут вот
-какая &#8212; пока мы не накопим критический багаж знаний по поводу определенного
-феномена, то говорить о том, можем ли мы извлечь из него практическую пользу или
-нет, просто бессмысленно.  Накапливание этих знаний занимает десятилетия, а
-может, и столетия.  Очевидно, что сохранить свои знания и наблюдения так, чтобы
-в будущем их кто–то мог использовать, можно лишь тогда, когда эти знания
-оформлены строгим и логическим образом и как-то связаны с тем, что уже известно.
-Именно поэтому вся наука занимается тем, что расширяет и классифицирует прежде
-накопленные знания, чтобы в дальнейшем кто-то смог ими воспользоваться.  Кто
-именно будет пользоваться, не так и важно.  Если вам удалось строго показать,
-что вы обнаружили что–то неизвестное в известной области &#8212; это вклад в
-общечеловеческое знание.  В этом смысле теорема Ферма, большой взрыв и многое
-другое &#8212; просто наблюдения об окружающем мире.  Как их использовать? Пока
-неизвестно.  Однако, мы смогли строго описать эти наблюдения, и они не
-противоречат всему тому, что мы знаем на данный момент.</p>
-
-<p>Несложно понять, что только благодаря развитию науки, мы, как человечество,
-можем «идти вперед».  Делать нашу жизнь лучше, комфортнее, становиться умнее, и
-т.д.  Однако, проблема в том, что исследование требует значительных денег, но не
-приносит немедленных результатов.  Это плохо вписывается в капиталистическую
-модель общества.  Те, у кого есть деньги, в основном озабочены тем, как их
-приумножить.  Поскольку возврат инвестиций в случае науки очень трудно
-прогнозировать, инвестиции в науку делаются крайне неохотно.  Поэтому стоит
-сразу сказать, что если ваша цель заработать как можно больше денег – не идите в
-науку.  Идите в индустрию, где возврат вложений может порой достигать
-астрономических величин. Просто посмотрите на Google с Facebook-ом &#8212; сайт с
-посещаемостью в миллиард человек, за каждого из которых рекламная компания
-платит 1 цент в единицу времени.  Прикиньте заработок самостоятельно.  Адекватен
-ли заработок Google и Facebook-а в соотношении к затратам на их продукт?  Я не
-знаю.  Просто, эмпирически, оказалось, что в данный момент времени такая схема
-очень успешно работает.  При этом поймите, что в Европе/Америке люди, работающие
-в университете, далеко не бедствуют, просто, работая в индустрии, можно
-заработать больше.</p>
-
-<p>Ну хорошо, а в чем же тогда прелесть исследовательской деятельности? Я вижу два
-преимущества: колоссальная свобода и наполнение жизни смыслом. Когда вы
-работаете на компанию, вы так или иначе должны следовать её общим интересам.
-Грубо говоря, вы просто часть процесса, главная цель которого состоит в том,
-чтобы компания могла успешно существовать и развиваться, и, стало быть,
-зарабатывать больше денег.  Работая в университете, при удачном стечении
-обстоятельств вы вольны делать абсолютно все, что вам заблагорассудится,
-учитывая, что вы демонстрируете академический прогресс. Например, публикуете
-хорошие статьи, сотрудничаете с другими учеными, выигрываете гранты, и т.д.  Но
-заметьте, что именно делать и как именно делать решаете именно вы, а не ваш
-начальник.  Никто не может вас заставить заниматься исследованиями, которые вам
-неинтересны, вы  сами себе хозяин, вы сами распоряжаетесь своим временем и
-ресурсами.  По-моему, это невероятно ценно, и добиться такой же свободы в
-индустрии очень сложно. Теперь про наполнение жизни смыслом.  Я думаю, что тут
-принципиально важен ответ на вопрос: «Зачем я живу?».  Если при ответе на этот
-вопрос вы оцениваете пользу, которую вы теоретически можете принести
-человечеству, и вы хотите это пользу каким–то образом максимизировать, то,
-возможно, расширение общечеловеческих знаний &#8212; это правильная амбиция.  Просто
-задумайтесь &#8212; работая в индустрии, вы выполняете то что нужно вашему
-работодателю здесь и сейчас.  Если завтра его требования поменяются, то вся ваша
-работа потенциально пойдет насмарку. Возвращаясь к классификации человеческих
-занятий на практическую деятельность и мета-деятельность, индустрия – это
-практика.  Поэтому там скорее важно количество.  Для ученых же скорее важна
-индивидуальность. Но как тут решить?  Ведь пока не попробуешь, не узнаешь&#8230; Я
-думаю, что тут нужно просто положиться на интуицию.</p>
-
-<p><a href="blog/2016/03/23/british-scientists-2/">Продолжение</a></p>
-]]></content>
-  </entry>
+  </a>
+  <h2>Portable Support for Explicit Vectorisation in C
+</h2>
   
-  <entry>
-    <title type="html"><![CDATA[Firefox on Gentoo]]></title>
-    <link href="http://ashinkarov.github.com/blog/2013/04/09/firefox-in-gentoo/"/>
-    <updated>2013-04-09T01:56:00+00:00</updated>
-    <id>http://ashinkarov.github.com/blog/2013/04/09/firefox-in-gentoo</id>
-    <content type="html"><![CDATA[<p>Before I&#8217;ll start describing my adventure with firefox on gentoo, I&#8217;ll clarify
-that firefox  is the only browser that I am using on my computers (well
-links/elinks/w3m for text browsing) and hopefully nothing is going to change my
-mind.  Why so?</p>
+  <p>A. Šinkarovs and S.-B. Scholz, <span>“Portable support for explicit
+vectorisation in <span>C</span>,”</span> in <em>16th workshop on
+compilers for parallel computing (CPC’12)</em>, Jan. 2012.</p>
 
-<p>For the past couple of years I have tried a bunch of alternatives and still believe
-that firefox is the best choice.  When chrome(ium) became popular, a lot of people
-switched to the glorious product of google, and it seems to me that the only
-reason for that switch was a very good job of google&#8217;s marketing department.
-I found it quite cheeky when they started the overall development, as firefox was
-really the best on the market at that time, it was free, and it was way more popular
-than anything else, that was probably something that google couldn&#8217;t tolerate.
-I always ask myself, wouldn&#8217;t it be more productive, to join
-the forces and to work on one product?  But then I kind of realise that if it
-would happen we would really end up with monopoly in the world of browsers,
-which we don&#8217;t want.</p>
+  <p class="bibpdf">
+    <a href="/pubs/cpcgcc.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
 
-<!-- more-->
+<code class="bibinfo" id="bibtex-box" style="display:none;">@inproceedings{cpcgcc,
+	author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
+	title = {Portable Support for Explicit Vectorisation in {C}},
+	booktitle = {16th Workshop on Compilers for Parallel Computing (CPC'12)},
+	year = {2012}}</code>
 
 
-<p>So, my main dissatisfaction with chromium and any webkit-based browser is that
-they cannot fix freaking selection.  I can&#8217;t show the picture, as I don&#8217;t have
-it installed, but whenever you select a text on a page with a complex layout,
-selection goes faaaar beyond the text and selects some random areas of the
-web-page.  You guys might say that I am picky, but this selection thing really
-drives me nuts.  Can anyone fix it?</p>
-
-<p>Another thing that nobody can mimic is
-<a href="http://www.vimperator.org/vimperator">Vimperator</a>.  Yeah, there are some
-plugins in chrome, but they are just funny.  Vimperator is not about adding
-h,j,k shortcuts, seriously.  Look at the code if you don&#8217;t believe me.</p>
-
-<p>Finally, to my impression firefox is the best balance between speed and
-resources.  Probably chrome can do regexps faster, but on my system it eats
-noticeably more memory which  means that if you have more that one tab
-open then most of the regexp effort goes down the drain because of memory
-overheads.  It is not really a scientific fact &#8211; just my personal intuition.
-May be you can configure this stuff, but after I used all my patience,
-firefox is still the winner.</p>
-
-<h2>Running browsers on gentoo</h2>
-
-<p>Any browser is a critical application, which should work fast and shouldn&#8217;t fail.
-That is why I am and will compile all my browsers from source with the highest
-possible optimisations.  After one of recompilations I found out that sometimes
-the fonts were rendered bold in the places where they shouldn&#8217;t be.  Mainly it
-happened when you scroll up and down with a wheel of your mouse.  See the picture
-below.</p>
-
-<p><img src="http://ashinkarov.github.com/images/firefox-gentoo.png"></p>
-
-<p>A couple of phrases in the middle of the wikipedia page look like if they are
-bold.  In the beginning I though that it is a problem of fontconfig and
-infinality which I was actively configuring at that time.  Later I found out
-that it was a problem in firefox itself.  The thing happens not very often and if
-you select and deselect this bold text, the boldness goes away.  So in principle
-you could even live with this thing, it is just quite annoying.</p>
-
-<p>After some googling I found a
-<a href="https://bugzilla.mozilla.org/show_bug.cgi?id=775203">bug</a>
-in the firefox bugzilla marked as <em>fixed</em>.
-Well, it definitely wasn&#8217;t fixed on my system, and I am using
-the latest releases.  Then I started to read the patches and
-investigate what the hell is going on.  It turned out, that the problem had
-something to do with the bug in cairo, and firefox people have their own
-version of cairo, where they happily committed the fix.  So far so good, but
-gentoo is linking against system cairo which does <em>not</em> have these changes.</p>
-
-<blockquote><p>Anyone knows why?</p></blockquote>
-
-<p>Anyhow, after some more investigation I found a flag which links against cairo
-from the firefox repository.  The flag is called <code>--disable-system-cairo</code> :)
-So all you need to do is to add the following line to the e-build:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>    mozconfig_annotate '' --disable-system-cairo</span></code></pre></td></tr></table></div></figure>
+<h3>Abstract</h3>
+<p><p><span>In pursuit of requirements of modern software, high-performance
+computing often offers a narrowly-tailored solutions that reduce
+portability of software. As one of such examples in this paper, we
+consider the situation with SIMD accelerators, whose importance
+seriously increased in the last decade. Firstly appeared in the early
+90es, being oriented exclusively on graphics acceleration, nowadays SIMD
+CPU extensions are used in a variety of fields. The lack of standard and
+incompatibility of instruction sets through the different types of CPUs
+substantially increase the complexity of developing portable
+applications within the extensions. In this paper we present an
+abstraction layer implemented as a set of C language extensions within
+the GNU GCC compiler which provides an interface for SIMD vectors and
+operations independently from the architecture. First of all, these
+abstractions allow to exploit SIMD extensions of a CPU explicitly, which
+is useful when auto-vectoriser fails. Secondly, the abstractions are
+general enough to be mapped to any hardware supporting SIMD paradigms;
+hence the new abstractions could be considered as a step forward to a
+new C language standard.</span></p></p>
 
 
-<p>recompile, and the problem happily goes away.  May be one day I will put
-an overlays for that.  May be one day gentoo people will add this thing into
-default tree.  Gentoo people, where are you? :)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Updating my blog]]></title>
-    <link href="http://ashinkarov.github.com/blog/2013/04/08/updating-my-blog/"/>
-    <updated>2013-04-08T03:20:00+00:00</updated>
-    <id>http://ashinkarov.github.com/blog/2013/04/08/updating-my-blog</id>
-    <content type="html"><![CDATA[<p>Finally I found some time to turn my web-site on the github into personal
-homepage.  I must say that I never liked web technologies, as I always have a
-feeling that I am digging through an enormous pile of shit when I just need to
-create a set of nice-looking html pages.  Having said that, I put a lot of hope into
-jekyll and octopress guys as they <em>only</em> produce static htmls on output.  One tiny
-thing that I didn&#8217;t consider was that the glorious technology uses ruby as an
-implementation language.</p>
 
-<!-- more-->
-
-
-<p>So what&#8217;s wrong with ruby?  Honestly speaking I didn&#8217;t quite understand yet.
-May be there&#8217;s nothing wrong with it and I just cannot use it properly.
-However, right now it feels like an overcomplicated technology that cannot function
-properly.  I must admit that I am looking at it through the prism of jekyll, and
-most of the time it throws exceptions, doing the wrong thing or eating-up my cpu
-without doing anything useful.  Mind you &#8211; I am just trying to generate static
-htmls :)</p>
-
-<p>Anyhow, we shall see later if I am going to change my mind or not.  For the time
-being, let&#8217;s look on the bright side.  On the bright side, I must say that I
-managed to configure my bibliography in a reasonable way.  The only reasonable
-way is to generate html from the bibtex.  You configure it once, and then you
-just keep adding entries into the bibliography file.</p>
-
-<p>Conversion from bibtex to html is taken by
-<a href="https://github.com/inukshuk/jekyll-scholar">jecyll-scholar plugin</a> which
-promised to work perfectly well.  As you may guess it didn&#8217;t.  At least not from
-the very beginning.  It managed to produce html looking exactly as bibtex+latex
-would produce.  It is perfectly fine if you write a paper, but for your web-page
-you want some more.  For instance, you wan to include some links: like a path to
-the paper to make sure that people can download it, a bibtex entry, to make sure
-that people can add it in their paper, etc.  As it turns out jekyll-scholar
-didn&#8217;t do that, instead people suggested to use jekyll-scholar-extras, which
-granted most of the missing functionality, but everything was hard-coded.  Mind
-you, I didn&#8217;t want to touch ruby at this point.</p>
-
-<p>So I managed to solve generation of additional fields by modifying the
-style-file I was using (yeah, you need to pick-up a style-file from
-<a href="https://github.com/inukshuk/csl-ruby">here</a> which
-is equivalent to the parameter you pass to bibliography in latex).  But then I
-came across the problem that jekyll-scholar does not preserve original formating
-of the bibtex, which makes it impossible to generate correct bibtex entry.  That
-was the point when I decided to investigate.</p>
-
-<p>As far as I&#8217;ve never seen ruby in my life, it took me some three hours to find
-the problem and to come-up with <em>a</em> solution which I wasn&#8217;t particularly happy
-about, but at least it worked fine.  After that I thought that it would be stupid
-to keep the changes only for myself, and I decided to notify the author.  By the
-way it&#8217;s not that I am so altruistic, I just figured out that whenever I&#8217;ll
-update my ruby packages, my changes will be gone :)</p>
-
-<p>Well, then I notified the author without much of a hope, and to my surprise he
-was very enthusiastic about the changes I made, he even didn&#8217;t consider my way
-being wrong, which was quite surprising.  Then I explained some more details, found
-out some answers, and got really stuck in fixing jekyll-scholar :)  But, I must
-pay my true respect to <a href="https://github.com/inukshuk">Sylvester Keil</a> who was very
-patient and very active when it came to bug-fixing and implementing new
-features.</p>
-
-<p>To conclude, I think that the current state of jekyll-scholar is quite
-satisfying, and assuming that we will finish merging scholar-extras, it would be
-a very decent and configurable bibtex-html converter.  In essence, such moments
-make you believe that open source movement is not just a brand, it really works
-and works pretty well.</p>
-
-<p>Finally, if you have any comments or notes, or feature-requests regarding
-jekyll-scholar, please don&#8217;t hesitate to create a github issue or contact an
-author.  Every single contribution helps.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Teaching operating systems]]></title>
-    <link href="http://ashinkarov.github.com/blog/2013/02/01/teaching-operating-systems/"/>
-    <updated>2013-02-01T20:16:00+00:00</updated>
-    <id>http://ashinkarov.github.com/blog/2013/02/01/teaching-operating-systems</id>
-    <content type="html"><![CDATA[<p>Teaching process should be fun and enjoyable for both parties: students and
-teachers, otherwise it doesn&#8217;t make much of a sense.  Studying operating systems
-might become relatively complex endeavour as it normally includes a lot of
-technical details, alternatives in designs and some low level programming. Also,
-the amount of code that one might have to deal with could be really frightening.</p>
-
-<p>In order to compensate the overall struggle, I&#8217;ve decided to concentrate on
-the way things are named in UNIX-flavoured OS-es.  The naming convention of
-different types of processes is pretty much amusing if you think about it.
-I don&#8217;t know who started it, but it has very noticeable demoniacal connotations:
-<em>daemons</em>, <em>zombies</em>, <em>killing parents</em>, <em>orphans</em>, etc.  Sounds quite scary,
-isn&#8217;t it?  Following that train of thought, I managed to come up with the
-following assignment:</p>
-
-<pre><code>Answer the following questions providing reasonable explanations:
-
-1. What happens when a child kills its parent?
-2. Can a zombie do so, or it is too dead for that?
-3. Can a daemon become a zombie?
-4. How long can an orphan live on it's own, if at all?
-</code></pre>
-
-<p>I hope that it would add some giggle to the overall struggle.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Amazon luck had left me]]></title>
-    <link href="http://ashinkarov.github.com/blog/2013/01/31/amazon-luck-left-me/"/>
-    <updated>2013-01-31T18:30:00+00:00</updated>
-    <id>http://ashinkarov.github.com/blog/2013/01/31/amazon-luck-left-me</id>
-    <content type="html"><![CDATA[<p>When I moved to the UK, three years ago, I was really amazed to see how
-simple it is to buy things online.  Keep in mind that in the place where
+]]></summary>
+</entry>
+<entry>
+    <title>Amazon luck had left me</title>
+    <link href="http://ashinkarov.github.io//posts/2013-01-31-amazon-luck-left-me.html" />
+    <id>http://ashinkarov.github.io//posts/2013-01-31-amazon-luck-left-me.html</id>
+    <published>2013-01-31T00:00:00Z</published>
+    <updated>2013-01-31T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<article>
+    <section class="header">
+        Posted on January 31, 2013
+        
+    </section>
+    <section>
+        <p>When I moved to the UK, three years ago, I was really amazed to see how
+simple it is to buy things online. Keep in mind that in the place where
 I lived before, people did not have a lot of trust in the post, so in the
-beginning the British system truly amazed me.  Three years later I am
+beginning the British system truly amazed me. Three years later I am
 reconsidering this statement.</p>
-
 <!-- more-->
-
-
 <p>On the unrelated note, I had a discussion once with my German colleague
-and he was vastly complaining about the British post.  When I asked to
+and he was vastly complaining about the British post. When I asked to
 explain the matter, he said that since he moved into the UK, eight years
-ago, the post managed to lose three parcels.  In Germany that would never
+ago, the post managed to lose three parcels. In Germany that would never
 happened, he concluded.</p>
-
 <p>Well, it indicates that different people have different expectations form
 the system, and if you would ever dare to complain to a Russian guy about
 the three parcels, he would laugh into your face.</p>
-
 <p>Coming back to the subject, very quickly I was hooked on Amazon, as it
 kind of works.</p>
-
-<h1>Amazon</h1>
-
+<h1 id="amazon">Amazon</h1>
 <p>Amazon has a great experience in online selling so they managed to come
-to the point that new customers wish to stay with them.  Actually it is
+to the point that new customers wish to stay with them. Actually it is
 a great job, and I wonder how many psychologists, web designers, etc. it
 took to come to the current state.</p>
-
-<p>Obviously, the killing feature is the globalisation.  They create a
-meta-online shop which redirects requests to the actual sellers.  The
+<p>Obviously, the killing feature is the globalisation. They create a
+meta-online shop which redirects requests to the actual sellers. The
 laziness is the driving force of progress so people adopted and appreciated
-the system very quickly .  Being in their current position they can give
+the system very quickly . Being in their current position they can give
 very competitive prices, thanks to <em>google shopping</em> service it is easy to
-check.  They unify the way you communicate, pay, receive, etc. and make it
-easy.  As apple slogan says &#8211; &#8220;it just works&#8221;.</p>
-
+check. They unify the way you communicate, pay, receive, etc. and make it
+easy. As apple slogan says – “it just works”.</p>
 <p>Now, most of the layered system do not work equally well in both
-directions, and Amazon is not exception here.  Amazon woks perfectly well
-until you don&#8217;t have to return items.  It has a simple explanation &#8211;
-people prefer to receive money rather than pay money.  Fair enough.</p>
-
+directions, and Amazon is not exception here. Amazon woks perfectly well
+until you don’t have to return items. It has a simple explanation –
+people prefer to receive money rather than pay money. Fair enough.</p>
 <p>Again, as a matter of fact, most of the time a person is happy with the
-stuff he is receiving.  So as a seller you might want to consider that.
-You might want to include this into your budget planning.  Especially
+stuff he is receiving. So as a seller you might want to consider that.
+You might want to include this into your budget planning. Especially
 cheeky sellers can make returns arbitrary hard in order to discourage
 people from doing so.</p>
-
-<h1>Amazon returns</h1>
-
+<h1 id="amazon-returns">Amazon returns</h1>
 <p>If you order stuff from Amazon itself, the returns are done very decently.
 It does not ask any stupid questions and immediately gives
-you a pre-paid sticker which you put on your item and post it back.  Well
-done Amazon, highly appreciated.  When it comes to the marketplace &#8211; then
+you a pre-paid sticker which you put on your item and post it back. Well
+done Amazon, highly appreciated. When it comes to the marketplace – then
 the hell breaks loose.</p>
-
 <p>It is crucially important to realise that in essence there are two
-different processes involved &#8211; if you buy from Amazon itself, or if you
-go to the <em>marketplace</em>.  The marketplace is a term they use to indicate that
+different processes involved – if you buy from Amazon itself, or if you
+go to the <em>marketplace</em>. The marketplace is a term they use to indicate that
 they just act as a front-end for sellers and all the real stuff is going
 to be done by sellers, not by the Amazon itself.</p>
-
-<p>Here comes the confusion.  Amazon tries to have the same look and feel
+<p>Here comes the confusion. Amazon tries to have the same look and feel
 no matter what you do, so in a way, the fact that you are potentially
 engaging with a third party, by making purchases at marketplace, is
-carefully hidden from you.  Dear Amazon, why don&#8217;t you unify return
-procedures for all your customers on the marketplace, ah?  That would
+carefully hidden from you. Dear Amazon, why don’t you unify return
+procedures for all your customers on the marketplace, ah? That would
 really fix the user experience, and we will be able to conclude that
-the layered approach works equally well both ways?  Are you going to lose
-part of your sellers?  Or would it create more work for you?   I doubt it.</p>
-
-<h1>Case Study</h1>
-
-<p>In the middle of December I bought a backpack from Amaon marketplace,
-as I needed a replacement for my old one.  After some googling I have
+the layered approach works equally well both ways? Are you going to lose
+part of your sellers? Or would it create more work for you? I doubt it.</p>
+<h1 id="case-study">Case Study</h1>
+<p>In the middle of December I bought a backpack from Amazon marketplace,
+as I needed a replacement for my old one. After some googling I have
 chosen <a href="http://www.amazon.co.uk/gp/product/B001IBHSUK/ref=oh_details_o06_s00_i00">this one</a>
-with a nice red cross.  Then I left the country for Christmas holidays and
-came back on 12-th of January.  The backpack was waiting for me, and the
-red cross was shining exactly as it did at the picture.  I decided to give
-it a try, and it wasn&#8217;t bad at all.  Later I discovered that the thing is
-leaking in the rain.  Well, the laptop bag which is leaking in the rain is
-less than usable for me.  Keep in mind, that I live in Scotland, and I
-think I don&#8217;t need to say too much about the rain here.</p>
-
-<p>Now I&#8217;ve checked if I still can return it, and the web page happily said
-that:</p>
-
-<pre><code>    ... the return window will close on 31 Jan 2013. Please note that this is
-    currently extended for the holidays and not all sellers offer an extended
-    return window ...
-</code></pre>
-
-<p>Well done Amazon, I thought, so I pressed the &#8220;Return&#8221; button and carefully
-explained the situation to the seller.  Few hours later I received the
-following response:</p>
-
-<pre><code>    Thank you for your email.
-
-    Unfortunately. we are unable to accept the return of this item as
+with a nice red cross. Then I left the country for Christmas holidays and
+came back on 12-th of January. The backpack was waiting for me, and the
+red cross was shining exactly as it did at the picture. I decided to give
+it a try, and it wasn’t bad at all. Later I discovered that the thing is
+leaking in the rain. Well, the laptop bag which is leaking in the rain is
+less than usable for me. Keep in mind, that I live in Scotland, and I
+think I don’t need to say too much about the rain here.</p>
+<p>Now I’ve checked if I still can return it, and the web page happily said
+that:
+… the return window will close on 31 Jan 2013. Please note that this is
+currently extended for the holidays and not all sellers offer an extended
+return window …
+Well done Amazon, I thought, so I pressed the “Return” button and carefully
+explained the situation to the seller. Few hours later I received the
+following response:
+Thank you for your email.</p>
+<pre><code>    Unfortunately. we are unable to accept the return of this item as
     it is not described to be water proof.
     If you require further assistance, please let us know.
 
@@ -601,57 +169,570 @@ following response:</p>
     Yours sincerely,
 
     Jas
-    Kikatek Customer Support Team
-</code></pre>
-
-<p>You must be bloody joking, Jas, I thought.  I really don&#8217;t know who are
-you, Jas, I am not even sure about your sex, but isn&#8217;t it just ridiculous?
+    Kikatek Customer Support Team</code></pre>
+<p>You must be bloody joking, Jas, I thought. I really don’t know who are
+you, Jas, I am not even sure about your sex, but isn’t it just ridiculous?
 The manual of a new car does not specify that it is not leaking, however
-application of common sense might help.  Also, the fact that implication
+application of common sense might help. Also, the fact that implication
 from false leads to both true and false is amusing, but do you really want
 to use it as an argument?</p>
-
 <p>Explaining my thoughts and trying to be polite, I replied to the email,
-but then they just didn&#8217;t respond to it.  This habit, very common in the
-UK, just pisses me off!  This bloody face-saving crap, it is everywhere.
+but then they just didn’t respond to it. This habit, very common in the
+UK, just pisses me off! This bloody face-saving crap, it is everywhere.
 There are plenty ways of terminating conversation politely, but not
 responding is <em>not</em> one of them!</p>
-
-<p>Fine, they just want to wait until the &#8220;return window&#8221; would be closed
-and use it as an argument later, I thought.  So I wrote to the Amazon
-asking for advice, and they suggested to write a claim.  I did so, which
+<p>Fine, they just want to wait until the “return window” would be closed
+and use it as an argument later, I thought. So I wrote to the Amazon
+asking for advice, and they suggested to write a claim. I did so, which
 caused immediate response from the seller, saying that the return is
 authorised.</p>
-
 <p>Right, now the annoying part of the story is that you have to pay yourself
-the postage of the item which, by the way costs about 10 pounds.  And I am
+the postage of the item which, by the way costs about 10 pounds. And I am
 not really sure if they ever going to refund that.</p>
-
-<p>Now, after later investigation, I have learned that this &#8220;extension&#8221; has
+<p>Now, after later investigation, I have learned that this “extension” has
 a tiny comment which you cannot really see when you look at your order:</p>
-
-<pre><code>     Please note that this doesn't apply to items sold and fulfilled by
+<pre><code>     Please note that this doesn&#39;t apply to items sold and fulfilled by
      Sellers on Amazon Marketplace. For information about returns to
      Sellers please see our Arranging Marketplace Returns and Refunds
-     help page
-</code></pre>
-
-<p>Further more, the Kikatek  has some policies on the returned items
+     help page</code></pre>
+<p>Further more, the Kikatek has some policies on the returned items
 regarding the way they are going to refund it.</p>
-
-<p>To be continued&#8230;</p>
-
-<h1>Conclusions</h1>
-
-<p>A simple thing is turning into a nightmare.  You just waste time on stupid
-emails and claims and what have you.  Of course, you can say &#8211; hell with
-that, I&#8217;ll buy a rain cover or solve it differently.</p>
-
+<p>To be continued…</p>
+<h1 id="conclusions">Conclusions</h1>
+<p>A simple thing is turning into a nightmare. You just waste time on stupid
+emails and claims and what have you. Of course, you can say – hell with
+that, I’ll buy a rain cover or solve it differently.</p>
 <p>My point is that by not unifying return policies for all the users, Amazon
-is spoiling the user experience.  I do understand that in general a return
+is spoiling the user experience. I do understand that in general a return
 should be complicated to discourage buyers from returning everything, but
-why don&#8217;t you make it equally complicated?</p>
-]]></content>
-  </entry>
+why don’t you make it equally complicated?</p>
+    </section>
+</article>
+]]></summary>
+</entry>
+<entry>
+    <title>Teaching operating systems</title>
+    <link href="http://ashinkarov.github.io//posts/2013-02-01-teaching-operating-systems.html" />
+    <id>http://ashinkarov.github.io//posts/2013-02-01-teaching-operating-systems.html</id>
+    <published>2013-02-01T00:00:00Z</published>
+    <updated>2013-02-01T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<article>
+    <section class="header">
+        Posted on February  1, 2013
+        
+    </section>
+    <section>
+        <p>Teaching process should be fun and enjoyable for both parties: students and
+teachers, otherwise it doesn’t make much of a sense. Studying operating systems
+might become relatively complex endeavour as it normally includes a lot of
+technical details, alternatives in designs and some low level programming. Also,
+the amount of code that one might have to deal with could be really frightening.</p>
+<p>In order to compensate the overall struggle, I’ve decided to concentrate on
+the way things are named in UNIX-flavoured OS-es. The naming convention of
+different types of processes is pretty much amusing if you think about it.
+I don’t know who started it, but it has very noticeable demoniacal connotations:
+<em>daemons</em>, <em>zombies</em>, <em>killing parents</em>, <em>orphans</em>, etc. Sounds quite scary,
+isn’t it? Following that train of thought, I managed to come up with the
+following assignment:</p>
+<pre><code>Answer the following questions providing reasonable explanations:
+
+1. What happens when a child kills its parent?
+2. Can a zombie do so, or it is too dead for that?
+3. Can a daemon become a zombie?
+4. How long can an orphan live on it&#39;s own, if at all?</code></pre>
+<p>I hope that it would add some giggle to the overall struggle.</p>
+    </section>
+</article>
+]]></summary>
+</entry>
+<entry>
+    <title>Updating my blog</title>
+    <link href="http://ashinkarov.github.io//posts/2013-04-08-updating-my-blog.html" />
+    <id>http://ashinkarov.github.io//posts/2013-04-08-updating-my-blog.html</id>
+    <published>2013-04-08T00:00:00Z</published>
+    <updated>2013-04-08T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<article>
+    <section class="header">
+        Posted on April  8, 2013
+        
+    </section>
+    <section>
+        <p>Finally I found some time to turn my web-site on the github into personal
+homepage. I must say that I never liked web technologies, as I always have a
+feeling that I am digging through an enormous pile of shit when I just need to
+create a set of nice-looking html pages. Having said that, I put a lot of hope into
+jekyll and octopress guys as they <em>only</em> produce static htmls on output. One tiny
+thing that I didn’t consider was that the glorious technology uses ruby as an
+implementation language.</p>
+<!-- more-->
+<p>So what’s wrong with ruby? Honestly speaking I didn’t quite understand yet.
+May be there’s nothing wrong with it and I just cannot use it properly.
+However, right now it feels like an overcomplicated technology that cannot function
+properly. I must admit that I am looking at it through the prism of jekyll, and
+most of the time it throws exceptions, doing the wrong thing or eating-up my cpu
+without doing anything useful. Mind you – I am just trying to generate static
+htmls :)</p>
+<p>Anyhow, we shall see later if I am going to change my mind or not. For the time
+being, let’s look on the bright side. On the bright side, I must say that I
+managed to configure my bibliography in a reasonable way. The only reasonable
+way is to generate html from the bibtex. You configure it once, and then you
+just keep adding entries into the bibliography file.</p>
+<p>Conversion from bibtex to html is taken by
+<a href="https://github.com/inukshuk/jekyll-scholar">jecyll-scholar plugin</a> which
+promised to work perfectly well. As you may guess it didn’t. At least not from
+the very beginning. It managed to produce html looking exactly as bibtex+latex
+would produce. It is perfectly fine if you write a paper, but for your web-page
+you want some more. For instance, you wan to include some links: like a path to
+the paper to make sure that people can download it, a bibtex entry, to make sure
+that people can add it in their paper, etc. As it turns out jekyll-scholar
+didn’t do that, instead people suggested to use jekyll-scholar-extras, which
+granted most of the missing functionality, but everything was hard-coded. Mind
+you, I didn’t want to touch ruby at this point.</p>
+<p>So I managed to solve generation of additional fields by modifying the
+style-file I was using (yeah, you need to pick-up a style-file from
+<a href="https://github.com/inukshuk/csl-ruby">here</a> which
+is equivalent to the parameter you pass to bibliography in latex). But then I
+came across the problem that jekyll-scholar does not preserve original formating
+of the bibtex, which makes it impossible to generate correct bibtex entry. That
+was the point when I decided to investigate.</p>
+<p>As far as I’ve never seen ruby in my life, it took me some three hours to find
+the problem and to come-up with <em>a</em> solution which I wasn’t particularly happy
+about, but at least it worked fine. After that I thought that it would be stupid
+to keep the changes only for myself, and I decided to notify the author. By the
+way it’s not that I am so altruistic, I just figured out that whenever I’ll
+update my ruby packages, my changes will be gone :)</p>
+<p>Well, then I notified the author without much of a hope, and to my surprise he
+was very enthusiastic about the changes I made, he even didn’t consider my way
+being wrong, which was quite surprising. Then I explained some more details, found
+out some answers, and got really stuck in fixing jekyll-scholar :) But, I must
+pay my true respect to <a href="https://github.com/inukshuk">Sylvester Keil</a> who was very
+patient and very active when it came to bug-fixing and implementing new
+features.</p>
+<p>To conclude, I think that the current state of jekyll-scholar is quite
+satisfying, and assuming that we will finish merging scholar-extras, it would be
+a very decent and configurable bibtex-html converter. In essence, such moments
+make you believe that open source movement is not just a brand, it really works
+and works pretty well.</p>
+<p>Finally, if you have any comments or notes, or feature-requests regarding
+jekyll-scholar, please don’t hesitate to create a github issue or contact an
+author. Every single contribution helps.</p>
+    </section>
+</article>
+]]></summary>
+</entry>
+<entry>
+    <title>Firefox on Gentoo</title>
+    <link href="http://ashinkarov.github.io//posts/2013-04-09-firefox-in-gentoo.html" />
+    <id>http://ashinkarov.github.io//posts/2013-04-09-firefox-in-gentoo.html</id>
+    <published>2013-04-09T00:00:00Z</published>
+    <updated>2013-04-09T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<article>
+    <section class="header">
+        Posted on April  9, 2013
+        
+    </section>
+    <section>
+        <p>Before I’ll start describing my adventure with firefox on gentoo, I’ll clarify
+that firefox is the only browser that I am using on my computers (well
+links/elinks/w3m for text browsing) and hopefully nothing is going to change my
+mind. Why so?</p>
+<p>For the past couple of years I have tried a bunch of alternatives and still believe
+that firefox is the best choice. When chrome(ium) became popular, a lot of people
+switched to the glorious product of google, and it seems to me that the only
+reason for that switch was a very good job of google’s marketing department.
+I found it quite cheeky when they started the overall development, as firefox was
+really the best on the market at that time, it was free, and it was way more popular
+than anything else, that was probably something that google couldn’t tolerate.
+I always ask myself, wouldn’t it be more productive, to join
+the forces and to work on one product? But then I kind of realise that if it
+would happen we would really end up with monopoly in the world of browsers,
+which we don’t want.</p>
+<!-- more-->
+<p>So, my main dissatisfaction with chromium and any webkit-based browser is that
+they cannot fix freaking selection. I can’t show the picture, as I don’t have
+it installed, but whenever you select a text on a page with a complex layout,
+selection goes faaaar beyond the text and selects some random areas of the
+web-page. You guys might say that I am picky, but this selection thing really
+drives me nuts. Can anyone fix it?</p>
+<p>Another thing that nobody can mimic is
+<a href="http://www.vimperator.org/vimperator">Vimperator</a>. Yeah, there are some
+plugins in chrome, but they are just funny. Vimperator is not about adding
+h,j,k shortcuts, seriously. Look at the code if you don’t believe me.</p>
+<p>Finally, to my impression firefox is the best balance between speed and
+resources. Probably chrome can do regexps faster, but on my system it eats
+noticeably more memory which means that if you have more that one tab
+open then most of the regexp effort goes down the drain because of memory
+overheads. It is not really a scientific fact – just my personal intuition.
+May be you can configure this stuff, but after I used all my patience,
+firefox is still the winner.</p>
+<h2 id="running-browsers-on-gentoo">Running browsers on gentoo</h2>
+<p>Any browser is a critical application, which should work fast and shouldn’t fail.
+That is why I am and will compile all my browsers from source with the highest
+possible optimisations. After one of recompilations I found out that sometimes
+the fonts were rendered bold in the places where they shouldn’t be. Mainly it
+happened when you scroll up and down with a wheel of your mouse. See the picture
+below.</p>
+<p>{% img /images/firefox-gentoo.png %}</p>
+<p>A couple of phrases in the middle of the wikipedia page look like if they are
+bold. In the beginning I though that it is a problem of fontconfig and
+infinality which I was actively configuring at that time. Later I found out
+that it was a problem in firefox itself. The thing happens not very often and if
+you select and deselect this bold text, the boldness goes away. So in principle
+you could even live with this thing, it is just quite annoying.</p>
+<p>After some googling I found a
+<a href="https://bugzilla.mozilla.org/show_bug.cgi?id=775203">bug</a>
+in the firefox bugzilla marked as <em>fixed</em>.
+Well, it definitely wasn’t fixed on my system, and I am using
+the latest releases. Then I started to read the patches and
+investigate what the hell is going on. It turned out, that the problem had
+something to do with the bug in cairo, and firefox people have their own
+version of cairo, where they happily committed the fix. So far so good, but
+gentoo is linking against system cairo which does <em>not</em> have these changes.</p>
+<blockquote>
+<p>Anyone knows why?</p>
+</blockquote>
+<p>Anyhow, after some more investigation I found a flag which links against cairo
+from the firefox repository. The flag is called <code>--disable-system-cairo</code> :)
+So all you need to do is to add the following line to the e-build:</p>
+<pre><code>        mozconfig_annotate &#39;&#39; --disable-system-cairo</code></pre>
+<p>recompile, and the problem happily goes away. May be one day I will put
+an overlays for that. May be one day gentoo people will add this thing into
+default tree. Gentoo people, where are you? :)</p>
+    </section>
+</article>
+]]></summary>
+</entry>
+<entry>
+    <title>Semantics-Preserving Data Layout Transformations for Improved
+Vectorisation
+</title>
+    <link href="http://ashinkarov.github.io//pubs/layout-correctness.html" />
+    <id>http://ashinkarov.github.io//pubs/layout-correctness.html</id>
+    <published>2013-09-01
+</published>
+    <updated>false</updated>
+    <summary type="html"><![CDATA[<div class="paper-img-desc">
+  <a class="paper-img" href="/pubs/layout-correctness.pdf
+">
   
+    <img src="/pubs/layout-correctness.png" style="width:30rem">
+  
+  </a>
+  <h2>Semantics-Preserving Data Layout Transformations for Improved
+Vectorisation
+</h2>
+  
+  <p>A. Šinkarovs and S.-B. Scholz, <span>“Semantics-preserving data
+layout transformations for improved vectorisation,”</span> in
+<em>Proceedings of the 2Nd ACM SIGPLAN workshop on functional
+high-performance computing</em>, Sep. 2013, pp. 59–70. doi: <a
+href="https://doi.org/10.1145/2502323.2502332">10.1145/2502323.2502332</a>.</p>
+
+  <p class="bibpdf">
+    <a href="/pubs/layout-correctness.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@inproceedings{layout-correctness,
+	author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
+	title = {Semantics-Preserving Data Layout Transformations for Improved Vectorisation},
+	booktitle = {2nd Workshop on Functional High-Performance Computing (FHPC'13)},
+	booktitle = {Proceedings of the 2Nd ACM SIGPLAN Workshop on Functional High-performance Computing},
+	series = {FHPC '13},
+	year = {2013},
+	isbn = {978-1-4503-2381-9},
+	location = {Boston, Massachusetts, USA},
+	pages = {59--70},
+	numpages = {12},
+	doi = {10.1145/2502323.2502332},
+	acmid = {2502332},
+	publisher = {ACM},
+	address = {New York, NY, USA},
+	keywords = {correctness, program transformation, type systems, vectorisation}}</code>
+
+
+<h3>Abstract</h3>
+<p><p><span>Data-Layouts that are favourable from an algorithmic
+perspective often are less suitable for vectorisation, i.e., for an
+effective use of modern processor’s vector instructions. This paper
+presents work on a compiler driven approach towards automatically
+transforming data layouts into a form that is suitable for
+vectorisation. In particular, we present a program transformation for a
+first-order functional array programming language that systematically
+modifies they layouts of all data structures. At the same time, the
+transformation also adjusts the code that operates on these structures
+so that the overall computation remains unchanged. We define a
+correctness criterion for layout modifying program transformations and
+we show that our transformation abides to this criterion.</span></p></p>
+
+
+
+]]></summary>
+</entry>
+<entry>
+    <title>Data Layout Inference for Code Vectorisation
+</title>
+    <link href="http://ashinkarov.github.io//pubs/data-layouts.html" />
+    <id>http://ashinkarov.github.io//pubs/data-layouts.html</id>
+    <published>2013-10-21
+</published>
+    <updated>false</updated>
+    <summary type="html"><![CDATA[<div class="paper-img-desc">
+  <a class="paper-img" href="/pubs/data-layouts.pdf
+">
+  
+    <img src="/pubs/data-layouts.png" style="width:30rem">
+  
+  </a>
+  <h2>Data Layout Inference for Code Vectorisation
+</h2>
+  
+  <p>A. Šinkarovs and S.-B. Scholz, <span>“Data layout inference for code
+vectorisation,”</span> in <em>2013 international conference on high
+performance computing simulation (HPCS)</em>, Oct. 2013, pp. 527–534.
+doi: <a
+href="https://doi.org/10.1109/HPCSim.2013.6641464">10.1109/HPCSim.2013.6641464</a>.</p>
+
+  <p class="bibpdf">
+    <a href="/pubs/data-layouts.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@inproceedings{data-layouts,
+	author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
+	title = {Data Layout Inference for Code Vectorisation},
+	booktitle = {2013 International Conference on High Performance Computing Simulation (HPCS)},
+	year = {2013},
+	pages = {527-534},
+	doi = {10.1109/HPCSim.2013.6641464},
+	month = {July}}</code>
+
+
+<h3>Abstract</h3>
+<p><p><span>SIMD instructions of modern CPUs are crucially important for
+the performance of compute-intensive algorithms. Auto-vectorisation
+often fails due to an unfortunate choice of data layout by the
+programmer. This paper proposes a data layout inference for
+auto-vectorisation which identifies layout transformations that convert
+SIMD-unfavorable layouts of data structures into favorable ones. We
+present a type system for layout transformations and we sketch an
+inference algorithm for it. Finally, we present some initial performance
+figures for the impact of the inferred layout transformations. They show
+that non-intuitive layouts that are inferred through our system can have
+a vast performance impact on compute intensive programs.</span></p></p>
+
+
+
+]]></summary>
+</entry>
+<entry>
+    <title>SAC/C Formulations of the All-Pairs N-Body Problem and their Performance
+on SMPs and GPGPUs
+</title>
+    <link href="http://ashinkarov.github.io//pubs/sexynbody.html" />
+    <id>http://ashinkarov.github.io//pubs/sexynbody.html</id>
+    <published>2014-08-07
+</published>
+    <updated>false</updated>
+    <summary type="html"><![CDATA[<div class="paper-img-desc">
+  <a class="paper-img" href="/pubs/sexynbody.pdf
+">
+  
+    <img src="/pubs/sexynbody.png" style="width:30rem">
+  
+  </a>
+  <h2>SAC/C Formulations of the All-Pairs N-Body Problem and their Performance
+on SMPs and GPGPUs
+</h2>
+  
+  <p>A. Šinkarovs, S.-B. Scholz, R. Bernecky, R. Douma, and C. Grelck,
+<span>“SAC/<span>C</span> formulations of the all-pairs n-body problem
+and their performance on <span>SMP</span>s and
+<span>GPGPU</span>s,”</span> <em>Concurrency and Computation: Practice
+and Experience</em>, vol. 26, no. 4, pp. 952–971, Aug. 2014, doi: <a
+href="https://doi.org/10.1002/cpe.3078">10.1002/cpe.3078</a>.</p>
+
+  <p class="bibpdf">
+    <a href="/pubs/sexynbody.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@article{sexynbody,
+	author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo
+                  and Bernecky, Robert and Douma, Roeland and Grelck, Clemens},
+	title = {SAC/{C} Formulations of the All-Pairs N-Body Problem
+                 and their Performance on {SMP}s and {GPGPU}s},
+	journal = {Concurrency and Computation: Practice and Experience},
+	year = {2014},
+	volume = {26},
+	number = {4},
+	pages = {952--971},
+	doi = {10.1002/cpe.3078}}</code>
+
+
+<h3>Abstract</h3>
+<p><p>This paper describes our experience in implementing the classical
+<span class="math inline"><em>N</em></span>-body algorithm in SaC and
+analysing the runtime performance achieved on three different machines:
+a dual-processor 8-core Dell PowerEdge 2950 (a Beowulf cluster node, the
+reference machine), a quad-core hyper-threaded Intel Core-i7 based
+system equipped with an NVidia GTX-480 graphics accelerator and an
+Oracle Sparc T4-4 server with a total of 256 hardware threads. We
+contrast our findings with those resulting from the reference C code and
+a few variants of it that employ OpenMP pragmas as well as explicit
+vectorisation.</p>
+<p>Our experiments demonstrate that the SaC implementation successfully
+combines a high-level of abstraction, very close to the mathematical
+specification, with very competitive runtimes. In fact, SaC matches or
+outperforms the hand-vectorised and hand-parallelised C codes on all
+three systems under investigation without the need for any source code
+modification. Furthermore, only SaC is able to effectively harness the
+advanced compute power of the graphics accelerator, again by mere
+recompilation of the same source code. Our results illustrate the
+benefits that SaC provides to application programmers in terms of coding
+productivity, source code and performance portability among different
+machine architectures, as well as long-term maintainability in evolving
+hardware environments.</p></p>
+
+
+
+]]></summary>
+</entry>
+<entry>
+    <title>Data Layout Types: a type-based approach to automatic data layout
+transformations for improved SIMD vectorisation
+</title>
+    <link href="http://ashinkarov.github.io//pubs/asv-thesis.html" />
+    <id>http://ashinkarov.github.io//pubs/asv-thesis.html</id>
+    <published>2015-05-01
+</published>
+    <updated>false</updated>
+    <summary type="html"><![CDATA[<div class="paper-img-desc">
+  <a class="paper-img" href="/pubs/asv-thesis.pdf
+">
+  
+    <img src="/pubs/asv-thesis.png" style="width:30rem">
+  
+  </a>
+  <h2>Data Layout Types: a type-based approach to automatic data layout
+transformations for improved SIMD vectorisation
+</h2>
+  
+  <p>A. Šinkarovs, <span>“Data layout types: A type-based approach to
+automatic data layout transformations for improved SIMD
+vectorisation,”</span> PhD thesis, School of Mathematical; Computer
+Sciences, Heriot-Watt University, Heriot-Watt University, Edinburgh
+Campus, Edinburgh, Scotland, EH14 4AS, 2015.</p>
+
+  <p class="bibpdf">
+    <a href="/pubs/asv-thesis.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@phdthesis{asv-thesis,
+	author = {\v{S}inkarovs, Artjoms},
+	title = {Data Layout Types: a type-based approach to automatic data layout transformations for improved SIMD vectorisation},
+	year = {2015},
+	month = {05},
+	school = {School of Mathematical and Computer Sciences, Heriot-Watt University},
+	address = {Heriot-Watt University, Edinburgh Campus, Edinburgh, Scotland, EH14 4AS}}</code>
+
+
+<h3>Abstract</h3>
+<p><p>The increasing complexity of modern hardware requires sophisticated
+programming techniques for programs to run efficiently. At the same
+time, increased power of modern hardware enables more advanced analyses
+to be included in compilers. This thesis focuses on one particular
+optimisation technique that improves utilisation of vector units. The
+foundation of this technique is the ability to chose memory mappings for
+data structures of a given program.</p>
+<p>Usually programming languages use a fixed layout for logical data
+structures in physical memory. Such a static mapping often has a
+negative effect on usability of vector units. In this thesis we consider
+a compiler for a programming language that allows every data structure
+in a program to have its own data layout. We make sure that data layouts
+across the program are sound, and most importantly we solve a problem of
+automatic data layout reconstruction. To consistently do this, we
+formulate this as a type inference problem, where type encodes a data
+layout for a given structure as well as implied program transformations.
+We prove that type-implied transformations preserve semantics of the
+original programs and we demonstrate significant performance
+improvements when targeting SIMD-capable architectures.</p></p>
+
+
+
+]]></summary>
+</entry>
+<entry>
+    <title>Type-driven data layouts for improved vectorisation
+</title>
+    <link href="http://ashinkarov.github.io//pubs/ccpe-data-layouts.html" />
+    <id>http://ashinkarov.github.io//pubs/ccpe-data-layouts.html</id>
+    <published>2015-05-18
+</published>
+    <updated>false</updated>
+    <summary type="html"><![CDATA[<div class="paper-img-desc">
+  <a class="paper-img" href="/pubs/2015-ccpe.pdf
+">
+  
+    <img src="/pubs/ccpe-data-layouts.png" style="width:30rem">
+  
+  </a>
+  <h2>Type-driven data layouts for improved vectorisation
+</h2>
+  
+  <p>A. Šinkarovs and S.-B. Scholz, <span>“Type-driven data layouts for
+improved vectorisation,”</span> <em>Concurrency and Computation:
+Practice and Experience</em>, vol. 28, no. 7, pp. 2092–2119, May 2015,
+doi: <a
+href="https://doi.org/10.1002/cpe.3501">10.1002/cpe.3501</a>.</p>
+
+  <p class="bibpdf">
+    <a href="/pubs/2015-ccpe.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@article{ccpe-data-layouts,
+	author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
+	title = {Type-driven data layouts for improved vectorisation},
+	journal = {Concurrency and Computation: Practice and Experience},
+	issn = {1532-0634},
+	doi = {10.1002/cpe.3501},
+	year = {2015},
+	volume = {28},
+	number = {7},
+	pages = {2092--2119},
+	month = {May},
+	publisher = {Wiley-Blackwell}}</code>
+
+
+<h3>Abstract</h3>
+<p><p><span>Vector instructions of modern CPUs are crucially important for
+the performance of compute-intensive algorithms. Auto-vectorisation
+often fails because of an unfortunate choice of data layout by the
+programmer. This paper proposes a data layout inference for
+auto-vectorisation that identifies layout transformations that convert
+single instruction, multiple data-unfavourable layouts of data
+structures into favourable ones. We present a type system for layout
+transformations, and we sketch an inference algorithm for it. Finally,
+we present some initial performance figures for the impact of the
+inferred layout transformations. They show that non-intuitive layouts
+that are inferred through our system can have a vast performance impact
+on compute intensive programs.</span></p></p>
+
+
+
+]]></summary>
+</entry>
+
 </feed>

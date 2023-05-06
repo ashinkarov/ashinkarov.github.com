@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Artem Shinkarov - 2019-ifl-tensorcomp</title>
+        <link href="//fonts.googleapis.com/css?family=Merriweather:900italic,900,700italic,400italic,700,400,300italic,300|Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/sakura.css" />
+        <link rel="stylesheet" href="../css/tema.css" />
+    </head>
+    <script>
+      function visibilityToggle(id) {
+         var x = document.getElementById(id);
+         //alert("display of " + id + " = " + x.style.display)
+         if (x.style.display === "none") {
+           x.style.display = "block";
+         } else {
+           x.style.display = "none";
+         }
+      }
+    </script>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">Artem Shinkarov</a>
+            </div>
+            <nav>
+                <a href="../">About</a>
+                <a href="../publications.html">Publications</a>
+                <a href="../archive.html">Posts</a>
+                <a href="../links.html">Links</a>
+            </nav>
+        </header>
+        <hr style="border:1px solid #e4e4e4;" />
+        <main role="main">
+            <div class="paper-img-desc">
+  <a class="paper-img" href="../pubs/2019-ifl-tensorcomp.pdf
+">
+  
+    <img src="../pubs/2019-ifl-tensorcomp.png" style="width:30rem">
+  
+  </a>
+  <h2>Tensor Comprehensions in SaC
+</h2>
+  
+  <p>S.-B. Scholz and Artjoms Šinkarovs, <span>“Tensor comprehensions in
+SaC,”</span> in <em>Proceedings of the 31st symposium on implementation
+and application of functional languages</em>, Sep. 2019. doi: <a href="https://doi.org/10.1145/3412932.3412947">10.1145/3412932.3412947</a>.</p>
+
+  <p class="bibpdf">
+    <a href="../pubs/2019-ifl-tensorcomp.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@inproceedings{2019-ifl-tensorcomp,
+	author = {Scholz, Sven-Bodo and \textbf{Artjoms {\v{S}inkarovs}}},
+	title = {Tensor Comprehensions in SaC},
+	year = {2019},
+	isbn = {9781450375627},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	doi = {10.1145/3412932.3412947},
+	booktitle = {Proceedings of the 31st Symposium on Implementation and Application of Functional Languages},
+	articleno = {15},
+	numpages = {13},
+	location = {Singapore, Singapore},
+	series = {IFL '19}}</code>
+
+
+<h3>Abstract</h3>
+<p><p><span> We propose a new notation for data parallel operators on
+multi-dimensional arrays named tensor comprehensions. This notation
+combines the basic principle of array-comprehensions with syntactical
+shortcuts very close to those found in the so-called Tensor Notations
+used in Physics and Mathematics. As a result, complex operators with
+rich semantics can be defined concisely. The key to this conciseness
+lies in the ability to define shape-polymorphic operations combined with
+the ability to infer array shapes from the immediate context. The paper
+provides a definition of the proposed notation, a formal shape inference
+process, as well as a set of re-write rules that translates tensor
+comprehensions as a zero-cost syntactic sugar into standard SaC
+expressions. </span></p></p>
+
+
+
+
+        </main>
+    </body>
+</html>

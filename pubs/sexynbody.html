@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Artem Shinkarov - sexynbody</title>
+        <link href="//fonts.googleapis.com/css?family=Merriweather:900italic,900,700italic,400italic,700,400,300italic,300|Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/sakura.css" />
+        <link rel="stylesheet" href="../css/tema.css" />
+    </head>
+    <script>
+      function visibilityToggle(id) {
+         var x = document.getElementById(id);
+         //alert("display of " + id + " = " + x.style.display)
+         if (x.style.display === "none") {
+           x.style.display = "block";
+         } else {
+           x.style.display = "none";
+         }
+      }
+    </script>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">Artem Shinkarov</a>
+            </div>
+            <nav>
+                <a href="../">About</a>
+                <a href="../publications.html">Publications</a>
+                <a href="../archive.html">Posts</a>
+                <a href="../links.html">Links</a>
+            </nav>
+        </header>
+        <hr style="border:1px solid #e4e4e4;" />
+        <main role="main">
+            <div class="paper-img-desc">
+  <a class="paper-img" href="../pubs/sexynbody.pdf
+">
+  
+    <img src="../pubs/sexynbody.png" style="width:30rem">
+  
+  </a>
+  <h2>SAC/C Formulations of the All-Pairs N-Body Problem and their Performance
+on SMPs and GPGPUs
+</h2>
+  
+  <p>A. Šinkarovs, S.-B. Scholz, R. Bernecky, R. Douma, and C. Grelck,
+<span>“SAC/<span>C</span> formulations of the all-pairs n-body problem
+and their performance on <span>SMP</span>s and
+<span>GPGPU</span>s,”</span> <em>Concurrency and Computation: Practice
+and Experience</em>, vol. 26, no. 4, pp. 952–971, Aug. 2014, doi: <a href="https://doi.org/10.1002/cpe.3078">10.1002/cpe.3078</a>.</p>
+
+  <p class="bibpdf">
+    <a href="../pubs/sexynbody.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@article{sexynbody,
+	author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo
+                  and Bernecky, Robert and Douma, Roeland and Grelck, Clemens},
+	title = {SAC/{C} Formulations of the All-Pairs N-Body Problem
+                 and their Performance on {SMP}s and {GPGPU}s},
+	journal = {Concurrency and Computation: Practice and Experience},
+	year = {2014},
+	volume = {26},
+	number = {4},
+	pages = {952--971},
+	doi = {10.1002/cpe.3078}}</code>
+
+
+<h3>Abstract</h3>
+<p><p>This paper describes our experience in implementing the classical
+<span class="math inline"><em>N</em></span>-body algorithm in SaC and
+analysing the runtime performance achieved on three different machines:
+a dual-processor 8-core Dell PowerEdge 2950 (a Beowulf cluster node, the
+reference machine), a quad-core hyper-threaded Intel Core-i7 based
+system equipped with an NVidia GTX-480 graphics accelerator and an
+Oracle Sparc T4-4 server with a total of 256 hardware threads. We
+contrast our findings with those resulting from the reference C code and
+a few variants of it that employ OpenMP pragmas as well as explicit
+vectorisation.</p>
+<p>Our experiments demonstrate that the SaC implementation successfully
+combines a high-level of abstraction, very close to the mathematical
+specification, with very competitive runtimes. In fact, SaC matches or
+outperforms the hand-vectorised and hand-parallelised C codes on all
+three systems under investigation without the need for any source code
+modification. Furthermore, only SaC is able to effectively harness the
+advanced compute power of the graphics accelerator, again by mere
+recompilation of the same source code. Our results illustrate the
+benefits that SaC provides to application programmers in terms of coding
+productivity, source code and performance portability among different
+machine architectures, as well as long-term maintainability in evolving
+hardware environments.</p></p>
+
+
+
+
+        </main>
+    </body>
+</html>

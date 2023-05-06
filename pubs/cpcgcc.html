@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Artem Shinkarov - cpcgcc</title>
+        <link href="//fonts.googleapis.com/css?family=Merriweather:900italic,900,700italic,400italic,700,400,300italic,300|Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/sakura.css" />
+        <link rel="stylesheet" href="../css/tema.css" />
+    </head>
+    <script>
+      function visibilityToggle(id) {
+         var x = document.getElementById(id);
+         //alert("display of " + id + " = " + x.style.display)
+         if (x.style.display === "none") {
+           x.style.display = "block";
+         } else {
+           x.style.display = "none";
+         }
+      }
+    </script>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">Artem Shinkarov</a>
+            </div>
+            <nav>
+                <a href="../">About</a>
+                <a href="../publications.html">Publications</a>
+                <a href="../archive.html">Posts</a>
+                <a href="../links.html">Links</a>
+            </nav>
+        </header>
+        <hr style="border:1px solid #e4e4e4;" />
+        <main role="main">
+            <div class="paper-img-desc">
+  <a class="paper-img" href="../pubs/cpcgcc.pdf
+">
+  
+    <img src="../pubs/cpcgcc.png" style="width:30rem">
+  
+  </a>
+  <h2>Portable Support for Explicit Vectorisation in C
+</h2>
+  
+  <p>A. Šinkarovs and S.-B. Scholz, <span>“Portable support for explicit
+vectorisation in <span>C</span>,”</span> in <em>16th workshop on
+compilers for parallel computing (CPC’12)</em>, Jan. 2012.</p>
+
+  <p class="bibpdf">
+    <a href="../pubs/cpcgcc.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@inproceedings{cpcgcc,
+	author = {\v{S}inkarovs, Artjoms and Scholz, Sven-Bodo},
+	title = {Portable Support for Explicit Vectorisation in {C}},
+	booktitle = {16th Workshop on Compilers for Parallel Computing (CPC'12)},
+	year = {2012}}</code>
+
+
+<h3>Abstract</h3>
+<p><p><span>In pursuit of requirements of modern software, high-performance
+computing often offers a narrowly-tailored solutions that reduce
+portability of software. As one of such examples in this paper, we
+consider the situation with SIMD accelerators, whose importance
+seriously increased in the last decade. Firstly appeared in the early
+90es, being oriented exclusively on graphics acceleration, nowadays SIMD
+CPU extensions are used in a variety of fields. The lack of standard and
+incompatibility of instruction sets through the different types of CPUs
+substantially increase the complexity of developing portable
+applications within the extensions. In this paper we present an
+abstraction layer implemented as a set of C language extensions within
+the GNU GCC compiler which provides an interface for SIMD vectors and
+operations independently from the architecture. First of all, these
+abstractions allow to exploit SIMD extensions of a CPU explicitly, which
+is useful when auto-vectoriser fails. Secondly, the abstractions are
+general enough to be mapped to any hardware supporting SIMD paradigms;
+hence the new abstractions could be considered as a step forward to a
+new C language standard.</span></p></p>
+
+
+
+
+        </main>
+    </body>
+</html>

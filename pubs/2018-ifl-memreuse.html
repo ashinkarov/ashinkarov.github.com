@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Artem Shinkarov - 2018-ifl-memreuse</title>
+        <link href="//fonts.googleapis.com/css?family=Merriweather:900italic,900,700italic,400italic,700,400,300italic,300|Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/sakura.css" />
+        <link rel="stylesheet" href="../css/tema.css" />
+    </head>
+    <script>
+      function visibilityToggle(id) {
+         var x = document.getElementById(id);
+         //alert("display of " + id + " = " + x.style.display)
+         if (x.style.display === "none") {
+           x.style.display = "block";
+         } else {
+           x.style.display = "none";
+         }
+      }
+    </script>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">Artem Shinkarov</a>
+            </div>
+            <nav>
+                <a href="../">About</a>
+                <a href="../publications.html">Publications</a>
+                <a href="../archive.html">Posts</a>
+                <a href="../links.html">Links</a>
+            </nav>
+        </header>
+        <hr style="border:1px solid #e4e4e4;" />
+        <main role="main">
+            <div class="paper-img-desc">
+  <a class="paper-img" href="../pubs/2018-ifl-memreuse.pdf
+">
+  
+    <img src="../pubs/2018-ifl-memreuse.png" style="width:30rem">
+  
+  </a>
+  <h2>Extended Memory Reuse: An Optimisation for Reducing Memory Allocations
+</h2>
+  
+  <p>H.-N. Vießmann, Artjoms Šinkarovs, and S.-B. Scholz, <span>“Extended
+memory reuse: An optimisation for reducing memory allocations,”</span>
+in <em>Proceedings of the 30th symposium on implementation and
+application of functional languages, <span>IFL</span> 2018, lowell, MA,
+USA, september 5-7, 2018</em>, Sep. 2018, pp. 107–118. doi: <a href="https://doi.org/10.1145/3310232.3310242">10.1145/3310232.3310242</a>.</p>
+
+  <p class="bibpdf">
+    <a href="../pubs/2018-ifl-memreuse.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@inproceedings{2018-ifl-memreuse,
+	author = {Hans{-}Nikolai Vie{\ss}mann and
+               \textbf{Artjoms {\v{S}}inkarovs} and
+               Sven{-}Bodo Scholz},
+	editor = {Matteo Cimini and
+               Jay McCarthy},
+	title = {Extended Memory Reuse: An Optimisation for Reducing Memory Allocations},
+	booktitle = {Proceedings of the 30th Symposium on Implementation and Application
+               of Functional Languages, {IFL} 2018, Lowell, MA, USA, September 5-7,
+               2018},
+	pages = {107--118},
+	publisher = {{ACM}},
+	year = {2018},
+	doi = {10.1145/3310232.3310242},
+	timestamp = {Wed, 25 Sep 2019 18:12:17 +0200},
+	biburl = {https://dblp.org/rec/conf/ifl/ViessmannSS18.bib},
+	bibsource = {dblp computer science bibliography, https://dblp.org}}</code>
+
+
+<h3>Abstract</h3>
+<p><p>In this paper we present an optimisation for reference counting based
+garbage collection. The optimisation aims at reducing the total number
+of calls to the heap manager while preserving the key benefits of
+reference counting, i.e. the opportunities for in-place updates as well
+as memory deallocation without global garbage collection. The key idea
+is to carefully extend the lifetime of variables so that memory
+deallocations followed by memory allocations of the same size can be
+replaced by a direct memory reuse. Such memory reuse turns out
+particularly useful in the context of innermost loops of
+compute-intensive applications. It leads to a runtime behaviour that
+performs pointer swaps between buffers in the same way it would be
+implemented manually in languages that require explicit memory
+management, e.g. C.</p>
+<p>We have implemented the proposed optimisation in the context of the
+Single-Assignment C compiler tool chain. The paper provides an
+algorithmic description of our optimisation and an evaluation of its
+effectiveness over a collection of benchmarks including a subset of the
+Rodinia benchmarks and the NAS Parallel Benchmarks. We show that for
+several benchmarks with allocations within loops our optimisation
+reduces the amount of allocations by a few orders of magnitude. We also
+observe no negative impact on the overall memory footprint nor on the
+overall runtime. Instead, for some sequential executions we find mild
+improvement, and on GPU devices we observe speedups of up to a factor of
+4x.</p></p>
+
+
+
+
+        </main>
+    </body>
+</html>
