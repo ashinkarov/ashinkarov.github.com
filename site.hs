@@ -105,6 +105,10 @@ main = do
       route idRoute
       compile compressCssCompiler
 
+    match "fonts/*" $ do
+      route idRoute
+      compile copyFileCompiler
+
     match (fromList ["about.rst", "contact.markdown", 
                      "name.md", "links.md"]) $ do
       route $ setExtension "html"
