@@ -81,7 +81,10 @@ possible optimisations. After one of recompilations I found out that sometimes
 the fonts were rendered bold in the places where they shouldn’t be. Mainly it
 happened when you scroll up and down with a wheel of your mouse. See the picture
 below.</p>
-<p>{% img /images/firefox-gentoo.png %}</p>
+<figure>
+<img src="../images/firefox-gentoo.png" alt="Screenshot of the problem" />
+<figcaption aria-hidden="true">Screenshot of the problem</figcaption>
+</figure>
 <p>A couple of phrases in the middle of the wikipedia page look like if they are
 bold. In the beginning I though that it is a problem of fontconfig and
 infinality which I was actively configuring at that time. Later I found out
@@ -103,7 +106,7 @@ gentoo is linking against system cairo which does <em>not</em> have these change
 <p>Anyhow, after some more investigation I found a flag which links against cairo
 from the firefox repository. The flag is called <code>--disable-system-cairo</code> :)
 So all you need to do is to add the following line to the e-build:</p>
-<pre><code>        mozconfig_annotate '' --disable-system-cairo</code></pre>
+<pre><code>mozconfig_annotate '' --disable-system-cairo</code></pre>
 <p>recompile, and the problem happily goes away. May be one day I will put
 an overlays for that. May be one day gentoo people will add this thing into
 default tree. Gentoo people, where are you? :)</p>
