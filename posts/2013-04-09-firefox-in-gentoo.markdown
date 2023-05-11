@@ -53,7 +53,7 @@ the fonts were rendered bold in the places where they shouldn't be.  Mainly it
 happened when you scroll up and down with a wheel of your mouse.  See the picture 
 below.
 
-{% img /images/firefox-gentoo.png %}
+![Screenshot of the problem](/images/firefox-gentoo.png)
 
 A couple of phrases in the middle of the wikipedia page look like if they are 
 bold.  In the beginning I though that it is a problem of fontconfig and
@@ -78,7 +78,7 @@ Anyhow, after some more investigation I found a flag which links against cairo
 from the firefox repository.  The flag is called `--disable-system-cairo` :)
 So all you need to do is to add the following line to the e-build:
 ```
-        mozconfig_annotate '' --disable-system-cairo
+mozconfig_annotate '' --disable-system-cairo
 ```
 recompile, and the problem happily goes away.  May be one day I will put
 an overlays for that.  May be one day gentoo people will add this thing into
