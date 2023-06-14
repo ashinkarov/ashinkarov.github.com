@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Artjoms Šinkarovs, Sven-Bodo Scholz">
+  <meta name="dcterms.date" content="2023-06-14">
+  <title>Rank-polymorphic arrays within dependent types</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/white.css" id="theme">
+  <link rel="stylesheet" href="Agda.css"/>
+  <link rel="stylesheet" href="my.css"/>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Rank-polymorphic arrays within dependent types</h1>
+  <p class="author"><u>Artjoms Šinkarovs</u>, Sven-Bodo Scholz</p>
+  <p class="date">14 June 2023</p>
+</section>
+
+<section>
+<section id="motivation" class="title-slide slide level1">
+<h1>Motivation</h1>
+
+</section>
+<section id="running-example" class="slide level2">
+<h2>Running Example</h2>
+<div class="fragment">
+<div style="font-size: .85em;">
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mm_naive <span class="op">(</span><span class="dt">const</span> <span class="dt">size_t</span> p<span class="op">,</span> <span class="dt">const</span> <span class="dt">size_t</span> q<span class="op">,</span> <span class="dt">const</span> <span class="dt">size_t</span> r<span class="op">,</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>          <span class="dt">const</span> <span class="dt">double</span> <span class="op">(*</span>a<span class="op">)[</span>p<span class="op">][</span>q<span class="op">],</span> <span class="dt">const</span> <span class="dt">double</span> <span class="op">(*</span>b<span class="op">)[</span>q<span class="op">][</span>r<span class="op">],</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>          <span class="dt">double</span> <span class="op">(*</span>c<span class="op">)[</span>p<span class="op">][</span>r<span class="op">])</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#pragma omp parallel for</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> p<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> r<span class="op">;</span> j<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      <span class="op">(*</span>c<span class="op">)[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="er">.</span><span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> q<span class="op">;</span> k<span class="op">++)</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">(*</span>c<span class="op">)[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">+=</span> <span class="op">(*</span>a<span class="op">)[</span>i<span class="op">][</span>k<span class="op">]</span> <span class="op">*</span> <span class="op">(*</span>b<span class="op">)[</span>k<span class="op">][</span>j<span class="op">];</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</div>
+</div>
+<div class="fragment">
+<p>Performance of this code is</p>
+</div>
+<div class="fragment">
+<p><strong>terrible</strong> — 12Gflops/s vs 1300Gflops/s achieved by
+OpenBLAS</p>
+</div>
+</section>
+<section id="why-openblas-is-fast" class="slide level2">
+<h2>Why OpenBLAS is fast?</h2>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd OpenBLAS/kernel </span></code></pre></div>
+<div class="fragment">
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls generic/gemm<span class="pp">*</span>.c <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">19</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls generic/gemm<span class="pp">*</span>.c <span class="kw">|</span> <span class="fu">xargs</span> cat <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">3986</span></span></code></pre></div>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls x86_64/dgemm<span class="pp">*</span>.S <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span>  </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">16</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls x86_64/dgemm<span class="pp">*</span> <span class="kw">|</span> <span class="fu">xargs</span> cat <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">47459</span></span></code></pre></div>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> expr 3986 + 47459</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">51445</span></span></code></pre></div>
+</div>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<center>
+<img width="50%" src="img/cat.gif"/ >
+</center>
+</section>
+<section id="why-openblas-is-fast-1" class="slide level2">
+<h2>Why OpenBLAS is fast?</h2>
+<ul>
+<li>Implements blocked matrix multiplication</li>
+<li>Hand-written Assembly kernels for each supported architecture</li>
+<li>Smart choice of blocking factors (10K loc in Assembly)</li>
+</ul>
+</section></section>
+<section id="the-plan" class="title-slide slide level1">
+<h1>The plan</h1>
+<ul>
+<li>High-level array-based specification (in the tradition of APL, J,
+SaC, Futhark, …)</li>
+<li>Correctness guarantees</li>
+<li>Adjust properties (such as blocking) without major
+reimplementation.</li>
+</ul>
+</section>
+
+<section>
+<section id="array-theory" class="title-slide slide level1">
+<h1>Array Theory</h1>
+<!--
+<pre class="Agda"><a id="1580" class="Keyword">open</a> <a id="1585" class="Keyword">import</a> <a id="1592" href="Data.Nat.html" class="Module">Data.Nat</a>
+<a id="1601" class="Keyword">open</a> <a id="1606" class="Keyword">import</a> <a id="1613" href="Data.Fin.html" class="Module">Data.Fin</a> <a id="1622" class="Symbol">as</a> <a id="1625" class="Module">Fin</a> <a id="1629" class="Keyword">using</a> <a id="1635" class="Symbol">(</a><a id="1636" href="Data.Fin.Base.html#1135" class="Datatype">Fin</a><a id="1639" class="Symbol">;</a> <a id="1641" href="Data.Fin.Base.html#1157" class="InductiveConstructor">zero</a><a id="1645" class="Symbol">;</a> <a id="1647" href="Data.Fin.Base.html#1188" class="InductiveConstructor">suc</a><a id="1650" class="Symbol">;</a> <a id="1652" href="Data.Fin.Base.html#4399" class="Function">remQuot</a><a id="1659" class="Symbol">;</a> <a id="1661" href="Data.Fin.Base.html#4509" class="Function">combine</a><a id="1668" class="Symbol">;</a> <a id="1670" href="Data.Fin.Base.html#1261" class="Function">toℕ</a><a id="1673" class="Symbol">;</a> <a id="1675" href="Data.Fin.Base.html#4152" class="Function">quotRem</a><a id="1682" class="Symbol">)</a>
+<a id="1684" class="Keyword">open</a> <a id="1689" class="Keyword">import</a> <a id="1696" href="Data.Fin.Properties.html" class="Module">Data.Fin.Properties</a> <a id="1716" class="Symbol">as</a> <a id="1719" class="Module">Fin</a> <a id="1723" class="Keyword">using</a> <a id="1729" class="Symbol">(</a><a id="1730" href="Data.Fin.Properties.html#19100" class="Function">remQuot-combine</a><a id="1745" class="Symbol">;</a> <a id="1747" href="Data.Fin.Properties.html#19394" class="Function">combine-remQuot</a><a id="1762" class="Symbol">)</a>
+<a id="1764" class="Keyword">open</a> <a id="1769" class="Keyword">import</a> <a id="1776" href="Data.Product.html" class="Module">Data.Product</a> <a id="1789" class="Symbol">as</a> <a id="1792" class="Module">Prod</a> <a id="1797" class="Keyword">hiding</a> <a id="1804" class="Symbol">(</a><a id="1805" href="Data.Product.html#2495" class="Function">map</a><a id="1808" class="Symbol">)</a>
+<a id="1810" class="Keyword">open</a> <a id="1815" class="Keyword">import</a> <a id="1822" href="Relation.Binary.PropositionalEquality.html" class="Module">Relation.Binary.PropositionalEquality</a> <a id="1860" class="Keyword">hiding</a> <a id="1867" class="Symbol">(</a><a id="1868" href="Relation.Binary.PropositionalEquality.html#2365" class="InductiveConstructor Operator">[_]</a><a id="1871" class="Symbol">)</a>
+<a id="1873" class="Keyword">open</a> <a id="1878" class="Keyword">import</a> <a id="1885" href="Function.html" class="Module">Function</a>
+<a id="1894" class="Keyword">open</a> <a id="1899" class="Keyword">import</a> <a id="1906" href="Category.Monad.html" class="Module">Category.Monad</a>
+<a id="1921" class="Keyword">open</a> <a id="1926" class="Keyword">import</a> <a id="1933" href="Data.List.html" class="Module">Data.List</a> <a id="1943" class="Keyword">hiding</a> <a id="1950" class="Symbol">(</a><a id="1951" href="Data.List.Base.html#5034" class="Function Operator">[_]</a><a id="1954" class="Symbol">;</a> <a id="1956" href="Data.List.Base.html#1553" class="Function">map</a><a id="1959" class="Symbol">;</a> <a id="1961" href="Data.List.Base.html#2819" class="Function">zipWith</a><a id="1968" class="Symbol">;</a> <a id="1970" href="Data.List.Base.html#3579" class="Function">zip</a><a id="1973" class="Symbol">;</a> <a id="1975" href="Data.List.Base.html#3708" class="Function">unzip</a><a id="1980" class="Symbol">;</a> <a id="1982" href="Data.List.Base.html#4793" class="Function">sum</a><a id="1985" class="Symbol">)</a>
+<a id="1987" class="Keyword">open</a> <a id="1992" class="Keyword">import</a> <a id="1999" href="Relation.Binary.PropositionalEquality.html" class="Module">Relation.Binary.PropositionalEquality</a> <a id="2037" class="Symbol">as</a> <a id="2040" class="Module">Eq</a> <a id="2043" class="Keyword">hiding</a> <a id="2050" class="Symbol">(</a><a id="2051" href="Relation.Binary.PropositionalEquality.html#2365" class="InductiveConstructor Operator">[_]</a><a id="2054" class="Symbol">)</a>
+<a id="2056" class="Keyword">open</a> <a id="2061" class="Keyword">import</a> <a id="2068" href="Relation.Binary.html" class="Module">Relation.Binary</a>
+<a id="2084" class="Keyword">open</a> <a id="2089" class="Keyword">import</a> <a id="2096" href="Algebra.html" class="Module">Algebra</a>
+
+<a id="2105" class="Keyword">pattern</a> <a id="#0"></a><a id="2113" href="present.html#2113" class="InductiveConstructor">#0</a> <a id="2116" class="Symbol">=</a> <a id="2118" class="InductiveConstructor">zero</a>
+<a id="2123" class="Keyword">pattern</a> <a id="#1"></a><a id="2131" href="present.html#2131" class="InductiveConstructor">#1</a> <a id="2134" class="Symbol">=</a> <a id="2136" class="InductiveConstructor">suc</a> <a id="2140" href="present.html#2113" class="InductiveConstructor">#0</a>
+
+<a id="2144" class="Keyword">pattern</a> <a id="[_]₁"></a><a id="2152" href="present.html#2152" class="InductiveConstructor Operator">[_]₁</a> <a id="2157" href="present.html#2161" class="Bound">x</a> <a id="2159" class="Symbol">=</a> <a id="2161" href="present.html#2161" class="Bound">x</a> <a id="2163" href="Agda.Builtin.List.html#182" class="InductiveConstructor Operator">∷</a> <a id="2165" class="InductiveConstructor">[]</a>
+<a id="2168" class="Keyword">pattern</a> <a id="[_,_]₂"></a><a id="2176" href="present.html#2176" class="InductiveConstructor Operator">[_,_]₂</a> <a id="2183" href="present.html#2189" class="Bound">x</a> <a id="2185" href="present.html#2193" class="Bound">y</a> <a id="2187" class="Symbol">=</a> <a id="2189" href="present.html#2189" class="Bound">x</a> <a id="2191" href="Agda.Builtin.List.html#182" class="InductiveConstructor Operator">∷</a> <a id="2193" href="present.html#2193" class="Bound">y</a> <a id="2195" href="Agda.Builtin.List.html#182" class="InductiveConstructor Operator">∷</a> <a id="2197" class="InductiveConstructor">[]</a>
+<a id="2200" class="Keyword">pattern</a> <a id="[_,_,_]₃"></a><a id="2208" href="present.html#2208" class="InductiveConstructor Operator">[_,_,_]₃</a> <a id="2217" href="present.html#2225" class="Bound">x</a> <a id="2219" href="present.html#2229" class="Bound">y</a> <a id="2221" href="present.html#2233" class="Bound">z</a> <a id="2223" class="Symbol">=</a> <a id="2225" href="present.html#2225" class="Bound">x</a> <a id="2227" href="Agda.Builtin.List.html#182" class="InductiveConstructor Operator">∷</a> <a id="2229" href="present.html#2229" class="Bound">y</a> <a id="2231" href="Agda.Builtin.List.html#182" class="InductiveConstructor Operator">∷</a> <a id="2233" href="present.html#2233" class="Bound">z</a> <a id="2235" href="Agda.Builtin.List.html#182" class="InductiveConstructor Operator">∷</a> <a id="2237" class="InductiveConstructor">[]</a>
+<a id="2240" class="Keyword">pattern</a> <a id="[_,_,_,_]₄"></a><a id="2248" href="present.html#2248" class="InductiveConstructor Operator">[_,_,_,_]₄</a> <a id="2259" href="present.html#2269" class="Bound">x</a> <a id="2261" href="present.html#2273" class="Bound">y</a> <a id="2263" href="present.html#2277" class="Bound">z</a> <a id="2265" href="present.html#2281" class="Bound">w</a> <a id="2267" class="Symbol">=</a> <a id="2269" href="present.html#2269" class="Bound">x</a> <a id="2271" href="Agda.Builtin.List.html#182" class="InductiveConstructor Operator">∷</a> <a id="2273" href="present.html#2273" class="Bound">y</a> <a id="2275" href="Agda.Builtin.List.html#182" class="InductiveConstructor Operator">∷</a> <a id="2277" href="present.html#2277" class="Bound">z</a> <a id="2279" href="Agda.Builtin.List.html#182" class="InductiveConstructor Operator">∷</a> <a id="2281" href="present.html#2281" class="Bound">w</a> <a id="2283" href="Agda.Builtin.List.html#182" class="InductiveConstructor Operator">∷</a> <a id="2285" class="InductiveConstructor">[]</a>
+<a id="2288" class="Keyword">pattern</a> <a id="[_,_,_,_,_]₅"></a><a id="2296" href="present.html#2296" class="InductiveConstructor Operator">[_,_,_,_,_]₅</a> <a id="2309" href="present.html#2321" class="Bound">x</a> <a id="2311" href="present.html#2325" class="Bound">y</a> <a id="2313" href="present.html#2329" class="Bound">z</a> <a id="2315" href="present.html#2333" class="Bound">w</a> <a id="2317" href="present.html#2337" class="Bound">s</a> <a id="2319" class="Symbol">=</a> <a id="2321" href="present.html#2321" class="Bound">x</a> <a id="2323" href="Agda.Builtin.List.html#182" class="InductiveConstructor Operator">∷</a> <a id="2325" href="present.html#2325" class="Bound">y</a> <a id="2327" href="Agda.Builtin.List.html#182" class="InductiveConstructor Operator">∷</a> <a id="2329" href="present.html#2329" class="Bound">z</a> <a id="2331" href="Agda.Builtin.List.html#182" class="InductiveConstructor Operator">∷</a> <a id="2333" href="present.html#2333" class="Bound">w</a> <a id="2335" href="Agda.Builtin.List.html#182" class="InductiveConstructor Operator">∷</a> <a id="2337" href="present.html#2337" class="Bound">s</a> <a id="2339" href="Agda.Builtin.List.html#182" class="InductiveConstructor Operator">∷</a> <a id="2341" class="InductiveConstructor">[]</a>
+
+
+<a id="2346" class="Keyword">private</a> <a id="2354" class="Keyword">variable</a>
+  <a id="2365" href="present.html#2365" class="Generalizable">n</a> <a id="2367" class="Symbol">:</a> <a id="2369" href="Agda.Builtin.Nat.html#186" class="Datatype">ℕ</a>
+  <a id="2373" href="present.html#2373" class="Generalizable">X</a> <a id="2375" href="present.html#2375" class="Generalizable">Y</a> <a id="2377" href="present.html#2377" class="Generalizable">Z</a> <a id="2379" class="Symbol">:</a> <a id="2381" href="Agda.Primitive.html#320" class="Primitive">Set</a>
+
+<a id="2386" class="Keyword">postulate</a>
+  <a id="⋯"></a><a id="2398" href="present.html#2398" class="Postulate">⋯</a> <a id="2400" class="Symbol">:</a> <a id="2402" class="Symbol">∀</a> <a id="2404" class="Symbol">{</a><a id="2405" href="present.html#2405" class="Bound">a</a><a id="2406" class="Symbol">}{</a><a id="2408" href="present.html#2408" class="Bound">X</a> <a id="2410" class="Symbol">:</a> <a id="2412" href="Agda.Primitive.html#320" class="Primitive">Set</a> <a id="2416" href="present.html#2405" class="Bound">a</a><a id="2417" class="Symbol">}</a> <a id="2419" class="Symbol">→</a> <a id="2421" href="present.html#2408" class="Bound">X</a>
+</pre>-->
+<div style="font-size: 1.1em;">
+<pre class="Agda"><a id="2469" class="Keyword">record</a> <a id="Array"></a><a id="2476" href="present.html#2476" class="Record">Array</a> <a id="2482" class="Symbol">:</a> <a id="2484" href="Agda.Primitive.html#320" class="Primitive">Set₁</a> <a id="2489" class="Keyword">where</a>
+  <a id="2497" class="Keyword">field</a>
+    <a id="Array.S"></a><a id="2507" href="present.html#2507" class="Field">S</a>    <a id="2512" class="Symbol">:</a> <a id="2514" href="Agda.Primitive.html#320" class="Primitive">Set</a>
+    <a id="Array.P"></a><a id="2522" href="present.html#2522" class="Field">P</a>    <a id="2527" class="Symbol">:</a> <a id="2529" href="present.html#2507" class="Field">S</a> <a id="2531" class="Symbol">→</a> <a id="2533" href="Agda.Primitive.html#320" class="Primitive">Set</a>
+    
+    <a id="Array.ι"></a><a id="2546" href="present.html#2546" class="Field">ι</a>    <a id="2551" class="Symbol">:</a> <a id="2553" href="Agda.Builtin.Nat.html#186" class="Datatype">ℕ</a> <a id="2555" class="Symbol">→</a> <a id="2557" href="present.html#2507" class="Field">S</a>
+    <a id="Array._⊗_"></a><a id="2563" href="present.html#2563" class="Field Operator">_⊗_</a>  <a id="2568" class="Symbol">:</a> <a id="2570" href="present.html#2507" class="Field">S</a> <a id="2572" class="Symbol">→</a> <a id="2574" href="present.html#2507" class="Field">S</a> <a id="2576" class="Symbol">→</a> <a id="2578" href="present.html#2507" class="Field">S</a>
+    
+    <a id="Array.ι-↔"></a><a id="2589" href="present.html#2589" class="Field">ι-↔</a>  <a id="2594" class="Symbol">:</a> <a id="2596" class="Symbol">∀</a> <a id="2598" class="Symbol">{</a><a id="2599" href="present.html#2599" class="Bound">n</a><a id="2600" class="Symbol">}</a> <a id="2602" class="Symbol">→</a> <a id="2604" href="present.html#2522" class="Field">P</a> <a id="2606" class="Symbol">(</a><a id="2607" href="present.html#2546" class="Field">ι</a> <a id="2609" href="present.html#2599" class="Bound">n</a><a id="2610" class="Symbol">)</a> <a id="2612" href="Function.Bundles.html#8819" class="Function Operator">↔</a> <a id="2614" href="Data.Fin.Base.html#1135" class="Datatype">Fin</a> <a id="2618" href="present.html#2599" class="Bound">n</a>
+    <a id="Array.⊗-↔"></a><a id="2624" href="present.html#2624" class="Field">⊗-↔</a>  <a id="2629" class="Symbol">:</a> <a id="2631" class="Symbol">∀</a> <a id="2633" class="Symbol">{</a><a id="2634" href="present.html#2634" class="Bound">s</a> <a id="2636" href="present.html#2636" class="Bound">p</a><a id="2637" class="Symbol">}</a> <a id="2639" class="Symbol">→</a> <a id="2641" href="present.html#2522" class="Field">P</a> <a id="2643" class="Symbol">(</a><a id="2644" href="present.html#2634" class="Bound">s</a> <a id="2646" href="present.html#2563" class="Field Operator">⊗</a> <a id="2648" href="present.html#2636" class="Bound">p</a><a id="2649" class="Symbol">)</a> <a id="2651" href="Function.Bundles.html#8819" class="Function Operator">↔</a> <a id="2653" class="Symbol">(</a><a id="2654" href="present.html#2522" class="Field">P</a> <a id="2656" href="present.html#2634" class="Bound">s</a> <a id="2658" href="Data.Product.html#1176" class="Function Operator">×</a> <a id="2660" href="present.html#2522" class="Field">P</a> <a id="2662" href="present.html#2636" class="Bound">p</a><a id="2663" class="Symbol">)</a>
+    
+    <a id="Array.Ar"></a><a id="2674" href="present.html#2674" class="Field">Ar</a>   <a id="2679" class="Symbol">:</a> <a id="2681" href="present.html#2507" class="Field">S</a> <a id="2683" class="Symbol">→</a> <a id="2685" href="Agda.Primitive.html#320" class="Primitive">Set</a> <a id="2689" class="Symbol">→</a> <a id="2691" href="Agda.Primitive.html#320" class="Primitive">Set</a>
+    <a id="Array.Ar-↔"></a><a id="2699" href="present.html#2699" class="Field">Ar-↔</a> <a id="2704" class="Symbol">:</a> <a id="2706" class="Symbol">∀</a> <a id="2708" class="Symbol">{</a><a id="2709" href="present.html#2709" class="Bound">s</a> <a id="2711" href="present.html#2711" class="Bound">X</a><a id="2712" class="Symbol">}</a> <a id="2714" class="Symbol">→</a> <a id="2716" class="Symbol">(</a><a id="2717" href="present.html#2522" class="Field">P</a> <a id="2719" href="present.html#2709" class="Bound">s</a> <a id="2721" class="Symbol">→</a> <a id="2723" href="present.html#2711" class="Bound">X</a><a id="2724" class="Symbol">)</a> <a id="2726" href="Function.Bundles.html#8819" class="Function Operator">↔</a> <a id="2728" href="present.html#2674" class="Field">Ar</a> <a id="2731" href="present.html#2709" class="Bound">s</a> <a id="2733" href="present.html#2711" class="Bound">X</a>
+</pre>
+</div>
+</section>
+<section id="immediate-operations" class="slide level2">
+<h2>Immediate Operations</h2>
+<pre class="Agda"><a id="2776" class="Keyword">module</a> <a id="ArOps"></a><a id="2783" href="present.html#2783" class="Module">ArOps</a> <a id="2789" class="Symbol">(</a><a id="2790" href="present.html#2790" class="Bound">A</a> <a id="2792" class="Symbol">:</a> <a id="2794" href="present.html#2476" class="Record">Array</a><a id="2799" class="Symbol">)</a> <a id="2801" class="Keyword">where</a>
+  <a id="2809" class="Keyword">open</a> <a id="2814" href="present.html#2476" class="Module">Array</a> <a id="2820" href="present.html#2790" class="Bound">A</a>
+
+  <a id="ArOps.φ"></a><a id="2825" href="present.html#2825" class="Function">φ</a>    <a id="2830" class="Symbol">:</a> <a id="2832" href="Data.Fin.Base.html#1135" class="Datatype">Fin</a> <a id="2836" href="present.html#2365" class="Generalizable">n</a> <a id="2838" class="Symbol">→</a> <a id="2840" href="present.html#2522" class="Field">P</a> <a id="2842" class="Symbol">(</a><a id="2843" href="present.html#2546" class="Field">ι</a> <a id="2845" href="present.html#2365" class="Generalizable">n</a><a id="2846" class="Symbol">)</a>
+  <a id="ArOps.ψ"></a><a id="2850" href="present.html#2850" class="Function">ψ</a>    <a id="2855" class="Symbol">:</a> <a id="2857" href="present.html#2522" class="Field">P</a> <a id="2859" class="Symbol">(</a><a id="2860" href="present.html#2546" class="Field">ι</a> <a id="2862" href="present.html#2365" class="Generalizable">n</a><a id="2863" class="Symbol">)</a> <a id="2865" class="Symbol">→</a> <a id="2867" href="Data.Fin.Base.html#1135" class="Datatype">Fin</a> <a id="2871" href="present.html#2365" class="Generalizable">n</a>
+  <a id="ArOps._⊛_"></a><a id="2875" href="present.html#2875" class="Function Operator">_⊛_</a>  <a id="2880" class="Symbol">:</a> <a id="2882" class="Symbol">∀</a> <a id="2884" class="Symbol">{</a><a id="2885" href="present.html#2885" class="Bound">l</a> <a id="2887" href="present.html#2887" class="Bound">r</a><a id="2888" class="Symbol">}</a> <a id="2890" class="Symbol">→</a> <a id="2892" href="present.html#2522" class="Field">P</a> <a id="2894" href="present.html#2885" class="Bound">l</a> <a id="2896" class="Symbol">→</a> <a id="2898" href="present.html#2522" class="Field">P</a> <a id="2900" href="present.html#2887" class="Bound">r</a> <a id="2902" class="Symbol">→</a> <a id="2904" href="present.html#2522" class="Field">P</a> <a id="2906" class="Symbol">(</a><a id="2907" href="present.html#2885" class="Bound">l</a> <a id="2909" href="present.html#2563" class="Field Operator">⊗</a> <a id="2911" href="present.html#2887" class="Bound">r</a><a id="2912" class="Symbol">)</a>
+  <a id="ArOps.fst"></a><a id="2916" href="present.html#2916" class="Function">fst</a>  <a id="2921" class="Symbol">:</a> <a id="2923" class="Symbol">∀</a> <a id="2925" class="Symbol">{</a><a id="2926" href="present.html#2926" class="Bound">l</a> <a id="2928" href="present.html#2928" class="Bound">r</a><a id="2929" class="Symbol">}</a> <a id="2931" class="Symbol">→</a> <a id="2933" href="present.html#2522" class="Field">P</a> <a id="2935" class="Symbol">(</a><a id="2936" href="present.html#2926" class="Bound">l</a> <a id="2938" href="present.html#2563" class="Field Operator">⊗</a> <a id="2940" href="present.html#2928" class="Bound">r</a><a id="2941" class="Symbol">)</a> <a id="2943" class="Symbol">→</a> <a id="2945" href="present.html#2522" class="Field">P</a> <a id="2947" href="present.html#2926" class="Bound">l</a> 
+  <a id="ArOps.snd"></a><a id="2952" href="present.html#2952" class="Function">snd</a>  <a id="2957" class="Symbol">:</a> <a id="2959" class="Symbol">∀</a> <a id="2961" class="Symbol">{</a><a id="2962" href="present.html#2962" class="Bound">l</a> <a id="2964" href="present.html#2964" class="Bound">r</a><a id="2965" class="Symbol">}</a> <a id="2967" class="Symbol">→</a> <a id="2969" href="present.html#2522" class="Field">P</a> <a id="2971" class="Symbol">(</a><a id="2972" href="present.html#2962" class="Bound">l</a> <a id="2974" href="present.html#2563" class="Field Operator">⊗</a> <a id="2976" href="present.html#2964" class="Bound">r</a><a id="2977" class="Symbol">)</a> <a id="2979" class="Symbol">→</a> <a id="2981" href="present.html#2522" class="Field">P</a> <a id="2983" href="present.html#2964" class="Bound">r</a>
+
+  <a id="ArOps.imap"></a><a id="2988" href="present.html#2988" class="Function">imap</a>  <a id="2994" class="Symbol">:</a> <a id="2996" class="Symbol">∀</a> <a id="2998" class="Symbol">{</a><a id="2999" href="present.html#2999" class="Bound">s</a><a id="3000" class="Symbol">}</a> <a id="3002" class="Symbol">→</a> <a id="3004" class="Symbol">(</a><a id="3005" href="present.html#2522" class="Field">P</a> <a id="3007" href="present.html#2999" class="Bound">s</a> <a id="3009" class="Symbol">→</a> <a id="3011" href="present.html#2373" class="Generalizable">X</a><a id="3012" class="Symbol">)</a> <a id="3014" class="Symbol">→</a> <a id="3016" href="present.html#2674" class="Field">Ar</a> <a id="3019" href="present.html#2999" class="Bound">s</a> <a id="3021" href="present.html#2373" class="Generalizable">X</a>
+  <a id="ArOps._[_]"></a><a id="3025" href="present.html#3025" class="Function Operator">_[_]</a>  <a id="3031" class="Symbol">:</a> <a id="3033" class="Symbol">∀</a> <a id="3035" class="Symbol">{</a><a id="3036" href="present.html#3036" class="Bound">s</a><a id="3037" class="Symbol">}</a> <a id="3039" class="Symbol">→</a> <a id="3041" href="present.html#2674" class="Field">Ar</a> <a id="3044" href="present.html#3036" class="Bound">s</a> <a id="3046" href="present.html#2373" class="Generalizable">X</a> <a id="3048" class="Symbol">→</a> <a id="3050" class="Symbol">(</a><a id="3051" href="present.html#2522" class="Field">P</a> <a id="3053" href="present.html#3036" class="Bound">s</a> <a id="3055" class="Symbol">→</a> <a id="3057" href="present.html#2373" class="Generalizable">X</a><a id="3058" class="Symbol">)</a>
+
+  <a id="ArOps.nest"></a><a id="3063" href="present.html#3063" class="Function">nest</a> <a id="3068" class="Symbol">:</a> <a id="3070" class="Symbol">∀</a> <a id="3072" class="Symbol">{</a><a id="3073" href="present.html#3073" class="Bound">s</a> <a id="3075" href="present.html#3075" class="Bound">p</a><a id="3076" class="Symbol">}</a> <a id="3078" class="Symbol">→</a> <a id="3080" href="present.html#2674" class="Field">Ar</a> <a id="3083" class="Symbol">(</a><a id="3084" href="present.html#3073" class="Bound">s</a> <a id="3086" href="present.html#2563" class="Field Operator">⊗</a> <a id="3088" href="present.html#3075" class="Bound">p</a><a id="3089" class="Symbol">)</a> <a id="3091" href="present.html#2373" class="Generalizable">X</a> <a id="3093" class="Symbol">→</a> <a id="3095" href="present.html#2674" class="Field">Ar</a> <a id="3098" href="present.html#3073" class="Bound">s</a> <a id="3100" class="Symbol">(</a><a id="3101" href="present.html#2674" class="Field">Ar</a> <a id="3104" href="present.html#3075" class="Bound">p</a> <a id="3106" href="present.html#2373" class="Generalizable">X</a><a id="3107" class="Symbol">)</a>
+  <a id="ArOps.unnest"></a><a id="3111" href="present.html#3111" class="Function">unnest</a> <a id="3118" class="Symbol">:</a> <a id="3120" class="Symbol">∀</a> <a id="3122" class="Symbol">{</a><a id="3123" href="present.html#3123" class="Bound">s</a> <a id="3125" href="present.html#3125" class="Bound">p</a><a id="3126" class="Symbol">}</a> <a id="3128" class="Symbol">→</a> <a id="3130" href="present.html#2674" class="Field">Ar</a> <a id="3133" href="present.html#3123" class="Bound">s</a> <a id="3135" class="Symbol">(</a><a id="3136" href="present.html#2674" class="Field">Ar</a> <a id="3139" href="present.html#3125" class="Bound">p</a> <a id="3141" href="present.html#2373" class="Generalizable">X</a><a id="3142" class="Symbol">)</a> <a id="3144" class="Symbol">→</a> <a id="3146" href="present.html#2674" class="Field">Ar</a> <a id="3149" class="Symbol">(</a><a id="3150" href="present.html#3123" class="Bound">s</a> <a id="3152" href="present.html#2563" class="Field Operator">⊗</a> <a id="3154" href="present.html#3125" class="Bound">p</a><a id="3155" class="Symbol">)</a> <a id="3157" href="present.html#2373" class="Generalizable">X</a>
+</pre>
+<!--
+<pre class="Agda">  <a id="3174" href="present.html#3174" class="Bound">i</a> <a id="3176" href="present.html#2875" class="Function Operator">⊛</a> <a id="3178" href="present.html#3178" class="Bound">j</a> <a id="3180" class="Symbol">=</a> <a id="3182" href="Function.Bundles.html#5879" class="Field">Inverse.f⁻¹</a> <a id="3194" href="present.html#2624" class="Field">⊗-↔</a> <a id="3198" class="Symbol">(</a><a id="3199" href="present.html#3174" class="Bound">i</a> <a id="3201" href="Agda.Builtin.Sigma.html#218" class="InductiveConstructor Operator">,</a> <a id="3203" href="present.html#3178" class="Bound">j</a><a id="3204" class="Symbol">)</a>
+  <a id="3208" href="present.html#2825" class="Function">φ</a> <a id="3210" class="Symbol">=</a> <a id="3212" href="Function.Bundles.html#5879" class="Field">Inverse.f⁻¹</a> <a id="3224" href="present.html#2589" class="Field">ι-↔</a>
+  <a id="3230" href="present.html#2850" class="Function">ψ</a> <a id="3232" class="Symbol">=</a> <a id="3234" href="Function.Bundles.html#5855" class="Field">Inverse.f</a> <a id="3244" href="present.html#2589" class="Field">ι-↔</a>
+  <a id="3250" href="present.html#2952" class="Function">snd</a> <a id="3254" class="Symbol">=</a> <a id="3256" href="Agda.Builtin.Sigma.html#246" class="Field">proj₂</a> <a id="3262" href="Function.Base.html#1040" class="Function Operator">∘</a> <a id="3264" href="Function.Bundles.html#5855" class="Field">Inverse.f</a> <a id="3274" href="present.html#2624" class="Field">⊗-↔</a>
+  <a id="3280" href="present.html#2916" class="Function">fst</a> <a id="3284" class="Symbol">=</a> <a id="3286" href="Agda.Builtin.Sigma.html#234" class="Field">proj₁</a> <a id="3292" href="Function.Base.html#1040" class="Function Operator">∘</a> <a id="3294" href="Function.Bundles.html#5855" class="Field">Inverse.f</a> <a id="3304" href="present.html#2624" class="Field">⊗-↔</a>
+  <a id="ArOps.fromVec"></a><a id="3310" href="present.html#3310" class="Function">fromVec</a> <a id="3318" class="Symbol">:</a> <a id="3320" class="Symbol">∀</a> <a id="3322" class="Symbol">{</a><a id="3323" href="present.html#3323" class="Bound">n</a><a id="3324" class="Symbol">}</a> <a id="3326" class="Symbol">→</a> <a id="3328" class="Symbol">(</a><a id="3329" href="Data.Fin.Base.html#1135" class="Datatype">Fin</a> <a id="3333" href="present.html#3323" class="Bound">n</a> <a id="3335" class="Symbol">→</a> <a id="3337" href="present.html#2373" class="Generalizable">X</a><a id="3338" class="Symbol">)</a> <a id="3340" class="Symbol">→</a> <a id="3342" href="present.html#2674" class="Field">Ar</a> <a id="3345" class="Symbol">(</a><a id="3346" href="present.html#2546" class="Field">ι</a> <a id="3348" href="present.html#3323" class="Bound">n</a><a id="3349" class="Symbol">)</a> <a id="3351" href="present.html#2373" class="Generalizable">X</a>
+  <a id="ArOps.toVec"></a><a id="3355" href="present.html#3355" class="Function">toVec</a> <a id="3361" class="Symbol">:</a> <a id="3363" class="Symbol">∀</a> <a id="3365" class="Symbol">{</a><a id="3366" href="present.html#3366" class="Bound">n</a><a id="3367" class="Symbol">}</a> <a id="3369" class="Symbol">→</a> <a id="3371" href="present.html#2674" class="Field">Ar</a> <a id="3374" class="Symbol">(</a><a id="3375" href="present.html#2546" class="Field">ι</a> <a id="3377" href="present.html#3366" class="Bound">n</a><a id="3378" class="Symbol">)</a> <a id="3380" href="present.html#2373" class="Generalizable">X</a> <a id="3382" class="Symbol">→</a> <a id="3384" href="Data.Fin.Base.html#1135" class="Datatype">Fin</a> <a id="3388" href="present.html#3366" class="Bound">n</a> <a id="3390" class="Symbol">→</a> <a id="3392" href="present.html#2373" class="Generalizable">X</a>
+  <a id="3396" href="present.html#2988" class="Function">imap</a> <a id="3401" class="Symbol">=</a> <a id="3403" href="Function.Bundles.html#5855" class="Field">Inverse.f</a> <a id="3413" href="present.html#2699" class="Field">Ar-↔</a>
+  <a id="3420" href="present.html#3025" class="Function Operator">_[_]</a> <a id="3425" class="Symbol">=</a> <a id="3427" href="Function.Bundles.html#5879" class="Field">Inverse.f⁻¹</a> <a id="3439" href="present.html#2699" class="Field">Ar-↔</a>
+  <a id="3446" href="present.html#3063" class="Function">nest</a> <a id="3451" href="present.html#3451" class="Bound">a</a> <a id="3453" class="Symbol">=</a> <a id="3455" href="present.html#2988" class="Function">imap</a> <a id="3460" class="Symbol">λ</a> <a id="3462" href="present.html#3462" class="Bound">i</a> <a id="3464" class="Symbol">→</a> <a id="3466" href="present.html#2988" class="Function">imap</a> <a id="3471" class="Symbol">λ</a> <a id="3473" href="present.html#3473" class="Bound">j</a> <a id="3475" class="Symbol">→</a> <a id="3477" href="present.html#3451" class="Bound">a</a> <a id="3479" href="present.html#3025" class="Function Operator">[</a> <a id="3481" href="present.html#3462" class="Bound">i</a> <a id="3483" href="present.html#2875" class="Function Operator">⊛</a> <a id="3485" href="present.html#3473" class="Bound">j</a> <a id="3487" href="present.html#3025" class="Function Operator">]</a>
+  <a id="3491" href="present.html#3111" class="Function">unnest</a> <a id="3498" href="present.html#3498" class="Bound">a</a> <a id="3500" class="Symbol">=</a> <a id="3502" href="present.html#2988" class="Function">imap</a> <a id="3507" class="Symbol">λ</a> <a id="3509" href="present.html#3509" class="Bound">i</a> <a id="3511" class="Symbol">→</a> <a id="3513" href="present.html#3498" class="Bound">a</a> <a id="3515" href="present.html#3025" class="Function Operator">[</a> <a id="3517" href="present.html#2916" class="Function">fst</a> <a id="3521" href="present.html#3509" class="Bound">i</a> <a id="3523" href="present.html#3025" class="Function Operator">]</a> <a id="3525" href="present.html#3025" class="Function Operator">[</a> <a id="3527" href="present.html#2952" class="Function">snd</a> <a id="3531" href="present.html#3509" class="Bound">i</a> <a id="3533" href="present.html#3025" class="Function Operator">]</a>
+  <a id="3537" href="present.html#3310" class="Function">fromVec</a> <a id="3545" href="present.html#3545" class="Bound">v</a> <a id="3547" class="Symbol">=</a> <a id="3549" href="present.html#2988" class="Function">imap</a> <a id="3554" class="Symbol">(</a><a id="3555" href="present.html#3545" class="Bound">v</a> <a id="3557" href="Function.Base.html#1040" class="Function Operator">∘</a> <a id="3559" href="present.html#2850" class="Function">ψ</a><a id="3560" class="Symbol">)</a>
+  <a id="3564" href="present.html#3355" class="Function">toVec</a> <a id="3570" href="present.html#3570" class="Bound">a</a> <a id="3572" class="Symbol">=</a> <a id="3574" href="present.html#3570" class="Bound">a</a> <a id="3576" href="present.html#3025" class="Function Operator">[_]</a> <a id="3580" href="Function.Base.html#1040" class="Function Operator">∘</a> <a id="3582" href="present.html#2825" class="Function">φ</a>
+
+  
+  <a id="ArOps.sel∘imap"></a><a id="3590" href="present.html#3590" class="Function">sel∘imap</a> <a id="3599" class="Symbol">:</a> <a id="3601" class="Symbol">∀</a> <a id="3603" class="Symbol">{</a><a id="3604" href="present.html#3604" class="Bound">s</a> <a id="3606" href="present.html#3606" class="Bound">X</a><a id="3607" class="Symbol">}</a> <a id="3609" class="Symbol">(</a><a id="3610" href="present.html#3610" class="Bound">a</a> <a id="3612" class="Symbol">:</a> <a id="3614" href="present.html#2522" class="Field">P</a> <a id="3616" href="present.html#3604" class="Bound">s</a> <a id="3618" class="Symbol">→</a> <a id="3620" href="present.html#3606" class="Bound">X</a><a id="3621" class="Symbol">)</a> <a id="3623" class="Symbol">→</a> <a id="3625" href="present.html#2988" class="Function">imap</a> <a id="3630" href="present.html#3610" class="Bound">a</a> <a id="3632" href="present.html#3025" class="Function Operator">[_]</a> <a id="3636" href="Agda.Builtin.Equality.html#133" class="Datatype Operator">≡</a> <a id="3638" href="present.html#3610" class="Bound">a</a>
+  <a id="3642" href="present.html#3590" class="Function">sel∘imap</a> <a id="3651" class="Symbol">=</a> <a id="3653" href="Agda.Builtin.Sigma.html#246" class="Field">proj₂</a> <a id="3659" class="Symbol">(</a><a id="3660" href="Function.Bundles.html#5989" class="Field">Inverse.inverse</a> <a id="3676" href="present.html#2699" class="Field">Ar-↔</a><a id="3680" class="Symbol">)</a>
+</pre>-->
+</section>
+<section id="immediate-operations-2" class="slide level2">
+<h2>Immediate Operations (2)</h2>
+<pre class="Agda">  <a id="ArOps.K"></a><a id="3726" href="present.html#3726" class="Function">K</a> <a id="3728" class="Symbol">:</a> <a id="3730" class="Symbol">∀</a> <a id="3732" class="Symbol">{</a><a id="3733" href="present.html#3733" class="Bound">s</a><a id="3734" class="Symbol">}</a> <a id="3736" class="Symbol">→</a> <a id="3738" href="present.html#2373" class="Generalizable">X</a> <a id="3740" class="Symbol">→</a> <a id="3742" href="present.html#2674" class="Field">Ar</a> <a id="3745" href="present.html#3733" class="Bound">s</a> <a id="3747" href="present.html#2373" class="Generalizable">X</a>
+  <a id="3751" href="present.html#3726" class="Function">K</a> <a id="3753" href="present.html#3753" class="Bound">x</a> <a id="3755" class="Symbol">=</a> <a id="3757" href="present.html#2988" class="Function">imap</a> <a id="3762" class="Symbol">λ</a> <a id="3764" href="present.html#3764" class="Bound">i</a> <a id="3766" class="Symbol">→</a> <a id="3768" href="present.html#3753" class="Bound">x</a>
+
+  <a id="ArOps.map"></a><a id="3773" href="present.html#3773" class="Function">map</a> <a id="3777" class="Symbol">:</a> <a id="3779" class="Symbol">∀</a> <a id="3781" class="Symbol">{</a><a id="3782" href="present.html#3782" class="Bound">s</a><a id="3783" class="Symbol">}</a> <a id="3785" class="Symbol">→</a> <a id="3787" class="Symbol">(</a><a id="3788" href="present.html#2373" class="Generalizable">X</a> <a id="3790" class="Symbol">→</a> <a id="3792" href="present.html#2375" class="Generalizable">Y</a><a id="3793" class="Symbol">)</a> <a id="3795" class="Symbol">→</a>  <a id="3798" href="present.html#2674" class="Field">Ar</a> <a id="3801" href="present.html#3782" class="Bound">s</a> <a id="3803" href="present.html#2373" class="Generalizable">X</a> <a id="3805" class="Symbol">→</a> <a id="3807" href="present.html#2674" class="Field">Ar</a> <a id="3810" href="present.html#3782" class="Bound">s</a> <a id="3812" href="present.html#2375" class="Generalizable">Y</a>
+  <a id="3816" href="present.html#3773" class="Function">map</a> <a id="3820" href="present.html#3820" class="Bound">f</a> <a id="3822" href="present.html#3822" class="Bound">a</a> <a id="3824" class="Symbol">=</a> <a id="3826" href="present.html#2988" class="Function">imap</a> <a id="3831" class="Symbol">(</a><a id="3832" href="present.html#3820" class="Bound">f</a> <a id="3834" href="Function.Base.html#1040" class="Function Operator">∘</a> <a id="3836" href="present.html#3822" class="Bound">a</a> <a id="3838" href="present.html#3025" class="Function Operator">[_]</a><a id="3841" class="Symbol">)</a>
+  
+  <a id="ArOps.zipWith"></a><a id="3848" href="present.html#3848" class="Function">zipWith</a> <a id="3856" class="Symbol">:</a> <a id="3858" class="Symbol">∀</a> <a id="3860" class="Symbol">{</a><a id="3861" href="present.html#3861" class="Bound">s</a><a id="3862" class="Symbol">}</a> <a id="3864" class="Symbol">→</a> <a id="3866" class="Symbol">(</a><a id="3867" href="present.html#2373" class="Generalizable">X</a> <a id="3869" class="Symbol">→</a> <a id="3871" href="present.html#2375" class="Generalizable">Y</a> <a id="3873" class="Symbol">→</a> <a id="3875" href="present.html#2377" class="Generalizable">Z</a><a id="3876" class="Symbol">)</a> 
+          <a id="3889" class="Symbol">→</a> <a id="3891" href="present.html#2674" class="Field">Ar</a> <a id="3894" href="present.html#3861" class="Bound">s</a> <a id="3896" href="present.html#2373" class="Generalizable">X</a> <a id="3898" class="Symbol">→</a> <a id="3900" href="present.html#2674" class="Field">Ar</a> <a id="3903" href="present.html#3861" class="Bound">s</a> <a id="3905" href="present.html#2375" class="Generalizable">Y</a> <a id="3907" class="Symbol">→</a> <a id="3909" href="present.html#2674" class="Field">Ar</a> <a id="3912" href="present.html#3861" class="Bound">s</a> <a id="3914" href="present.html#2377" class="Generalizable">Z</a>
+  <a id="3918" href="present.html#3848" class="Function">zipWith</a> <a id="3926" href="present.html#3926" class="Bound">f</a> <a id="3928" href="present.html#3928" class="Bound">a</a> <a id="3930" href="present.html#3930" class="Bound">b</a> <a id="3932" class="Symbol">=</a> <a id="3934" href="present.html#2988" class="Function">imap</a> <a id="3939" class="Symbol">λ</a> <a id="3941" href="present.html#3941" class="Bound">i</a> <a id="3943" class="Symbol">→</a> <a id="3945" href="present.html#3926" class="Bound">f</a> <a id="3947" class="Symbol">(</a><a id="3948" href="present.html#3928" class="Bound">a</a> <a id="3950" href="present.html#3025" class="Function Operator">[</a> <a id="3952" href="present.html#3941" class="Bound">i</a> <a id="3954" href="present.html#3025" class="Function Operator">]</a><a id="3955" class="Symbol">)</a> <a id="3957" class="Symbol">(</a><a id="3958" href="present.html#3930" class="Bound">b</a> <a id="3960" href="present.html#3025" class="Function Operator">[</a> <a id="3962" href="present.html#3941" class="Bound">i</a> <a id="3964" href="present.html#3025" class="Function Operator">]</a><a id="3965" class="Symbol">)</a>
+  
+  <a id="ArOps._≈ₐ_"></a><a id="3972" href="present.html#3972" class="Function Operator">_≈ₐ_</a> <a id="3977" class="Symbol">:</a> <a id="3979" class="Symbol">∀</a> <a id="3981" class="Symbol">{</a><a id="3982" href="present.html#3982" class="Bound">s</a> <a id="3984" href="present.html#3984" class="Bound">X</a><a id="3985" class="Symbol">}</a> <a id="3987" class="Symbol">→</a> <a id="3989" class="Symbol">(</a><a id="3990" href="present.html#2674" class="Field">Ar</a> <a id="3993" href="present.html#3982" class="Bound">s</a> <a id="3995" href="present.html#3984" class="Bound">X</a><a id="3996" class="Symbol">)</a> <a id="3998" class="Symbol">→</a> <a id="4000" class="Symbol">(</a><a id="4001" href="present.html#2674" class="Field">Ar</a> <a id="4004" href="present.html#3982" class="Bound">s</a> <a id="4006" href="present.html#3984" class="Bound">X</a><a id="4007" class="Symbol">)</a> <a id="4009" class="Symbol">→</a> <a id="4011" href="Agda.Primitive.html#320" class="Primitive">Set</a>
+  <a id="4017" href="present.html#4017" class="Bound">a</a> <a id="4019" href="present.html#3972" class="Function Operator">≈ₐ</a> <a id="4022" href="present.html#4022" class="Bound">b</a> <a id="4024" class="Symbol">=</a> <a id="4026" class="Symbol">∀</a> <a id="4028" href="present.html#4028" class="Bound">ix</a> <a id="4031" class="Symbol">→</a> <a id="4033" href="present.html#4017" class="Bound">a</a> <a id="4035" href="present.html#3025" class="Function Operator">[</a> <a id="4037" href="present.html#4028" class="Bound">ix</a> <a id="4040" href="present.html#3025" class="Function Operator">]</a> <a id="4042" href="Agda.Builtin.Equality.html#133" class="Datatype Operator">≡</a> <a id="4044" href="present.html#4022" class="Bound">b</a> <a id="4046" href="present.html#3025" class="Function Operator">[</a> <a id="4048" href="present.html#4028" class="Bound">ix</a> <a id="4051" href="present.html#3025" class="Function Operator">]</a>
+</pre>
+<!--
+<pre class="Agda">  <a id="ArOps.S′"></a><a id="4068" href="present.html#4068" class="Function">S′</a> <a id="4071" class="Symbol">:</a> <a id="4073" class="Symbol">∀</a> <a id="4075" class="Symbol">{</a><a id="4076" href="present.html#4076" class="Bound">s</a> <a id="4078" href="present.html#4078" class="Bound">p</a><a id="4079" class="Symbol">}</a> <a id="4081" class="Symbol">→</a> <a id="4083" href="present.html#2674" class="Field">Ar</a> <a id="4086" href="present.html#4076" class="Bound">s</a> <a id="4088" class="Symbol">(</a><a id="4089" href="present.html#2674" class="Field">Ar</a> <a id="4092" href="present.html#4078" class="Bound">p</a> <a id="4094" href="present.html#2373" class="Generalizable">X</a><a id="4095" class="Symbol">)</a> <a id="4097" class="Symbol">→</a> <a id="4099" class="Symbol">(</a><a id="4100" href="present.html#2522" class="Field">P</a> <a id="4102" href="present.html#4076" class="Bound">s</a> <a id="4104" class="Symbol">→</a> <a id="4106" href="present.html#2522" class="Field">P</a> <a id="4108" href="present.html#4078" class="Bound">p</a><a id="4109" class="Symbol">)</a> <a id="4111" class="Symbol">→</a> <a id="4113" class="Symbol">(</a><a id="4114" href="present.html#2674" class="Field">Ar</a> <a id="4117" href="present.html#4076" class="Bound">s</a> <a id="4119" href="present.html#2373" class="Generalizable">X</a><a id="4120" class="Symbol">)</a>
+  <a id="4124" href="present.html#4068" class="Function">S′</a> <a id="4127" href="present.html#4127" class="Bound">f</a> <a id="4129" href="present.html#4129" class="Bound">g</a> <a id="4131" class="Symbol">=</a> <a id="4133" href="present.html#2988" class="Function">imap</a> <a id="4138" class="Symbol">λ</a> <a id="4140" href="present.html#4140" class="Bound">i</a> <a id="4142" class="Symbol">→</a> <a id="4144" href="present.html#4127" class="Bound">f</a> <a id="4146" href="present.html#3025" class="Function Operator">[</a> <a id="4148" href="present.html#4140" class="Bound">i</a> <a id="4150" href="present.html#3025" class="Function Operator">]</a> <a id="4152" href="present.html#3025" class="Function Operator">[</a> <a id="4154" href="present.html#4129" class="Bound">g</a> <a id="4156" href="present.html#4140" class="Bound">i</a> <a id="4158" href="present.html#3025" class="Function Operator">]</a>
+
+  <a id="ArOps.unzip"></a><a id="4163" href="present.html#4163" class="Function">unzip</a> <a id="4169" class="Symbol">:</a> <a id="4171" class="Symbol">∀</a> <a id="4173" class="Symbol">{</a><a id="4174" href="present.html#4174" class="Bound">s</a><a id="4175" class="Symbol">}</a> <a id="4177" class="Symbol">→</a> <a id="4179" href="present.html#2674" class="Field">Ar</a> <a id="4182" href="present.html#4174" class="Bound">s</a> <a id="4184" class="Symbol">(</a><a id="4185" href="present.html#2373" class="Generalizable">X</a> <a id="4187" href="Data.Product.html#1176" class="Function Operator">×</a> <a id="4189" href="present.html#2375" class="Generalizable">Y</a><a id="4190" class="Symbol">)</a> <a id="4192" class="Symbol">→</a> <a id="4194" href="present.html#2674" class="Field">Ar</a> <a id="4197" href="present.html#4174" class="Bound">s</a> <a id="4199" href="present.html#2373" class="Generalizable">X</a> <a id="4201" href="Data.Product.html#1176" class="Function Operator">×</a> <a id="4203" href="present.html#2674" class="Field">Ar</a> <a id="4206" href="present.html#4174" class="Bound">s</a> <a id="4208" href="present.html#2375" class="Generalizable">Y</a>
+  <a id="4212" href="present.html#4163" class="Function">unzip</a> <a id="4218" href="present.html#4218" class="Bound">f</a> <a id="4220" class="Symbol">=</a> <a id="4222" href="present.html#3773" class="Function">map</a> <a id="4226" href="Agda.Builtin.Sigma.html#234" class="Field">proj₁</a> <a id="4232" href="present.html#4218" class="Bound">f</a> <a id="4234" href="Agda.Builtin.Sigma.html#218" class="InductiveConstructor Operator">,</a> <a id="4236" href="present.html#3773" class="Function">map</a> <a id="4240" href="Agda.Builtin.Sigma.html#246" class="Field">proj₂</a> <a id="4246" href="present.html#4218" class="Bound">f</a>
+
+
+  <a id="ArOps.refl-≈ₐ"></a><a id="4252" href="present.html#4252" class="Function">refl-≈ₐ</a>   <a id="4262" class="Symbol">:</a> <a id="4264" class="Symbol">∀</a> <a id="4266" class="Symbol">{</a><a id="4267" href="present.html#4267" class="Bound">s</a> <a id="4269" href="present.html#4269" class="Bound">X</a><a id="4270" class="Symbol">}{</a><a id="4272" href="present.html#4272" class="Bound">a</a> <a id="4274" class="Symbol">:</a> <a id="4276" href="present.html#2674" class="Field">Ar</a> <a id="4279" href="present.html#4267" class="Bound">s</a> <a id="4281" href="present.html#4269" class="Bound">X</a><a id="4282" class="Symbol">}</a> <a id="4284" class="Symbol">→</a> <a id="4286" href="present.html#4272" class="Bound">a</a> <a id="4288" href="present.html#3972" class="Function Operator">≈ₐ</a> <a id="4291" href="present.html#4272" class="Bound">a</a>
+  <a id="ArOps.sym-≈ₐ"></a><a id="4295" href="present.html#4295" class="Function">sym-≈ₐ</a>    <a id="4305" class="Symbol">:</a> <a id="4307" class="Symbol">∀</a> <a id="4309" class="Symbol">{</a><a id="4310" href="present.html#4310" class="Bound">s</a> <a id="4312" href="present.html#4312" class="Bound">X</a><a id="4313" class="Symbol">}{</a><a id="4315" href="present.html#4315" class="Bound">a</a> <a id="4317" href="present.html#4317" class="Bound">b</a> <a id="4319" class="Symbol">:</a> <a id="4321" href="present.html#2674" class="Field">Ar</a> <a id="4324" href="present.html#4310" class="Bound">s</a> <a id="4326" href="present.html#4312" class="Bound">X</a><a id="4327" class="Symbol">}</a> <a id="4329" class="Symbol">→</a> <a id="4331" href="present.html#4315" class="Bound">a</a> <a id="4333" href="present.html#3972" class="Function Operator">≈ₐ</a> <a id="4336" href="present.html#4317" class="Bound">b</a> <a id="4338" class="Symbol">→</a> <a id="4340" href="present.html#4317" class="Bound">b</a> <a id="4342" href="present.html#3972" class="Function Operator">≈ₐ</a> <a id="4345" href="present.html#4315" class="Bound">a</a>
+  <a id="ArOps.trans-≈ₐ"></a><a id="4349" href="present.html#4349" class="Function">trans-≈ₐ</a>  <a id="4359" class="Symbol">:</a> <a id="4361" class="Symbol">∀</a> <a id="4363" class="Symbol">{</a><a id="4364" href="present.html#4364" class="Bound">s</a> <a id="4366" href="present.html#4366" class="Bound">X</a><a id="4367" class="Symbol">}{</a><a id="4369" href="present.html#4369" class="Bound">a</a> <a id="4371" href="present.html#4371" class="Bound">b</a> <a id="4373" href="present.html#4373" class="Bound">c</a> <a id="4375" class="Symbol">:</a> <a id="4377" href="present.html#2674" class="Field">Ar</a> <a id="4380" href="present.html#4364" class="Bound">s</a> <a id="4382" href="present.html#4366" class="Bound">X</a><a id="4383" class="Symbol">}</a> <a id="4385" class="Symbol">→</a> <a id="4387" href="present.html#4369" class="Bound">a</a> <a id="4389" href="present.html#3972" class="Function Operator">≈ₐ</a> <a id="4392" href="present.html#4371" class="Bound">b</a> <a id="4394" class="Symbol">→</a> <a id="4396" href="present.html#4371" class="Bound">b</a> <a id="4398" href="present.html#3972" class="Function Operator">≈ₐ</a> <a id="4401" href="present.html#4373" class="Bound">c</a> <a id="4403" class="Symbol">→</a> <a id="4405" href="present.html#4369" class="Bound">a</a> <a id="4407" href="present.html#3972" class="Function Operator">≈ₐ</a> <a id="4410" href="present.html#4373" class="Bound">c</a>
+  <a id="4414" class="Comment">-- This is surely something that we do not have (without funExt)</a>
+  <a id="4481" class="Comment">--cong-≈-≡ : ∀ {s X Y} (f : Ar s X → Y)</a>
+  <a id="4523" class="Comment">--         → ∀ {a b : Ar s X} → (a ≈ₐ b) → f a ≡ f b</a>
+  <a id="4578" class="Comment">--cong-≈-≡ f {a} {b} a≈b = ?</a>
+  <a id="4609" href="present.html#4252" class="Function">refl-≈ₐ</a> <a id="4617" href="present.html#4617" class="Bound">ix</a> <a id="4620" class="Symbol">=</a> <a id="4622" href="Agda.Builtin.Equality.html#190" class="InductiveConstructor">refl</a>
+  <a id="4629" href="present.html#4295" class="Function">sym-≈ₐ</a> <a id="4636" href="present.html#4636" class="Bound">a≈b</a> <a id="4640" href="present.html#4640" class="Bound">ix</a> <a id="4643" class="Symbol">=</a> <a id="4645" href="Relation.Binary.PropositionalEquality.Core.html#1693" class="Function">sym</a> <a id="4649" class="Symbol">(</a><a id="4650" href="present.html#4636" class="Bound">a≈b</a> <a id="4654" href="present.html#4640" class="Bound">ix</a><a id="4656" class="Symbol">)</a>
+  <a id="4660" href="present.html#4349" class="Function">trans-≈ₐ</a> <a id="4669" href="present.html#4669" class="Bound">a≈b</a> <a id="4673" href="present.html#4673" class="Bound">b≈c</a> <a id="4677" href="present.html#4677" class="Bound">ix</a> <a id="4680" class="Symbol">=</a> <a id="4682" href="Relation.Binary.PropositionalEquality.Core.html#1738" class="Function">trans</a> <a id="4688" class="Symbol">(</a><a id="4689" href="present.html#4669" class="Bound">a≈b</a> <a id="4693" href="present.html#4677" class="Bound">ix</a><a id="4695" class="Symbol">)</a> <a id="4697" class="Symbol">(</a><a id="4698" href="present.html#4673" class="Bound">b≈c</a> <a id="4702" href="present.html#4677" class="Bound">ix</a><a id="4704" class="Symbol">)</a>
+  
+  <a id="ArOps.trans-≡-≈"></a><a id="4711" href="present.html#4711" class="Function">trans-≡-≈</a> <a id="4721" class="Symbol">:</a> <a id="4723" class="Symbol">∀</a> <a id="4725" class="Symbol">{</a><a id="4726" href="present.html#4726" class="Bound">s</a> <a id="4728" href="present.html#4728" class="Bound">X</a><a id="4729" class="Symbol">}{</a><a id="4731" href="present.html#4731" class="Bound">a</a> <a id="4733" href="present.html#4733" class="Bound">b</a> <a id="4735" href="present.html#4735" class="Bound">c</a> <a id="4737" class="Symbol">:</a> <a id="4739" href="present.html#2674" class="Field">Ar</a> <a id="4742" href="present.html#4726" class="Bound">s</a> <a id="4744" href="present.html#4728" class="Bound">X</a><a id="4745" class="Symbol">}</a> <a id="4747" class="Symbol">→</a> <a id="4749" href="present.html#4731" class="Bound">a</a> <a id="4751" href="Agda.Builtin.Equality.html#133" class="Datatype Operator">≡</a> <a id="4753" href="present.html#4733" class="Bound">b</a> <a id="4755" class="Symbol">→</a> <a id="4757" href="present.html#4733" class="Bound">b</a> <a id="4759" href="present.html#3972" class="Function Operator">≈ₐ</a> <a id="4762" href="present.html#4735" class="Bound">c</a> <a id="4764" class="Symbol">→</a> <a id="4766" href="present.html#4731" class="Bound">a</a> <a id="4768" href="present.html#3972" class="Function Operator">≈ₐ</a> <a id="4771" href="present.html#4735" class="Bound">c</a>
+  <a id="4775" href="present.html#4711" class="Function">trans-≡-≈</a> <a id="4785" href="Agda.Builtin.Equality.html#190" class="InductiveConstructor">refl</a> <a id="4790" href="present.html#4790" class="Bound">x</a> <a id="4792" class="Symbol">=</a> <a id="4794" href="present.html#4790" class="Bound">x</a>
+
+  <a id="4799" class="Keyword">import</a> <a id="4806" href="Relation.Binary.Reasoning.Setoid.html" class="Module">Relation.Binary.Reasoning.Setoid</a> <a id="4839" class="Symbol">as</a> <a id="4842" class="Module">EqReasoning</a>
+
+  <a id="ArOps.≈ₐ-isEquiv"></a><a id="4857" href="present.html#4857" class="Function">≈ₐ-isEquiv</a> <a id="4868" class="Symbol">:</a> <a id="4870" class="Symbol">∀</a> <a id="4872" class="Symbol">{</a><a id="4873" href="present.html#4873" class="Bound">s</a> <a id="4875" href="present.html#4875" class="Bound">X</a><a id="4876" class="Symbol">}</a> <a id="4878" class="Symbol">→</a> <a id="4880" href="Relation.Binary.Structures.html#1531" class="Record">IsEquivalence</a> <a id="4894" class="Symbol">(</a><a id="4895" href="present.html#3972" class="Function Operator">_≈ₐ_</a> <a id="4900" class="Symbol">{</a><a id="4901" href="present.html#4873" class="Bound">s</a><a id="4902" class="Symbol">}</a> <a id="4904" class="Symbol">{</a><a id="4905" href="present.html#4875" class="Bound">X</a><a id="4906" class="Symbol">})</a>
+  <a id="4911" href="present.html#4857" class="Function">≈ₐ-isEquiv</a> <a id="4922" class="Symbol">=</a> <a id="4924" class="Keyword">record</a> <a id="4931" class="Symbol">{</a> <a id="4933" href="Relation.Binary.Structures.html#1577" class="Field">refl</a> <a id="4938" class="Symbol">=</a> <a id="4940" href="present.html#4252" class="Function">refl-≈ₐ</a> <a id="4948" class="Symbol">;</a> <a id="4950" href="Relation.Binary.Structures.html#1603" class="Field">sym</a> <a id="4954" class="Symbol">=</a> <a id="4956" href="present.html#4295" class="Function">sym-≈ₐ</a> <a id="4963" class="Symbol">;</a> <a id="4965" href="Relation.Binary.Structures.html#1629" class="Field">trans</a> <a id="4971" class="Symbol">=</a> <a id="4973" href="present.html#4349" class="Function">trans-≈ₐ</a><a id="4981" class="Symbol">}</a>
+
+  <a id="ArOps.ArSetoid"></a><a id="4986" href="present.html#4986" class="Function">ArSetoid</a> <a id="4995" class="Symbol">:</a> <a id="4997" class="Symbol">∀</a> <a id="4999" class="Symbol">{</a><a id="5000" href="present.html#5000" class="Bound">s</a> <a id="5002" href="present.html#5002" class="Bound">X</a><a id="5003" class="Symbol">}</a> <a id="5005" class="Symbol">→</a> <a id="5007" href="Relation.Binary.Bundles.html#1018" class="Record">Setoid</a> <a id="5014" class="Symbol">_</a> <a id="5016" class="Symbol">_</a>
+  <a id="5020" href="present.html#4986" class="Function">ArSetoid</a> <a id="5029" class="Symbol">{</a><a id="5030" href="present.html#5030" class="Bound">s</a><a id="5031" class="Symbol">}</a> <a id="5033" class="Symbol">{</a><a id="5034" href="present.html#5034" class="Bound">X</a><a id="5035" class="Symbol">}</a> <a id="5037" class="Symbol">=</a> <a id="5039" class="Keyword">record</a> <a id="5046" class="Symbol">{</a> <a id="5048" href="Relation.Binary.Bundles.html#1141" class="Field">isEquivalence</a> <a id="5062" class="Symbol">=</a> <a id="5064" href="present.html#4857" class="Function">≈ₐ-isEquiv</a> <a id="5075" class="Symbol">{</a><a id="5076" href="present.html#5030" class="Bound">s</a><a id="5077" class="Symbol">}</a> <a id="5079" class="Symbol">{</a><a id="5080" href="present.html#5034" class="Bound">X</a><a id="5081" class="Symbol">}}</a>
+
+  <a id="5087" class="Keyword">module</a> <a id="ArOps.ArReasoning"></a><a id="5094" href="present.html#5094" class="Module">ArReasoning</a> <a id="5106" class="Symbol">{</a><a id="5107" href="present.html#5107" class="Bound">s</a><a id="5108" class="Symbol">}</a> <a id="5110" class="Symbol">{</a><a id="5111" href="present.html#5111" class="Bound">X</a><a id="5112" class="Symbol">}</a> <a id="5114" class="Symbol">=</a> <a id="5116" href="Relation.Binary.Reasoning.Setoid.html" class="Module">EqReasoning</a> <a id="5128" class="Symbol">(</a><a id="5129" href="present.html#4986" class="Function">ArSetoid</a> <a id="5138" class="Symbol">{</a><a id="5139" href="present.html#5107" class="Bound">s</a><a id="5140" class="Symbol">}</a> <a id="5142" class="Symbol">{</a><a id="5143" href="present.html#5111" class="Bound">X</a><a id="5144" class="Symbol">})</a>
+</pre>-->
+</section>
+<section id="canonical-mm" class="slide level2">
+<h2>Canonical mm</h2>
+<div style="font-size: 0.85em;">
+<pre class="Agda"><a id="5210" class="Keyword">module</a> <a id="MMnaive"></a><a id="5217" href="present.html#5217" class="Module">MMnaive</a> <a id="5225" class="Symbol">(</a><a id="5226" href="present.html#5226" class="Bound">A</a> <a id="5228" class="Symbol">:</a> <a id="5230" href="present.html#2476" class="Record">Array</a><a id="5235" class="Symbol">)</a>
+   <a id="5240" class="Symbol">(</a><a id="5241" href="present.html#5241" class="Bound Operator">_⊠_</a> <a id="5245" class="Symbol">:</a> <a id="5247" href="present.html#2373" class="Generalizable">X</a> <a id="5249" class="Symbol">→</a> <a id="5251" href="present.html#2375" class="Generalizable">Y</a> <a id="5253" class="Symbol">→</a> <a id="5255" href="present.html#2377" class="Generalizable">Z</a><a id="5256" class="Symbol">)</a> <a id="5258" class="Symbol">(</a><a id="5259" href="present.html#5259" class="Bound">ε</a> <a id="5261" class="Symbol">:</a> <a id="5263" href="present.html#2377" class="Generalizable">Z</a><a id="5264" class="Symbol">)</a> <a id="5266" class="Symbol">(</a><a id="5267" href="present.html#5267" class="Bound Operator">_⊞_</a> <a id="5271" class="Symbol">:</a> <a id="5273" href="present.html#2377" class="Generalizable">Z</a> <a id="5275" class="Symbol">→</a> <a id="5277" href="present.html#2377" class="Generalizable">Z</a> <a id="5279" class="Symbol">→</a> <a id="5281" href="present.html#2377" class="Generalizable">Z</a><a id="5282" class="Symbol">)</a>
+   <a id="5287" class="Symbol">(</a><a id="5288" href="present.html#5288" class="Bound">sum</a> <a id="5292" class="Symbol">:</a> <a id="5294" class="Symbol">∀</a> <a id="5296" class="Symbol">{</a><a id="5297" href="present.html#5297" class="Bound">X</a> <a id="5299" href="present.html#5299" class="Bound">s</a><a id="5300" class="Symbol">}</a> <a id="5302" class="Symbol">→</a> <a id="5304" class="Symbol">(</a><a id="5305" href="present.html#5297" class="Bound">X</a> <a id="5307" class="Symbol">→</a> <a id="5309" href="present.html#5297" class="Bound">X</a> <a id="5311" class="Symbol">→</a> <a id="5313" href="present.html#5297" class="Bound">X</a><a id="5314" class="Symbol">)</a> <a id="5316" class="Symbol">→</a> <a id="5318" href="present.html#5297" class="Bound">X</a> <a id="5320" class="Symbol">→</a> <a id="5322" href="present.html#2674" class="Field">Array.Ar</a> <a id="5331" href="present.html#5226" class="Bound">A</a> <a id="5333" href="present.html#5299" class="Bound">s</a> <a id="5335" href="present.html#5297" class="Bound">X</a> <a id="5337" class="Symbol">→</a> <a id="5339" href="present.html#5297" class="Bound">X</a><a id="5340" class="Symbol">)</a>
+</pre>
+<!--
+<pre class="Agda">    <a id="5359" class="Symbol">(</a><a id="5360" class="Keyword">let</a> <a id="5364" class="Keyword">infixl</a> <a id="5371" class="Number">10</a> _⊠_<a id="5377" class="Symbol">;</a> <a id="5379" href="present.html#5379" class="Bound Operator">_⊠_</a> <a id="5383" class="Symbol">=</a> <a id="5385" href="present.html#5241" class="Bound Operator">_⊠_</a><a id="5388" class="Symbol">)</a> <a id="5390" class="Keyword">where</a>
+
+  <a id="5399" class="Keyword">open</a> <a id="5404" href="present.html#2476" class="Module">Array</a> <a id="5410" href="present.html#5226" class="Bound">A</a>
+  <a id="5414" class="Keyword">open</a> <a id="5419" href="present.html#2783" class="Module">ArOps</a> <a id="5425" href="present.html#5226" class="Bound">A</a>
+
+  <a id="5430" class="Keyword">variable</a>
+    <a id="5443" href="present.html#5443" class="Generalizable">s</a> <a id="5445" href="present.html#5445" class="Generalizable">p</a> <a id="5447" href="present.html#5447" class="Generalizable">q</a> <a id="5449" href="present.html#5449" class="Generalizable">r</a> <a id="5451" href="present.html#5451" class="Generalizable">u</a> <a id="5453" href="present.html#5453" class="Generalizable">v</a> <a id="5455" href="present.html#5455" class="Generalizable">w</a> <a id="5457" class="Symbol">:</a> <a id="5459" href="present.html#2507" class="Function">S</a>
+</pre>-->
+<pre class="Agda">  <a id="MMnaive.mm-canon"></a><a id="5475" href="present.html#5475" class="Function">mm-canon</a> <a id="5484" class="Symbol">:</a> <a id="5486" href="present.html#2674" class="Function">Ar</a> <a id="5489" class="Symbol">(</a><a id="5490" href="present.html#5443" class="Generalizable">s</a> <a id="5492" href="present.html#2563" class="Function Operator">⊗</a> <a id="5494" href="present.html#5445" class="Generalizable">p</a><a id="5495" class="Symbol">)</a> <a id="5497" href="present.html#5247" class="Bound">X</a> <a id="5499" class="Symbol">→</a> <a id="5501" href="present.html#2674" class="Function">Ar</a> <a id="5504" class="Symbol">(</a><a id="5505" href="present.html#5445" class="Generalizable">p</a> <a id="5507" href="present.html#2563" class="Function Operator">⊗</a> <a id="5509" href="present.html#5447" class="Generalizable">q</a><a id="5510" class="Symbol">)</a> <a id="5512" href="present.html#5251" class="Bound">Y</a> <a id="5514" class="Symbol">→</a> <a id="5516" href="present.html#2674" class="Function">Ar</a> <a id="5519" class="Symbol">(</a><a id="5520" href="present.html#5443" class="Generalizable">s</a> <a id="5522" href="present.html#2563" class="Function Operator">⊗</a> <a id="5524" href="present.html#5447" class="Generalizable">q</a><a id="5525" class="Symbol">)</a> <a id="5527" href="present.html#5255" class="Bound">Z</a>
+  <a id="5531" href="present.html#5475" class="Function">mm-canon</a> <a id="5540" href="present.html#5540" class="Bound">a</a> <a id="5542" href="present.html#5542" class="Bound">b</a> <a id="5544" class="Symbol">=</a> <a id="5546" href="present.html#2988" class="Function">imap</a> <a id="5551" class="Symbol">λ</a> <a id="5553" href="present.html#5553" class="Bound">ij</a> <a id="5556" class="Symbol">→</a>
+    <a id="5562" href="present.html#5288" class="Bound">sum</a> <a id="5566" href="present.html#5267" class="Bound Operator">_⊞_</a> <a id="5570" href="present.html#5259" class="Bound">ε</a> <a id="5572" class="Symbol">(</a><a id="5573" href="present.html#2988" class="Function">imap</a> <a id="5578" class="Symbol">λ</a> <a id="5580" href="present.html#5580" class="Bound">k</a> <a id="5582" class="Symbol">→</a> <a id="5584" href="present.html#5540" class="Bound">a</a> <a id="5586" href="present.html#3025" class="Function Operator">[</a> <a id="5588" href="present.html#2916" class="Function">fst</a> <a id="5592" href="present.html#5553" class="Bound">ij</a> <a id="5595" href="present.html#2875" class="Function Operator">⊛</a> <a id="5597" href="present.html#5580" class="Bound">k</a> <a id="5599" href="present.html#3025" class="Function Operator">]</a> <a id="5601" href="present.html#5379" class="Bound Operator">⊠</a> <a id="5603" href="present.html#5542" class="Bound">b</a> <a id="5605" href="present.html#3025" class="Function Operator">[</a> <a id="5607" href="present.html#5580" class="Bound">k</a> <a id="5609" href="present.html#2875" class="Function Operator">⊛</a> <a id="5611" href="present.html#2952" class="Function">snd</a> <a id="5615" href="present.html#5553" class="Bound">ij</a> <a id="5618" href="present.html#3025" class="Function Operator">]</a><a id="5619" class="Symbol">)</a>
+</pre>
+</div>
+<div class="fragment">
+<ol type="1">
+<li><code>mm-canon</code> is rank-polymorphic</li>
+<li><code>mm-canon</code> is generic in <span
+class="math inline">\(A\)</span></li>
+</ol>
+</div>
+</section></section>
+<section>
+<section id="initial-model" class="title-slide slide level1">
+<h1>Initial Model</h1>
+<pre class="Agda"><a id="5728" class="Keyword">module</a> <a id="I"></a><a id="5735" href="present.html#5735" class="Module">I</a> <a id="5737" class="Keyword">where</a>
+  <a id="5745" class="Keyword">data</a> <a id="I.S"></a><a id="5750" href="present.html#5750" class="Datatype">S</a> <a id="5752" class="Symbol">:</a> <a id="5754" href="Agda.Primitive.html#320" class="Primitive">Set</a> <a id="5758" class="Keyword">where</a>
+    <a id="I.S.ι"></a><a id="5768" href="present.html#5768" class="InductiveConstructor">ι</a>    <a id="5773" class="Symbol">:</a> <a id="5775" href="Agda.Builtin.Nat.html#186" class="Datatype">ℕ</a> <a id="5777" class="Symbol">→</a> <a id="5779" href="present.html#5750" class="Datatype">S</a>
+    <a id="I.S._⊗_"></a><a id="5785" href="present.html#5785" class="InductiveConstructor Operator">_⊗_</a>  <a id="5790" class="Symbol">:</a> <a id="5792" href="present.html#5750" class="Datatype">S</a> <a id="5794" class="Symbol">→</a> <a id="5796" href="present.html#5750" class="Datatype">S</a> <a id="5798" class="Symbol">→</a> <a id="5800" href="present.html#5750" class="Datatype">S</a>
+</pre>
+<!--
+<pre class="Agda">  <a id="5817" class="Keyword">infixl</a> <a id="5824" class="Number">5</a> <a id="5826" href="present.html#5785" class="InductiveConstructor Operator">_⊗_</a>
+  <a id="5832" class="Keyword">private</a> <a id="5840" class="Keyword">variable</a>
+    <a id="5853" href="present.html#5853" class="Generalizable">s</a> <a id="5855" href="present.html#5855" class="Generalizable">p</a> <a id="5857" class="Symbol">:</a> <a id="5859" href="present.html#5750" class="Datatype">S</a>
+</pre>-->
+<pre class="Agda">  <a id="5875" class="Keyword">data</a> <a id="I.P"></a><a id="5880" href="present.html#5880" class="Datatype">P</a> <a id="5882" class="Symbol">:</a> <a id="5884" href="present.html#5750" class="Datatype">S</a> <a id="5886" class="Symbol">→</a> <a id="5888" href="Agda.Primitive.html#320" class="Primitive">Set</a> <a id="5892" class="Keyword">where</a>
+    <a id="I.P.ι"></a><a id="5902" href="present.html#5902" class="InductiveConstructor">ι</a>    <a id="5907" class="Symbol">:</a> <a id="5909" href="Data.Fin.Base.html#1135" class="Datatype">Fin</a> <a id="5913" href="present.html#2365" class="Generalizable">n</a> <a id="5915" class="Symbol">→</a> <a id="5917" href="present.html#5880" class="Datatype">P</a> <a id="5919" class="Symbol">(</a><a id="5920" href="present.html#5768" class="InductiveConstructor">ι</a> <a id="5922" href="present.html#2365" class="Generalizable">n</a><a id="5923" class="Symbol">)</a>
+    <a id="I.P._⊗_"></a><a id="5929" href="present.html#5929" class="InductiveConstructor Operator">_⊗_</a>  <a id="5934" class="Symbol">:</a> <a id="5936" href="present.html#5880" class="Datatype">P</a> <a id="5938" href="present.html#5853" class="Generalizable">s</a> <a id="5940" class="Symbol">→</a> <a id="5942" href="present.html#5880" class="Datatype">P</a> <a id="5944" href="present.html#5855" class="Generalizable">p</a> <a id="5946" class="Symbol">→</a> <a id="5948" href="present.html#5880" class="Datatype">P</a> <a id="5950" class="Symbol">(</a><a id="5951" href="present.html#5853" class="Generalizable">s</a> <a id="5953" href="present.html#5785" class="InductiveConstructor Operator">⊗</a> <a id="5955" href="present.html#5855" class="Generalizable">p</a><a id="5956" class="Symbol">)</a>
+
+  <a id="I.Ar"></a><a id="5961" href="present.html#5961" class="Function">Ar</a> <a id="5964" class="Symbol">:</a> <a id="5966" href="present.html#5750" class="Datatype">S</a> <a id="5968" class="Symbol">→</a> <a id="5970" href="Agda.Primitive.html#320" class="Primitive">Set</a> <a id="5974" class="Symbol">→</a> <a id="5976" href="Agda.Primitive.html#320" class="Primitive">Set</a>
+  <a id="5982" href="present.html#5961" class="Function">Ar</a> <a id="5985" href="present.html#5985" class="Bound">s</a> <a id="5987" href="present.html#5987" class="Bound">X</a> <a id="5989" class="Symbol">=</a> <a id="5991" href="present.html#5880" class="Datatype">P</a> <a id="5993" href="present.html#5985" class="Bound">s</a> <a id="5995" class="Symbol">→</a> <a id="5997" href="present.html#5987" class="Bound">X</a>
+
+  <a id="I.A"></a><a id="6002" href="present.html#6002" class="Function">A</a> <a id="6004" class="Symbol">:</a> <a id="6006" href="present.html#2476" class="Record">Array</a>
+  <a id="6014" href="present.html#6002" class="Function">A</a> <a id="6016" class="Symbol">=</a> <a id="6018" class="Keyword">record</a> <a id="6025" class="Symbol">{</a> 
+        <a id="6036" href="present.html#2507" class="Field">S</a> <a id="6038" class="Symbol">=</a> <a id="6040" href="present.html#5750" class="Datatype">S</a><a id="6041" class="Symbol">;</a> <a id="6043" href="present.html#2522" class="Field">P</a> <a id="6045" class="Symbol">=</a> <a id="6047" href="present.html#5880" class="Datatype">P</a><a id="6048" class="Symbol">;</a> <a id="6050" href="present.html#2546" class="Field">ι</a> <a id="6052" class="Symbol">=</a> <a id="6054" href="present.html#5768" class="InductiveConstructor">ι</a><a id="6055" class="Symbol">;</a> <a id="6057" href="present.html#2563" class="Field Operator">_⊗_</a> <a id="6061" class="Symbol">=</a> <a id="6063" href="present.html#5785" class="InductiveConstructor Operator">_⊗_</a> <a id="6067" class="Symbol">;</a> <a id="6069" href="present.html#2674" class="Field">Ar</a> <a id="6072" class="Symbol">=</a> <a id="6074" href="present.html#5961" class="Function">Ar</a>
+        <a id="6085" class="Comment">-- the proofs are trivial</a>
+</pre>
+<!--
+<pre class="Agda">       <a id="6131" class="Symbol">;</a> <a id="6133" href="present.html#2589" class="Field">ι-↔</a> <a id="6137" class="Symbol">=</a> <a id="6139" href="Function.Bundles.html#10505" class="Function">mk↔</a> <a id="6143" class="Symbol">{</a><a id="6144" class="Argument">f</a> <a id="6146" class="Symbol">=</a> <a id="6148" class="Symbol">λ</a> <a id="6150" class="Symbol">{</a> <a id="6152" class="Symbol">(</a><a id="6153" href="present.html#5902" class="InductiveConstructor">ι</a> <a id="6155" href="present.html#6155" class="Bound">i</a><a id="6156" class="Symbol">)</a> <a id="6158" class="Symbol">→</a> <a id="6160" href="present.html#6155" class="Bound">i</a> <a id="6162" class="Symbol">}}{</a><a id="6165" href="present.html#5902" class="InductiveConstructor">ι</a><a id="6166" class="Symbol">}</a> <a id="6168" class="Symbol">((λ</a> <a id="6172" href="present.html#6172" class="Bound">x</a> <a id="6174" class="Symbol">→</a> <a id="6176" href="Agda.Builtin.Equality.html#190" class="InductiveConstructor">refl</a><a id="6180" class="Symbol">)</a> <a id="6182" href="Agda.Builtin.Sigma.html#218" class="InductiveConstructor Operator">,</a> <a id="6184" class="Symbol">λ</a> <a id="6186" class="Symbol">{</a> <a id="6188" class="Symbol">(</a><a id="6189" href="present.html#5902" class="InductiveConstructor">ι</a> <a id="6191" href="present.html#6191" class="Bound">i</a><a id="6192" class="Symbol">)</a> <a id="6194" class="Symbol">→</a> <a id="6196" href="Agda.Builtin.Equality.html#190" class="InductiveConstructor">refl</a> <a id="6201" class="Symbol">})</a>
+       <a id="6211" class="Symbol">;</a> <a id="6213" href="present.html#2624" class="Field">⊗-↔</a> <a id="6217" class="Symbol">=</a> <a id="6219" href="Function.Bundles.html#10505" class="Function">mk↔</a> <a id="6223" class="Symbol">{</a><a id="6224" class="Argument">f</a> <a id="6226" class="Symbol">=</a> <a id="6228" class="Symbol">λ</a> <a id="6230" class="Symbol">{</a> <a id="6232" class="Symbol">(</a><a id="6233" href="present.html#6233" class="Bound">i</a> <a id="6235" href="present.html#5929" class="InductiveConstructor Operator">⊗</a> <a id="6237" href="present.html#6237" class="Bound">j</a><a id="6238" class="Symbol">)</a> <a id="6240" class="Symbol">→</a> <a id="6242" href="present.html#6233" class="Bound">i</a> <a id="6244" href="Agda.Builtin.Sigma.html#218" class="InductiveConstructor Operator">,</a> <a id="6246" href="present.html#6237" class="Bound">j</a> <a id="6248" class="Symbol">}}{λ</a> <a id="6253" class="Symbol">{</a> <a id="6255" class="Symbol">(</a><a id="6256" href="present.html#6256" class="Bound">i</a> <a id="6258" href="Agda.Builtin.Sigma.html#218" class="InductiveConstructor Operator">,</a> <a id="6260" href="present.html#6260" class="Bound">j</a><a id="6261" class="Symbol">)</a> <a id="6263" class="Symbol">→</a> <a id="6265" href="present.html#6256" class="Bound">i</a> <a id="6267" href="present.html#5929" class="InductiveConstructor Operator">⊗</a> <a id="6269" href="present.html#6260" class="Bound">j</a> <a id="6271" class="Symbol">}}</a>
+                      <a id="6296" class="Symbol">((λ</a> <a id="6300" class="Symbol">{</a> <a id="6302" class="Symbol">(</a><a id="6303" href="present.html#6303" class="Bound">i</a> <a id="6305" href="Agda.Builtin.Sigma.html#218" class="InductiveConstructor Operator">,</a> <a id="6307" href="present.html#6307" class="Bound">j</a><a id="6308" class="Symbol">)</a> <a id="6310" class="Symbol">→</a> <a id="6312" href="Agda.Builtin.Equality.html#190" class="InductiveConstructor">refl</a> <a id="6317" class="Symbol">})</a> <a id="6320" href="Agda.Builtin.Sigma.html#218" class="InductiveConstructor Operator">,</a> <a id="6322" class="Symbol">λ</a> <a id="6324" class="Symbol">{</a> <a id="6326" class="Symbol">(</a><a id="6327" href="present.html#6327" class="Bound">i</a> <a id="6329" href="present.html#5929" class="InductiveConstructor Operator">⊗</a> <a id="6331" href="present.html#6331" class="Bound">j</a><a id="6332" class="Symbol">)</a> <a id="6334" class="Symbol">→</a> <a id="6336" href="Agda.Builtin.Equality.html#190" class="InductiveConstructor">refl</a> <a id="6341" class="Symbol">})</a>
+       <a id="6351" class="Symbol">;</a> <a id="6353" href="present.html#2699" class="Field">Ar-↔</a> <a id="6358" class="Symbol">=</a> <a id="6360" href="Function.Bundles.html#10505" class="Function">mk↔</a> <a id="6364" class="Symbol">{</a><a id="6365" class="Argument">f</a> <a id="6367" class="Symbol">=</a> <a id="6369" href="Function.Base.html#624" class="Function">id</a><a id="6371" class="Symbol">}{</a><a id="6373" href="Function.Base.html#624" class="Function">id</a><a id="6375" class="Symbol">}</a> <a id="6377" class="Symbol">((λ</a> <a id="6381" href="present.html#6381" class="Bound">x</a> <a id="6383" class="Symbol">→</a> <a id="6385" href="Agda.Builtin.Equality.html#190" class="InductiveConstructor">refl</a><a id="6389" class="Symbol">)</a> <a id="6391" href="Agda.Builtin.Sigma.html#218" class="InductiveConstructor Operator">,</a> <a id="6393" class="Symbol">λ</a> <a id="6395" href="present.html#6395" class="Bound">x</a> <a id="6397" class="Symbol">→</a> <a id="6399" href="Agda.Builtin.Equality.html#190" class="InductiveConstructor">refl</a><a id="6403" class="Symbol">)</a>
+      <a id="6411" class="Symbol">}</a>
+</pre>-->
+</section>
+<section id="blocking-1" class="slide level2">
+<h2>Blocking (1)</h2>
+<pre class="Agda"><a id="6443" class="Keyword">module</a> <a id="Blocking"></a><a id="6450" href="present.html#6450" class="Module">Blocking</a> <a id="6459" class="Symbol">(</a><a id="6460" href="present.html#6460" class="Bound">A</a> <a id="6462" class="Symbol">:</a> <a id="6464" href="present.html#2476" class="Record">Array</a><a id="6469" class="Symbol">)</a> <a id="6471" class="Keyword">where</a>
+</pre>
+<div style="font-size: 0.8em;">
+<p><span class="math display">\[
+\begin{pmatrix}
+a &amp; a &amp; a &amp; a &amp; a &amp; a \\
+b &amp; b &amp; b &amp; b &amp; b &amp; b \\
+c &amp; c &amp; c &amp; c &amp; c &amp; c \\
+d &amp; d &amp; d &amp; d &amp; d &amp; d
+\end{pmatrix}
+\Rightarrow
+\left(
+\begin{array}{c c c | c c c}
+a &amp; a &amp; a &amp; a &amp; a &amp; a \\
+b &amp; b &amp; b &amp; b &amp; b &amp; b \\
+\hline
+c &amp; c &amp; c &amp; c &amp; c &amp; c \\
+d &amp; d &amp; d &amp; d &amp; d &amp; d
+\end{array}
+\right)
+\]</span></p>
+</div>
+<!--
+<pre class="Agda">  <a id="6837" class="Keyword">open</a> <a id="6842" href="present.html#2476" class="Module">Array</a> <a id="6848" href="present.html#6460" class="Bound">A</a>
+  <a id="6852" class="Keyword">open</a> <a id="6857" href="present.html#2783" class="Module">ArOps</a> <a id="6863" href="present.html#6460" class="Bound">A</a>
+
+  <a id="6868" class="Keyword">private</a> <a id="6876" class="Keyword">variable</a>
+    <a id="6889" href="present.html#6889" class="Generalizable">s</a> <a id="6891" href="present.html#6891" class="Generalizable">p</a> <a id="6893" href="present.html#6893" class="Generalizable">q</a> <a id="6895" href="present.html#6895" class="Generalizable">r</a> <a id="6897" class="Symbol">:</a> <a id="6899" href="present.html#2507" class="Field">S</a>
+</pre>-->
+<pre class="Agda">  <a id="Blocking.block"></a><a id="6915" href="present.html#6915" class="Function">block</a>   <a id="6923" class="Symbol">:</a> <a id="6925" href="present.html#2674" class="Field">Ar</a> <a id="6928" class="Symbol">((</a><a id="6930" href="present.html#6889" class="Generalizable">s</a> <a id="6932" href="present.html#2563" class="Field Operator">⊗</a> <a id="6934" href="present.html#6891" class="Generalizable">p</a><a id="6935" class="Symbol">)</a> <a id="6937" href="present.html#2563" class="Field Operator">⊗</a> <a id="6939" class="Symbol">(</a><a id="6940" href="present.html#6893" class="Generalizable">q</a> <a id="6942" href="present.html#2563" class="Field Operator">⊗</a> <a id="6944" href="present.html#6895" class="Generalizable">r</a><a id="6945" class="Symbol">))</a> <a id="6948" href="present.html#2373" class="Generalizable">X</a> 
+          <a id="6961" class="Symbol">→</a> <a id="6963" href="present.html#2674" class="Field">Ar</a> <a id="6966" class="Symbol">((</a><a id="6968" href="present.html#6889" class="Generalizable">s</a> <a id="6970" href="present.html#2563" class="Field Operator">⊗</a> <a id="6972" href="present.html#6893" class="Generalizable">q</a><a id="6973" class="Symbol">)</a> <a id="6975" href="present.html#2563" class="Field Operator">⊗</a> <a id="6977" class="Symbol">(</a><a id="6978" href="present.html#6891" class="Generalizable">p</a> <a id="6980" href="present.html#2563" class="Field Operator">⊗</a> <a id="6982" href="present.html#6895" class="Generalizable">r</a><a id="6983" class="Symbol">))</a> <a id="6986" href="present.html#2373" class="Generalizable">X</a>
+
+  <a id="Blocking.unblock"></a><a id="6991" href="present.html#6991" class="Function">unblock</a> <a id="6999" class="Symbol">:</a> <a id="7001" href="present.html#2674" class="Field">Ar</a> <a id="7004" class="Symbol">((</a><a id="7006" href="present.html#6889" class="Generalizable">s</a> <a id="7008" href="present.html#2563" class="Field Operator">⊗</a> <a id="7010" href="present.html#6893" class="Generalizable">q</a><a id="7011" class="Symbol">)</a> <a id="7013" href="present.html#2563" class="Field Operator">⊗</a> <a id="7015" class="Symbol">(</a><a id="7016" href="present.html#6891" class="Generalizable">p</a> <a id="7018" href="present.html#2563" class="Field Operator">⊗</a> <a id="7020" href="present.html#6895" class="Generalizable">r</a><a id="7021" class="Symbol">))</a> <a id="7024" href="present.html#2373" class="Generalizable">X</a>
+          <a id="7036" class="Symbol">→</a> <a id="7038" href="present.html#2674" class="Field">Ar</a> <a id="7041" class="Symbol">((</a><a id="7043" href="present.html#6889" class="Generalizable">s</a> <a id="7045" href="present.html#2563" class="Field Operator">⊗</a> <a id="7047" href="present.html#6891" class="Generalizable">p</a><a id="7048" class="Symbol">)</a> <a id="7050" href="present.html#2563" class="Field Operator">⊗</a> <a id="7052" class="Symbol">(</a><a id="7053" href="present.html#6893" class="Generalizable">q</a> <a id="7055" href="present.html#2563" class="Field Operator">⊗</a> <a id="7057" href="present.html#6895" class="Generalizable">r</a><a id="7058" class="Symbol">))</a> <a id="7061" href="present.html#2373" class="Generalizable">X</a>
+  <a id="7065" href="present.html#6991" class="Function">unblock</a> <a id="7073" class="Symbol">=</a> <a id="7075" href="present.html#6915" class="Function">block</a>
+</pre>
+<!--
+<pre class="Agda">  <a id="7096" href="present.html#6915" class="Function">block</a> <a id="7102" href="present.html#7102" class="Bound">a</a> <a id="7104" class="Symbol">=</a> <a id="7106" href="present.html#2988" class="Function">imap</a> <a id="7111" class="Symbol">λ</a> <a id="7113" href="present.html#7113" class="Bound">ijkl</a> <a id="7118" class="Symbol">→</a> <a id="7120" href="present.html#7102" class="Bound">a</a> <a id="7122" href="present.html#3025" class="Function Operator">[</a> <a id="7124" class="Symbol">(</a><a id="7125" href="present.html#2916" class="Function">fst</a> <a id="7129" class="Symbol">(</a><a id="7130" href="present.html#2916" class="Function">fst</a> <a id="7134" href="present.html#7113" class="Bound">ijkl</a><a id="7138" class="Symbol">)</a> <a id="7140" href="present.html#2875" class="Function Operator">⊛</a> <a id="7142" href="present.html#2916" class="Function">fst</a> <a id="7146" class="Symbol">(</a><a id="7147" href="present.html#2952" class="Function">snd</a> <a id="7151" href="present.html#7113" class="Bound">ijkl</a><a id="7155" class="Symbol">))</a> 
+                              <a id="7189" href="present.html#2875" class="Function Operator">⊛</a> <a id="7191" class="Symbol">(</a><a id="7192" href="present.html#2952" class="Function">snd</a> <a id="7196" class="Symbol">(</a><a id="7197" href="present.html#2916" class="Function">fst</a> <a id="7201" href="present.html#7113" class="Bound">ijkl</a><a id="7205" class="Symbol">)</a> <a id="7207" href="present.html#2875" class="Function Operator">⊛</a> <a id="7209" href="present.html#2952" class="Function">snd</a> <a id="7213" class="Symbol">(</a><a id="7214" href="present.html#2952" class="Function">snd</a> <a id="7218" href="present.html#7113" class="Bound">ijkl</a><a id="7222" class="Symbol">))</a> <a id="7225" href="present.html#3025" class="Function Operator">]</a>
+</pre>-->
+</section>
+<section id="blocking-2" class="slide level2">
+<h2>Blocking (2)</h2>
+<div style="font-size: 0.8em;">
+<p><span class="math display">\[
+\begin{pmatrix}
+a &amp; a &amp; a &amp; a &amp; a &amp; a \\
+b &amp; b &amp; b &amp; b &amp; b &amp; b \\
+c &amp; c &amp; c &amp; c &amp; c &amp; c \\
+d &amp; d &amp; d &amp; d &amp; d &amp; d
+\end{pmatrix}
+\Rightarrow
+\left(
+\begin{array}{c c | c c | c c}
+a &amp; a &amp; a &amp; a &amp; a &amp; a \\
+b &amp; b &amp; b &amp; b &amp; b &amp; b \\
+c &amp; c &amp; c &amp; c &amp; c &amp; c \\
+d &amp; d &amp; d &amp; d &amp; d &amp; d
+\end{array}
+\right)
+\]</span></p>
+</div>
+<pre class="Agda">  <a id="Blocking.blockᵥ"></a><a id="7599" href="present.html#7599" class="Function">blockᵥ</a> <a id="7606" class="Symbol">:</a> <a id="7608" href="present.html#2674" class="Field">Ar</a> <a id="7611" class="Symbol">(</a><a id="7612" href="present.html#6889" class="Generalizable">s</a> <a id="7614" href="present.html#2563" class="Field Operator">⊗</a> <a id="7616" class="Symbol">(</a><a id="7617" href="present.html#6891" class="Generalizable">p</a> <a id="7619" href="present.html#2563" class="Field Operator">⊗</a> <a id="7621" href="present.html#6893" class="Generalizable">q</a><a id="7622" class="Symbol">))</a> <a id="7625" href="present.html#2373" class="Generalizable">X</a> <a id="7627" class="Symbol">→</a> <a id="7629" href="present.html#2674" class="Field">Ar</a> <a id="7632" class="Symbol">(</a><a id="7633" href="present.html#6891" class="Generalizable">p</a> <a id="7635" href="present.html#2563" class="Field Operator">⊗</a> <a id="7637" class="Symbol">(</a><a id="7638" href="present.html#6889" class="Generalizable">s</a> <a id="7640" href="present.html#2563" class="Field Operator">⊗</a> <a id="7642" href="present.html#6893" class="Generalizable">q</a><a id="7643" class="Symbol">))</a> <a id="7646" href="present.html#2373" class="Generalizable">X</a>
+  <a id="Blocking.unblockᵥ"></a><a id="7650" href="present.html#7650" class="Function">unblockᵥ</a> <a id="7659" class="Symbol">:</a> <a id="7661" href="present.html#2674" class="Field">Ar</a> <a id="7664" class="Symbol">(</a><a id="7665" href="present.html#6891" class="Generalizable">p</a> <a id="7667" href="present.html#2563" class="Field Operator">⊗</a> <a id="7669" class="Symbol">(</a><a id="7670" href="present.html#6889" class="Generalizable">s</a> <a id="7672" href="present.html#2563" class="Field Operator">⊗</a> <a id="7674" href="present.html#6893" class="Generalizable">q</a><a id="7675" class="Symbol">))</a> <a id="7678" href="present.html#2373" class="Generalizable">X</a> <a id="7680" class="Symbol">→</a> <a id="7682" href="present.html#2674" class="Field">Ar</a> <a id="7685" class="Symbol">(</a><a id="7686" href="present.html#6889" class="Generalizable">s</a> <a id="7688" href="present.html#2563" class="Field Operator">⊗</a> <a id="7690" class="Symbol">(</a><a id="7691" href="present.html#6891" class="Generalizable">p</a> <a id="7693" href="present.html#2563" class="Field Operator">⊗</a> <a id="7695" href="present.html#6893" class="Generalizable">q</a><a id="7696" class="Symbol">))</a> <a id="7699" href="present.html#2373" class="Generalizable">X</a>
+  <a id="7703" href="present.html#7650" class="Function">unblockᵥ</a> <a id="7712" class="Symbol">=</a> <a id="7714" href="present.html#7599" class="Function">blockᵥ</a>
+</pre>
+<!--
+<pre class="Agda">  <a id="7736" href="present.html#7599" class="Function">blockᵥ</a> <a id="7743" href="present.html#7743" class="Bound">a</a> <a id="7745" class="Symbol">=</a> <a id="7747" href="present.html#2988" class="Function">imap</a> <a id="7752" class="Symbol">λ</a> <a id="7754" href="present.html#7754" class="Bound">ijk</a> <a id="7758" class="Symbol">→</a> <a id="7760" href="present.html#7743" class="Bound">a</a> <a id="7762" href="present.html#3025" class="Function Operator">[</a> <a id="7764" href="present.html#2916" class="Function">fst</a> <a id="7768" class="Symbol">(</a><a id="7769" href="present.html#2952" class="Function">snd</a> <a id="7773" href="present.html#7754" class="Bound">ijk</a><a id="7776" class="Symbol">)</a> 
+                              <a id="7809" href="present.html#2875" class="Function Operator">⊛</a> <a id="7811" class="Symbol">(</a><a id="7812" href="present.html#2916" class="Function">fst</a> <a id="7816" href="present.html#7754" class="Bound">ijk</a> <a id="7820" href="present.html#2875" class="Function Operator">⊛</a> <a id="7822" href="present.html#2952" class="Function">snd</a> <a id="7826" class="Symbol">(</a><a id="7827" href="present.html#2952" class="Function">snd</a> <a id="7831" href="present.html#7754" class="Bound">ijk</a><a id="7834" class="Symbol">))</a> <a id="7837" href="present.html#3025" class="Function Operator">]</a>
+</pre>-->
+</section>
+<section id="blocking-3" class="slide level2">
+<h2>Blocking (3)</h2>
+<div style="font-size: 0.8em;">
+<p><span class="math display">\[
+\begin{pmatrix}
+a &amp; a &amp; a &amp; a &amp; a &amp; a \\
+b &amp; b &amp; b &amp; b &amp; b &amp; b \\
+c &amp; c &amp; c &amp; c &amp; c &amp; c \\
+d &amp; d &amp; d &amp; d &amp; d &amp; d
+\end{pmatrix}
+\Rightarrow
+\left(
+\begin{array}{c c c c c c}
+a &amp; a &amp; a &amp; a &amp; a &amp; a \\
+b &amp; b &amp; b &amp; b &amp; b &amp; b \\
+\hline
+c &amp; c &amp; c &amp; c &amp; c &amp; c \\
+d &amp; d &amp; d &amp; d &amp; d &amp; d
+\end{array}
+\right)
+\]</span></p>
+</div>
+<pre class="Agda">  <a id="Blocking.blockₕ"></a><a id="8214" href="present.html#8214" class="Function">blockₕ</a>   <a id="8223" class="Symbol">:</a> <a id="8225" href="present.html#2674" class="Field">Ar</a> <a id="8228" class="Symbol">((</a><a id="8230" href="present.html#6889" class="Generalizable">s</a> <a id="8232" href="present.html#2563" class="Field Operator">⊗</a> <a id="8234" href="present.html#6891" class="Generalizable">p</a><a id="8235" class="Symbol">)</a> <a id="8237" href="present.html#2563" class="Field Operator">⊗</a> <a id="8239" href="present.html#6893" class="Generalizable">q</a><a id="8240" class="Symbol">)</a> <a id="8242" href="present.html#2373" class="Generalizable">X</a> <a id="8244" class="Symbol">→</a> <a id="8246" href="present.html#2674" class="Field">Ar</a> <a id="8249" class="Symbol">(</a><a id="8250" href="present.html#6889" class="Generalizable">s</a> <a id="8252" href="present.html#2563" class="Field Operator">⊗</a> <a id="8254" class="Symbol">(</a><a id="8255" href="present.html#6891" class="Generalizable">p</a> <a id="8257" href="present.html#2563" class="Field Operator">⊗</a> <a id="8259" href="present.html#6893" class="Generalizable">q</a><a id="8260" class="Symbol">))</a> <a id="8263" href="present.html#2373" class="Generalizable">X</a>
+  <a id="Blocking.unblockₕ"></a><a id="8267" href="present.html#8267" class="Function">unblockₕ</a> <a id="8276" class="Symbol">:</a> <a id="8278" href="present.html#2674" class="Field">Ar</a> <a id="8281" class="Symbol">(</a><a id="8282" href="present.html#6889" class="Generalizable">s</a> <a id="8284" href="present.html#2563" class="Field Operator">⊗</a> <a id="8286" class="Symbol">(</a><a id="8287" href="present.html#6891" class="Generalizable">p</a> <a id="8289" href="present.html#2563" class="Field Operator">⊗</a> <a id="8291" href="present.html#6893" class="Generalizable">q</a><a id="8292" class="Symbol">))</a> <a id="8295" href="present.html#2373" class="Generalizable">X</a> <a id="8297" class="Symbol">→</a> <a id="8299" href="present.html#2674" class="Field">Ar</a> <a id="8302" class="Symbol">((</a><a id="8304" href="present.html#6889" class="Generalizable">s</a> <a id="8306" href="present.html#2563" class="Field Operator">⊗</a> <a id="8308" href="present.html#6891" class="Generalizable">p</a><a id="8309" class="Symbol">)</a> <a id="8311" href="present.html#2563" class="Field Operator">⊗</a> <a id="8313" href="present.html#6893" class="Generalizable">q</a><a id="8314" class="Symbol">)</a> <a id="8316" href="present.html#2373" class="Generalizable">X</a>
+</pre>
+<!--
+<pre class="Agda">  <a id="8333" href="present.html#8214" class="Function">blockₕ</a> <a id="8340" href="present.html#8340" class="Bound">a</a> <a id="8342" class="Symbol">=</a> <a id="8344" href="present.html#2988" class="Function">imap</a> <a id="8349" class="Symbol">λ</a> <a id="8351" href="present.html#8351" class="Bound">ijk</a> <a id="8355" class="Symbol">→</a> <a id="8357" href="present.html#8340" class="Bound">a</a> <a id="8359" href="present.html#3025" class="Function Operator">[</a> <a id="8361" class="Symbol">(</a><a id="8362" href="present.html#2916" class="Function">fst</a> <a id="8366" href="present.html#8351" class="Bound">ijk</a> <a id="8370" href="present.html#2875" class="Function Operator">⊛</a> <a id="8372" href="present.html#2916" class="Function">fst</a> <a id="8376" class="Symbol">(</a><a id="8377" href="present.html#2952" class="Function">snd</a> <a id="8381" href="present.html#8351" class="Bound">ijk</a><a id="8384" class="Symbol">))</a>
+                              <a id="8417" href="present.html#2875" class="Function Operator">⊛</a> <a id="8419" href="present.html#2952" class="Function">snd</a> <a id="8423" class="Symbol">(</a><a id="8424" href="present.html#2952" class="Function">snd</a> <a id="8428" href="present.html#8351" class="Bound">ijk</a><a id="8431" class="Symbol">)</a> <a id="8433" href="present.html#3025" class="Function Operator">]</a>
+  <a id="8437" class="Comment">--(i ⊗ (j ⊗ k)) = a [ (i ⊗ j) ⊗ k ]</a>
+  <a id="8475" href="present.html#8267" class="Function">unblockₕ</a> <a id="8484" href="present.html#8484" class="Bound">a</a> <a id="8486" class="Symbol">=</a> <a id="8488" href="present.html#2988" class="Function">imap</a> <a id="8493" class="Symbol">λ</a> <a id="8495" href="present.html#8495" class="Bound">ijk</a> <a id="8499" class="Symbol">→</a> <a id="8501" href="present.html#8484" class="Bound">a</a> <a id="8503" href="present.html#3025" class="Function Operator">[</a> <a id="8505" href="present.html#2916" class="Function">fst</a> <a id="8509" class="Symbol">(</a><a id="8510" href="present.html#2916" class="Function">fst</a> <a id="8514" href="present.html#8495" class="Bound">ijk</a><a id="8517" class="Symbol">)</a>
+                                <a id="8551" href="present.html#2875" class="Function Operator">⊛</a> <a id="8553" class="Symbol">(</a><a id="8554" href="present.html#2952" class="Function">snd</a> <a id="8558" class="Symbol">(</a><a id="8559" href="present.html#2916" class="Function">fst</a> <a id="8563" href="present.html#8495" class="Bound">ijk</a><a id="8566" class="Symbol">)</a> <a id="8568" href="present.html#2875" class="Function Operator">⊛</a> <a id="8570" href="present.html#2952" class="Function">snd</a> <a id="8574" href="present.html#8495" class="Bound">ijk</a><a id="8577" class="Symbol">)</a> <a id="8579" href="present.html#3025" class="Function Operator">]</a>
+  <a id="8583" class="Comment">--((i ⊗ j) ⊗ k) = a [ i ⊗ (j ⊗ k) ]</a>
+</pre>-->
+</section>
+<section id="blocked-mm" class="slide level2">
+<h2>Blocked mm</h2>
+<div style="font-size: 0.9em;">
+<!--
+<pre class="Agda"><a id="8684" class="Keyword">module</a> <a id="Blocked"></a><a id="8691" href="present.html#8691" class="Module">Blocked</a>
+   <a id="8702" class="Symbol">(</a><a id="8703" href="present.html#8703" class="Bound Operator">_⊠_</a> <a id="8707" class="Symbol">:</a> <a id="8709" href="present.html#2373" class="Generalizable">X</a> <a id="8711" class="Symbol">→</a> <a id="8713" href="present.html#2375" class="Generalizable">Y</a> <a id="8715" class="Symbol">→</a> <a id="8717" href="present.html#2377" class="Generalizable">Z</a><a id="8718" class="Symbol">)</a> <a id="8720" class="Symbol">(</a><a id="8721" href="present.html#8721" class="Bound">ε</a> <a id="8723" class="Symbol">:</a> <a id="8725" href="present.html#2377" class="Generalizable">Z</a><a id="8726" class="Symbol">)</a> <a id="8728" class="Symbol">(</a><a id="8729" href="present.html#8729" class="Bound Operator">_⊞_</a> <a id="8733" class="Symbol">:</a> <a id="8735" href="present.html#2377" class="Generalizable">Z</a> <a id="8737" class="Symbol">→</a> <a id="8739" href="present.html#2377" class="Generalizable">Z</a> <a id="8741" class="Symbol">→</a> <a id="8743" href="present.html#2377" class="Generalizable">Z</a><a id="8744" class="Symbol">)</a>
+   <a id="8749" class="Symbol">(</a><a id="8750" href="present.html#8750" class="Bound">sum</a> <a id="8754" class="Symbol">:</a> <a id="8756" class="Symbol">∀</a> <a id="8758" class="Symbol">{</a><a id="8759" href="present.html#8759" class="Bound">X</a> <a id="8761" href="present.html#8761" class="Bound">s</a><a id="8762" class="Symbol">}</a> <a id="8764" class="Symbol">→</a> <a id="8766" class="Symbol">(</a><a id="8767" href="present.html#8759" class="Bound">X</a> <a id="8769" class="Symbol">→</a> <a id="8771" href="present.html#8759" class="Bound">X</a> <a id="8773" class="Symbol">→</a> <a id="8775" href="present.html#8759" class="Bound">X</a><a id="8776" class="Symbol">)</a> <a id="8778" class="Symbol">→</a> <a id="8780" href="present.html#8759" class="Bound">X</a> <a id="8782" class="Symbol">→</a> <a id="8784" href="present.html#2674" class="Field">Array.Ar</a> <a id="8793" href="present.html#6002" class="Function">I.A</a> <a id="8797" href="present.html#8761" class="Bound">s</a> <a id="8799" href="present.html#8759" class="Bound">X</a> <a id="8801" class="Symbol">→</a> <a id="8803" href="present.html#8759" class="Bound">X</a><a id="8804" class="Symbol">)</a>
+   <a id="8809" class="Symbol">(</a><a id="8810" class="Keyword">let</a> <a id="8814" class="Keyword">infixl</a> <a id="8821" class="Number">10</a> _⊠_<a id="8827" class="Symbol">;</a> <a id="8829" href="present.html#8829" class="Bound Operator">_⊠_</a> <a id="8833" class="Symbol">=</a> <a id="8835" href="present.html#8703" class="Bound Operator">_⊠_</a><a id="8838" class="Symbol">)</a>
+   <a id="8843" class="Symbol">(</a><a id="8844" class="Keyword">let</a> <a id="8848" class="Keyword">infixl</a> <a id="8855" class="Number">5</a> _⊞_<a id="8860" class="Symbol">;</a> <a id="8862" href="present.html#8862" class="Bound Operator">_⊞_</a> <a id="8866" class="Symbol">=</a> <a id="8868" href="present.html#8729" class="Bound Operator">_⊞_</a><a id="8871" class="Symbol">)</a> <a id="8873" class="Keyword">where</a>
+
+  <a id="8882" class="Keyword">open</a> <a id="8887" href="present.html#5735" class="Module">I</a><a id="8888" class="Symbol">;</a> <a id="8890" class="Keyword">open</a> <a id="8895" href="present.html#2783" class="Module">ArOps</a> <a id="8901" href="present.html#6002" class="Function">I.A</a>
+  <a id="8907" class="Keyword">open</a> <a id="8912" href="present.html#5217" class="Module">MMnaive</a> <a id="8920" href="present.html#6002" class="Function">I.A</a> <a id="8924" href="present.html#8829" class="Bound Operator">_⊠_</a> <a id="8928" href="present.html#8721" class="Bound">ε</a> <a id="8930" href="present.html#8862" class="Bound Operator">_⊞_</a> <a id="8934" href="present.html#8750" class="Bound">sum</a>
+  <a id="8940" class="Keyword">open</a> <a id="8945" href="present.html#6450" class="Module">Blocking</a> <a id="8954" href="present.html#6002" class="Function">I.A</a>
+
+  <a id="Blocked.ni"></a><a id="8961" href="present.html#8961" class="Function">ni</a> <a id="8964" class="Symbol">:</a> <a id="8966" class="Symbol">(</a><a id="8967" href="present.html#8967" class="Bound">A</a> <a id="8969" class="Symbol">:</a> <a id="8971" href="Agda.Primitive.html#320" class="Primitive">Set</a><a id="8974" class="Symbol">)</a> <a id="8976" class="Symbol">→</a> <a id="8978" href="present.html#8967" class="Bound">A</a> <a id="8980" class="Symbol">→</a> <a id="8982" href="present.html#8967" class="Bound">A</a>
+  <a id="8986" href="present.html#8961" class="Function">ni</a> <a id="8989" href="present.html#8989" class="Bound">A</a> <a id="8991" href="present.html#8991" class="Bound">a</a> <a id="8993" class="Symbol">=</a> <a id="8995" href="present.html#8991" class="Bound">a</a>
+
+  <a id="9000" class="Keyword">infix</a> <a id="9006" class="Number">-2</a> <a id="9009" href="present.html#8961" class="Function">ni</a>
+  <a id="9014" class="Keyword">syntax</a> <a id="9021" href="present.html#8961" class="Function">ni</a> <a id="9024" class="Bound">A</a> <a id="9026" class="Bound">e</a> <a id="9028" class="Symbol">=</a> <a id="9030" class="Bound">e</a> <a id="9032" class="Function">∶</a> <a id="9034" class="Bound">A</a>
+</pre>-->
+<pre class="Agda">  <a id="Blocked.mm"></a><a id="9050" href="present.html#9050" class="Function">mm</a> <a id="9053" class="Symbol">:</a> <a id="9055" href="present.html#5961" class="Function">Ar</a> <a id="9058" class="Symbol">(</a><a id="9059" href="present.html#5443" class="Generalizable">s</a> <a id="9061" href="present.html#5785" class="InductiveConstructor Operator">⊗</a> <a id="9063" href="present.html#5445" class="Generalizable">p</a><a id="9064" class="Symbol">)</a> <a id="9066" href="present.html#8709" class="Bound">X</a> <a id="9068" class="Symbol">→</a> <a id="9070" href="present.html#5961" class="Function">Ar</a> <a id="9073" class="Symbol">(</a><a id="9074" href="present.html#5445" class="Generalizable">p</a> <a id="9076" href="present.html#5785" class="InductiveConstructor Operator">⊗</a> <a id="9078" href="present.html#5447" class="Generalizable">q</a><a id="9079" class="Symbol">)</a> <a id="9081" href="present.html#8713" class="Bound">Y</a> <a id="9083" class="Symbol">→</a> <a id="9085" href="present.html#5961" class="Function">Ar</a> <a id="9088" class="Symbol">(</a><a id="9089" href="present.html#5443" class="Generalizable">s</a> <a id="9091" href="present.html#5785" class="InductiveConstructor Operator">⊗</a> <a id="9093" href="present.html#5447" class="Generalizable">q</a><a id="9094" class="Symbol">)</a> <a id="9096" href="present.html#8717" class="Bound">Z</a>
+
+  <a id="9101" href="present.html#9050" class="Function">mm</a> <a id="9104" class="Symbol">{</a><a id="9105" class="Argument">s</a> <a id="9107" class="Symbol">=</a> <a id="9109" href="present.html#5768" class="InductiveConstructor">ι</a> <a id="9111" href="present.html#9111" class="Bound">m</a><a id="9112" class="Symbol">}</a> <a id="9114" class="Symbol">{</a><a id="9115" href="present.html#5768" class="InductiveConstructor">ι</a> <a id="9117" href="present.html#9117" class="Bound">n</a><a id="9118" class="Symbol">}</a> <a id="9120" class="Symbol">{</a><a id="9121" href="present.html#5768" class="InductiveConstructor">ι</a> <a id="9123" href="present.html#9123" class="Bound">k</a><a id="9124" class="Symbol">}</a> <a id="9126" class="Symbol">=</a> <a id="9128" href="present.html#5475" class="Function">mm-canon</a>
+
+  <a id="9140" href="present.html#9050" class="Function">mm</a> <a id="9143" class="Symbol">{</a><a id="9144" class="Argument">s</a> <a id="9146" class="Symbol">=</a> <a id="9148" href="present.html#5768" class="InductiveConstructor">ι</a> <a id="9150" href="present.html#9150" class="Bound">m</a><a id="9151" class="Symbol">}</a> <a id="9153" class="Symbol">{</a><a id="9154" href="present.html#5768" class="InductiveConstructor">ι</a> <a id="9156" href="present.html#9156" class="Bound">n</a><a id="9157" class="Symbol">}</a> <a id="9159" class="Symbol">{</a><a id="9160" href="present.html#9160" class="Bound">p</a> <a id="9162" href="present.html#5785" class="InductiveConstructor Operator">⊗</a> <a id="9164" href="present.html#9164" class="Bound">q</a><a id="9165" class="Symbol">}</a> <a id="9167" href="present.html#9167" class="Bound">a</a> <a id="9169" href="present.html#9169" class="Bound">b</a> <a id="9171" class="Symbol">=</a>
+    <a id="9177" class="Keyword">let</a> <a id="9181" href="present.html#9181" class="Bound">b′</a> <a id="9184" class="Symbol">=</a> <a id="9186" href="present.html#3063" class="Function">nest</a> <a id="9191" href="Function.Base.html#1928" class="Function Operator">$</a> <a id="9193" href="present.html#7599" class="Function">blockᵥ</a> <a id="9200" href="present.html#9169" class="Bound">b</a>  <a id="9203" href="present.html#8961" class="Function">∶</a> <a id="9205" href="present.html#5961" class="Function">Ar</a> <a id="9208" href="present.html#9160" class="Bound">p</a> <a id="9210" class="Symbol">(</a><a id="9211" href="present.html#5961" class="Function">Ar</a> <a id="9214" class="Symbol">(</a><a id="9215" href="present.html#5768" class="InductiveConstructor">ι</a> <a id="9217" href="present.html#9156" class="Bound">n</a> <a id="9219" href="present.html#5785" class="InductiveConstructor Operator">⊗</a> <a id="9221" href="present.html#9164" class="Bound">q</a><a id="9222" class="Symbol">)</a> <a id="9224" href="present.html#8713" class="Bound">Y</a><a id="9225" class="Symbol">)</a>
+        <a id="9235" href="present.html#9235" class="Bound">c′</a> <a id="9238" class="Symbol">=</a> <a id="9240" href="present.html#3773" class="Function">map</a> <a id="9244" class="Symbol">(</a><a id="9245" href="present.html#9050" class="Function">mm</a> <a id="9248" href="present.html#9167" class="Bound">a</a><a id="9249" class="Symbol">)</a> <a id="9251" href="present.html#9181" class="Bound">b′</a>    <a id="9257" href="present.html#8961" class="Function">∶</a> <a id="9259" href="present.html#5961" class="Function">Ar</a> <a id="9262" href="present.html#9160" class="Bound">p</a> <a id="9264" class="Symbol">(</a><a id="9265" href="present.html#5961" class="Function">Ar</a> <a id="9268" class="Symbol">(</a><a id="9269" href="present.html#5768" class="InductiveConstructor">ι</a> <a id="9271" href="present.html#9150" class="Bound">m</a> <a id="9273" href="present.html#5785" class="InductiveConstructor Operator">⊗</a> <a id="9275" href="present.html#9164" class="Bound">q</a><a id="9276" class="Symbol">)</a> <a id="9278" href="present.html#8717" class="Bound">Z</a><a id="9279" class="Symbol">)</a>
+    <a id="9285" class="Keyword">in</a>  <a id="9289" href="present.html#7650" class="Function">unblockᵥ</a> <a id="9298" href="Function.Base.html#1928" class="Function Operator">$</a> <a id="9300" href="present.html#3111" class="Function">unnest</a> <a id="9307" href="present.html#9235" class="Bound">c′</a>
+
+  <a id="9313" href="present.html#9050" class="Function">mm</a> <a id="9316" class="Symbol">{</a><a id="9317" class="Argument">s</a> <a id="9319" class="Symbol">=</a> <a id="9321" href="present.html#5768" class="InductiveConstructor">ι</a> <a id="9323" href="present.html#9323" class="Bound">m</a><a id="9324" class="Symbol">}</a> <a id="9326" class="Symbol">{</a><a id="9327" href="present.html#9327" class="Bound">p</a> <a id="9329" href="present.html#5785" class="InductiveConstructor Operator">⊗</a> <a id="9331" href="present.html#9331" class="Bound">q</a><a id="9332" class="Symbol">}</a> <a id="9334" class="Symbol">{</a><a id="9335" href="present.html#9335" class="Bound">r</a> <a id="9337" href="present.html#5785" class="InductiveConstructor Operator">⊗</a> <a id="9339" href="present.html#9339" class="Bound">w</a><a id="9340" class="Symbol">}</a> <a id="9342" href="present.html#9342" class="Bound">a</a> <a id="9344" href="present.html#9344" class="Bound">b</a> <a id="9346" class="Symbol">=</a>
+    <a id="9352" class="Keyword">let</a> <a id="9356" href="present.html#9356" class="Bound">a′</a> <a id="9359" class="Symbol">=</a> <a id="9361" href="present.html#3063" class="Function">nest</a> <a id="9366" href="Function.Base.html#1928" class="Function Operator">$</a> <a id="9368" href="present.html#7599" class="Function">blockᵥ</a> <a id="9375" href="present.html#9342" class="Bound">a</a>  <a id="9378" href="present.html#8961" class="Function">∶</a> <a id="9380" href="present.html#5961" class="Function">Ar</a> <a id="9383" href="present.html#9327" class="Bound">p</a> <a id="9385" class="Symbol">(</a><a id="9386" href="present.html#5961" class="Function">Ar</a> <a id="9389" class="Symbol">(</a><a id="9390" href="present.html#5768" class="InductiveConstructor">ι</a> <a id="9392" href="present.html#9323" class="Bound">m</a> <a id="9394" href="present.html#5785" class="InductiveConstructor Operator">⊗</a> <a id="9396" href="present.html#9331" class="Bound">q</a><a id="9397" class="Symbol">)</a> <a id="9399" href="present.html#8709" class="Bound">X</a><a id="9400" class="Symbol">)</a>
+        <a id="9410" href="present.html#9410" class="Bound">b′</a> <a id="9413" class="Symbol">=</a> <a id="9415" href="present.html#3063" class="Function">nest</a> <a id="9420" href="Function.Base.html#1928" class="Function Operator">$</a> <a id="9422" href="present.html#6915" class="Function">block</a>  <a id="9429" href="present.html#9344" class="Bound">b</a>  <a id="9432" href="present.html#8961" class="Function">∶</a> <a id="9434" href="present.html#5961" class="Function">Ar</a> <a id="9437" class="Symbol">(</a><a id="9438" href="present.html#9327" class="Bound">p</a> <a id="9440" href="present.html#5785" class="InductiveConstructor Operator">⊗</a> <a id="9442" href="present.html#9335" class="Bound">r</a><a id="9443" class="Symbol">)</a> <a id="9445" class="Symbol">(</a><a id="9446" href="present.html#5961" class="Function">Ar</a> <a id="9449" class="Symbol">(</a><a id="9450" href="present.html#9331" class="Bound">q</a> <a id="9452" href="present.html#5785" class="InductiveConstructor Operator">⊗</a> <a id="9454" href="present.html#9339" class="Bound">w</a><a id="9455" class="Symbol">)</a> <a id="9457" href="present.html#8713" class="Bound">Y</a><a id="9458" class="Symbol">)</a>
+        <a id="9468" href="present.html#9468" class="Bound">c′</a> <a id="9471" class="Symbol">=</a> <a id="9473" class="Symbol">λ</a> <a id="9475" href="present.html#9475" class="Bound">i</a> <a id="9477" class="Symbol">→</a> <a id="9479" href="present.html#8750" class="Bound">sum</a> <a id="9483" class="Symbol">(</a><a id="9484" href="present.html#3848" class="Function">zipWith</a> <a id="9492" href="present.html#8862" class="Bound Operator">_⊞_</a><a id="9495" class="Symbol">)</a> <a id="9497" class="Symbol">(</a><a id="9498" href="present.html#3726" class="Function">K</a> <a id="9500" href="present.html#8721" class="Bound">ε</a><a id="9501" class="Symbol">)</a>
+                       <a id="9526" class="Symbol">λ</a> <a id="9528" href="present.html#9528" class="Bound">k</a> <a id="9530" class="Symbol">→</a> <a id="9532" href="present.html#9050" class="Function">mm</a> <a id="9535" class="Symbol">(</a><a id="9536" href="present.html#9356" class="Bound">a′</a> <a id="9539" href="present.html#3025" class="Function Operator">[</a> <a id="9541" href="present.html#9528" class="Bound">k</a> <a id="9543" href="present.html#3025" class="Function Operator">]</a><a id="9544" class="Symbol">)</a> <a id="9546" class="Symbol">(</a><a id="9547" href="present.html#9410" class="Bound">b′</a> <a id="9550" href="present.html#3025" class="Function Operator">[</a> <a id="9552" href="present.html#9528" class="Bound">k</a> <a id="9554" href="present.html#5929" class="InductiveConstructor Operator">⊗</a> <a id="9556" href="present.html#9475" class="Bound">i</a> <a id="9558" href="present.html#3025" class="Function Operator">]</a><a id="9559" class="Symbol">)</a>
+    <a id="9565" class="Keyword">in</a>  <a id="9569" href="present.html#7650" class="Function">unblockᵥ</a> <a id="9578" href="Function.Base.html#1928" class="Function Operator">$</a> <a id="9580" href="present.html#3111" class="Function">unnest</a> <a id="9587" href="present.html#9468" class="Bound">c′</a>
+
+  <a id="9593" href="present.html#9050" class="CatchallClause Function">mm</a><a id="9595" class="CatchallClause"> </a><a id="9596" class="CatchallClause Symbol">_</a><a id="9597" class="CatchallClause"> </a><a id="9598" class="CatchallClause Symbol">_</a><a id="9599" class="CatchallClause"> </a><a id="9600" class="CatchallClause Symbol">_</a> <a id="9602" class="Symbol">=</a> <a id="9604" href="present.html#2398" class="Postulate">⋯</a>
+
+</pre>
+</div>
+</section>
+<section id="correctness" class="slide level2">
+<h2>Correctness</h2>
+<pre class="Agda"><a id="9639" class="Keyword">module</a> <a id="Proof"></a><a id="9646" href="present.html#9646" class="Module">Proof</a> 
+  <a id="9655" class="Symbol">(</a><a id="9656" href="present.html#9656" class="Bound Operator">_⊠_</a> <a id="9660" class="Symbol">:</a> <a id="9662" href="present.html#2373" class="Generalizable">X</a> <a id="9664" class="Symbol">→</a> <a id="9666" href="present.html#2375" class="Generalizable">Y</a> <a id="9668" class="Symbol">→</a> <a id="9670" href="present.html#2377" class="Generalizable">Z</a><a id="9671" class="Symbol">)</a> <a id="9673" class="Symbol">(</a><a id="9674" href="present.html#9674" class="Bound">ε</a> <a id="9676" class="Symbol">:</a> <a id="9678" href="present.html#2377" class="Generalizable">Z</a><a id="9679" class="Symbol">)</a> <a id="9681" class="Symbol">(</a><a id="9682" href="present.html#9682" class="Bound Operator">_⊞_</a> <a id="9686" class="Symbol">:</a> <a id="9688" href="present.html#2377" class="Generalizable">Z</a> <a id="9690" class="Symbol">→</a> <a id="9692" href="present.html#2377" class="Generalizable">Z</a> <a id="9694" class="Symbol">→</a> <a id="9696" href="present.html#2377" class="Generalizable">Z</a><a id="9697" class="Symbol">)</a> <a id="9699" class="Keyword">where</a>
+  <a id="9707" class="Keyword">open</a> <a id="9712" href="present.html#5735" class="Module">I</a><a id="9713" class="Symbol">;</a> <a id="9715" class="Keyword">open</a> <a id="9720" href="present.html#2783" class="Module">ArOps</a> <a id="9726" href="present.html#6002" class="Function">I.A</a>
+
+  <a id="Proof.sum₁"></a><a id="9733" href="present.html#9733" class="Function">sum₁</a> <a id="9738" class="Symbol">:</a> <a id="9740" class="Symbol">∀</a> <a id="9742" class="Symbol">{</a><a id="9743" href="present.html#9743" class="Bound">X</a><a id="9744" class="Symbol">}</a> <a id="9746" class="Symbol">→</a> <a id="9748" class="Symbol">(</a><a id="9749" href="present.html#9743" class="Bound">X</a> <a id="9751" class="Symbol">→</a> <a id="9753" href="present.html#9743" class="Bound">X</a> <a id="9755" class="Symbol">→</a> <a id="9757" href="present.html#9743" class="Bound">X</a><a id="9758" class="Symbol">)</a> <a id="9760" class="Symbol">→</a> <a id="9762" href="present.html#9743" class="Bound">X</a> <a id="9764" class="Symbol">→</a> <a id="9766" href="present.html#5961" class="Function">Ar</a> <a id="9769" class="Symbol">(</a><a id="9770" href="present.html#5768" class="InductiveConstructor">ι</a> <a id="9772" href="present.html#2365" class="Generalizable">n</a><a id="9773" class="Symbol">)</a> <a id="9775" href="present.html#9743" class="Bound">X</a> <a id="9777" class="Symbol">→</a> <a id="9779" href="present.html#9743" class="Bound">X</a>
+
+  <a id="Proof.sum"></a><a id="9784" href="present.html#9784" class="Function">sum</a> <a id="9788" class="Symbol">:</a> <a id="9790" class="Symbol">∀</a> <a id="9792" class="Symbol">{</a><a id="9793" href="present.html#9793" class="Bound">X</a> <a id="9795" href="present.html#9795" class="Bound">s</a><a id="9796" class="Symbol">}</a> <a id="9798" class="Symbol">→</a> <a id="9800" class="Symbol">(</a><a id="9801" href="present.html#9793" class="Bound">X</a> <a id="9803" class="Symbol">→</a> <a id="9805" href="present.html#9793" class="Bound">X</a> <a id="9807" class="Symbol">→</a> <a id="9809" href="present.html#9793" class="Bound">X</a><a id="9810" class="Symbol">)</a> <a id="9812" class="Symbol">→</a> <a id="9814" href="present.html#9793" class="Bound">X</a> <a id="9816" class="Symbol">→</a> <a id="9818" href="present.html#5961" class="Function">Ar</a> <a id="9821" href="present.html#9795" class="Bound">s</a> <a id="9823" href="present.html#9793" class="Bound">X</a> <a id="9825" class="Symbol">→</a> <a id="9827" href="present.html#9793" class="Bound">X</a>
+  <a id="9831" href="present.html#9784" class="Function">sum</a> <a id="9835" class="Symbol">{</a><a id="9836" class="Argument">s</a> <a id="9838" class="Symbol">=</a> <a id="9840" href="present.html#5768" class="InductiveConstructor">ι</a> <a id="9842" href="present.html#9842" class="Bound">x</a><a id="9843" class="Symbol">}</a>   <a id="9847" href="present.html#9847" class="Bound">f</a> <a id="9849" href="present.html#9849" class="Bound">e</a> <a id="9851" href="present.html#9851" class="Bound">a</a> <a id="9853" class="Symbol">=</a> <a id="9855" href="present.html#9733" class="Function">sum₁</a> <a id="9860" href="present.html#9847" class="Bound">f</a> <a id="9862" href="present.html#9849" class="Bound">e</a> <a id="9864" href="present.html#9851" class="Bound">a</a>
+  <a id="9868" href="present.html#9784" class="Function">sum</a> <a id="9872" class="Symbol">{</a><a id="9873" class="Argument">s</a> <a id="9875" class="Symbol">=</a> <a id="9877" href="present.html#9877" class="Bound">s</a> <a id="9879" href="present.html#5785" class="InductiveConstructor Operator">⊗</a> <a id="9881" href="present.html#9881" class="Bound">p</a><a id="9882" class="Symbol">}</a> <a id="9884" href="present.html#9884" class="Bound">f</a> <a id="9886" href="present.html#9886" class="Bound">e</a> <a id="9888" href="present.html#9888" class="Bound">a</a> <a id="9890" class="Symbol">=</a> <a id="9892" href="present.html#9784" class="Function">sum</a>  <a id="9897" href="present.html#9884" class="Bound">f</a> <a id="9899" href="present.html#9886" class="Bound">e</a> <a id="9901" href="Function.Base.html#1928" class="Function Operator">$</a> <a id="9903" href="present.html#3773" class="Function">map</a> <a id="9907" class="Symbol">(</a><a id="9908" href="present.html#9784" class="Function">sum</a> <a id="9912" href="present.html#9884" class="Bound">f</a> <a id="9914" href="present.html#9886" class="Bound">e</a><a id="9915" class="Symbol">)</a>
+                                         <a id="9958" class="Symbol">(</a><a id="9959" href="present.html#3063" class="Function">nest</a> <a id="9964" href="present.html#9888" class="Bound">a</a><a id="9965" class="Symbol">)</a>
+</pre>
+<!--
+<pre class="Agda">  <a id="9982" class="Keyword">open</a> <a id="9987" href="present.html#5217" class="Module">MMnaive</a> <a id="9995" href="present.html#6002" class="Function">I.A</a> <a id="9999" href="present.html#9656" class="Bound Operator">_⊠_</a> <a id="10003" href="present.html#9674" class="Bound">ε</a> <a id="10005" href="present.html#9682" class="Bound Operator">_⊞_</a> <a id="10009" href="present.html#9784" class="Function">sum</a>
+  <a id="10015" class="Keyword">open</a> <a id="10020" href="present.html#8691" class="Module">Blocked</a> <a id="10028" href="present.html#9656" class="Bound Operator">_⊠_</a> <a id="10032" href="present.html#9674" class="Bound">ε</a> <a id="10034" href="present.html#9682" class="Bound Operator">_⊞_</a> <a id="10038" href="present.html#9784" class="Function">sum</a>
+</pre>-->
+<pre class="Agda">  <a id="Proof.blocked-ok"></a><a id="10056" href="present.html#10056" class="Function">blocked-ok</a> <a id="10067" class="Symbol">:</a> <a id="10069" class="Symbol">(</a><a id="10070" href="present.html#10070" class="Bound">a</a> <a id="10072" class="Symbol">:</a> <a id="10074" href="present.html#5961" class="Function">Ar</a> <a id="10077" class="Symbol">(</a><a id="10078" href="present.html#5443" class="Generalizable">s</a> <a id="10080" href="present.html#5785" class="InductiveConstructor Operator">⊗</a> <a id="10082" href="present.html#5445" class="Generalizable">p</a><a id="10083" class="Symbol">)</a> <a id="10085" href="present.html#9662" class="Bound">X</a><a id="10086" class="Symbol">)</a> <a id="10088" class="Symbol">→</a> <a id="10090" class="Symbol">(</a><a id="10091" href="present.html#10091" class="Bound">b</a> <a id="10093" class="Symbol">:</a> <a id="10095" href="present.html#5961" class="Function">Ar</a> <a id="10098" class="Symbol">(</a><a id="10099" href="present.html#5445" class="Generalizable">p</a> <a id="10101" href="present.html#5785" class="InductiveConstructor Operator">⊗</a> <a id="10103" href="present.html#5447" class="Generalizable">q</a><a id="10104" class="Symbol">)</a> <a id="10106" href="present.html#9666" class="Bound">Y</a><a id="10107" class="Symbol">)</a>
+             <a id="10122" class="Symbol">→</a> <a id="10124" href="present.html#9050" class="Function">mm</a> <a id="10127" href="present.html#10070" class="Bound">a</a> <a id="10129" href="present.html#10091" class="Bound">b</a> <a id="10131" href="present.html#3972" class="Function Operator">≈ₐ</a> <a id="10134" href="present.html#5475" class="Function">mm-canon</a> <a id="10143" href="present.html#10070" class="Bound">a</a> <a id="10145" href="present.html#10091" class="Bound">b</a>
+  <a id="10149" href="present.html#10056" class="Function">blocked-ok</a> <a id="10160" class="Symbol">=</a> <a id="10162" href="present.html#2398" class="Postulate">⋯</a>
+</pre>
+<!--
+<pre class="Agda">  <a id="Proof.ιsuc"></a><a id="10179" href="present.html#10179" class="Function">ιsuc</a> <a id="10184" class="Symbol">:</a> <a id="10186" href="present.html#5880" class="Datatype">I.P</a> <a id="10190" class="Symbol">(</a><a id="10191" href="present.html#5768" class="InductiveConstructor">ι</a> <a id="10193" href="present.html#2365" class="Generalizable">n</a><a id="10194" class="Symbol">)</a> <a id="10196" class="Symbol">→</a> <a id="10198" href="present.html#5880" class="Datatype">I.P</a> <a id="10202" class="Symbol">(</a><a id="10203" href="present.html#5768" class="InductiveConstructor">ι</a> <a id="10205" class="Symbol">(</a><a id="10206" href="Agda.Builtin.Nat.html#217" class="InductiveConstructor">suc</a> <a id="10210" href="present.html#2365" class="Generalizable">n</a><a id="10211" class="Symbol">))</a>
+  <a id="10216" href="present.html#10179" class="Function">ιsuc</a> <a id="10221" class="Symbol">(</a><a id="10222" href="present.html#5902" class="InductiveConstructor">ι</a> <a id="10224" href="present.html#10224" class="Bound">i</a><a id="10225" class="Symbol">)</a> <a id="10227" class="Symbol">=</a> <a id="10229" href="present.html#5902" class="InductiveConstructor">ι</a> <a id="10231" class="Symbol">(</a><a id="10232" href="Data.Fin.Base.html#1188" class="InductiveConstructor">suc</a> <a id="10236" href="present.html#10224" class="Bound">i</a><a id="10237" class="Symbol">)</a>
+  <a id="10241" href="present.html#9733" class="Function">sum₁</a> <a id="10246" class="Symbol">{</a><a id="10247" class="Argument">n</a> <a id="10249" class="Symbol">=</a> <a id="10251" href="Agda.Builtin.Nat.html#204" class="InductiveConstructor">zero</a><a id="10255" class="Symbol">}</a>   <a id="10259" href="present.html#10259" class="Bound">f</a> <a id="10261" href="present.html#10261" class="Bound">e</a> <a id="10263" href="present.html#10263" class="Bound">a</a> <a id="10265" class="Symbol">=</a> <a id="10267" href="present.html#10261" class="Bound">e</a>
+  <a id="10271" href="present.html#9733" class="Function">sum₁</a> <a id="10276" class="Symbol">{</a><a id="10277" class="Argument">n</a> <a id="10279" class="Symbol">=</a> <a id="10281" href="Agda.Builtin.Nat.html#217" class="InductiveConstructor">suc</a> <a id="10285" href="present.html#10285" class="Bound">n</a><a id="10286" class="Symbol">}</a>  <a id="10289" href="present.html#10289" class="Bound">f</a> <a id="10291" href="present.html#10291" class="Bound">e</a> <a id="10293" href="present.html#10293" class="Bound">a</a> <a id="10295" class="Symbol">=</a> <a id="10297" href="present.html#10289" class="Bound">f</a> <a id="10299" class="Symbol">(</a><a id="10300" href="present.html#10293" class="Bound">a</a> <a id="10302" class="Symbol">(</a><a id="10303" href="present.html#5902" class="InductiveConstructor">ι</a> <a id="10305" href="Data.Fin.Base.html#1157" class="InductiveConstructor">zero</a><a id="10309" class="Symbol">))</a> <a id="10312" class="Symbol">(</a><a id="10313" href="present.html#9733" class="Function">sum₁</a> <a id="10318" href="present.html#10289" class="Bound">f</a> <a id="10320" href="present.html#10291" class="Bound">e</a> <a id="10322" class="Symbol">(</a><a id="10323" href="present.html#10293" class="Bound">a</a> <a id="10325" href="Function.Base.html#1040" class="Function Operator">∘</a> <a id="10327" href="present.html#10179" class="Function">ιsuc</a><a id="10331" class="Symbol">))</a>
+
+</pre>-->
+</section></section>
+<section>
+<section id="reshaping" class="title-slide slide level1">
+<h1>Reshaping</h1>
+<pre class="Agda"><a id="10361" class="Keyword">module</a> <a id="Rshp"></a><a id="10368" href="present.html#10368" class="Module">Rshp</a> <a id="10373" class="Symbol">(</a><a id="10374" href="present.html#10374" class="Bound">A</a> <a id="10376" class="Symbol">:</a> <a id="10378" href="present.html#2476" class="Record">Array</a><a id="10383" class="Symbol">)</a> <a id="10385" class="Keyword">where</a>
+</pre>
+<!--
+<pre class="Agda">  <a id="10406" class="Keyword">open</a> <a id="10411" href="present.html#2476" class="Module">Array</a> <a id="10417" href="present.html#10374" class="Bound">A</a><a id="10418" class="Symbol">;</a> <a id="10420" class="Keyword">open</a> <a id="10425" href="present.html#2783" class="Module">ArOps</a> <a id="10431" href="present.html#10374" class="Bound">A</a>
+  <a id="10435" class="Keyword">variable</a>
+   <a id="10447" href="present.html#10447" class="Generalizable">x</a> <a id="10449" href="present.html#10449" class="Generalizable">y</a> <a id="10451" href="present.html#10451" class="Generalizable">z</a> <a id="10453" class="Symbol">:</a> <a id="10455" href="Agda.Builtin.Nat.html#186" class="Datatype">ℕ</a>
+   <a id="10460" href="present.html#10460" class="Generalizable">xs</a> <a id="10463" href="present.html#10463" class="Generalizable">ys</a> <a id="10466" href="present.html#10466" class="Generalizable">zs</a> <a id="10469" href="present.html#10469" class="Generalizable">ws</a> <a id="10472" class="Symbol">:</a> <a id="10474" href="present.html#2507" class="Field">S</a>
+  <a id="10478" class="Keyword">infixl</a> <a id="10485" class="Number">17</a> <a id="10488" href="present.html#10602" class="InductiveConstructor Operator">_⊕_</a>
+  <a id="10494" class="Keyword">infixl</a> <a id="10501" class="Number">15</a> <a id="10504" href="present.html#10685" class="InductiveConstructor Operator">_∙_</a>
+  <a id="10510" class="Keyword">infixr</a> <a id="10517" class="Number">16</a> <a id="10520" href="present.html#10881" class="Function Operator">_⟨_⟩</a>
+</pre>-->
+<pre class="Agda">  <a id="10539" class="Keyword">data</a> <a id="Rshp.Reshape"></a><a id="10544" href="present.html#10544" class="Datatype">Reshape</a> <a id="10552" class="Symbol">:</a> <a id="10554" href="present.html#2507" class="Field">S</a> <a id="10556" class="Symbol">→</a> <a id="10558" href="present.html#2507" class="Field">S</a> <a id="10560" class="Symbol">→</a> <a id="10562" href="Agda.Primitive.html#320" class="Primitive">Set</a> <a id="10566" class="Keyword">where</a>
+    <a id="Rshp.Reshape.eq"></a><a id="10576" href="present.html#10576" class="InductiveConstructor">eq</a>    <a id="10582" class="Symbol">:</a> <a id="10584" href="present.html#10544" class="Datatype">Reshape</a> <a id="10592" href="present.html#10460" class="Generalizable">xs</a> <a id="10595" href="present.html#10460" class="Generalizable">xs</a>
+    <a id="Rshp.Reshape._⊕_"></a><a id="10602" href="present.html#10602" class="InductiveConstructor Operator">_⊕_</a>   <a id="10608" class="Symbol">:</a> <a id="10610" href="present.html#10544" class="Datatype">Reshape</a> <a id="10618" href="present.html#10460" class="Generalizable">xs</a> <a id="10621" href="present.html#10463" class="Generalizable">ys</a> <a id="10624" class="Symbol">→</a> <a id="10626" href="present.html#10544" class="Datatype">Reshape</a> <a id="10634" href="present.html#10469" class="Generalizable">ws</a> <a id="10637" href="present.html#10466" class="Generalizable">zs</a> 
+          <a id="10651" class="Symbol">→</a> <a id="10653" href="present.html#10544" class="Datatype">Reshape</a> <a id="10661" class="Symbol">(</a><a id="10662" href="present.html#10460" class="Generalizable">xs</a> <a id="10665" href="present.html#2563" class="Field Operator">⊗</a> <a id="10667" href="present.html#10469" class="Generalizable">ws</a><a id="10669" class="Symbol">)</a> <a id="10671" class="Symbol">(</a><a id="10672" href="present.html#10463" class="Generalizable">ys</a> <a id="10675" href="present.html#2563" class="Field Operator">⊗</a> <a id="10677" href="present.html#10466" class="Generalizable">zs</a><a id="10679" class="Symbol">)</a>
+    <a id="Rshp.Reshape._∙_"></a><a id="10685" href="present.html#10685" class="InductiveConstructor Operator">_∙_</a>   <a id="10691" class="Symbol">:</a> <a id="10693" href="present.html#10544" class="Datatype">Reshape</a> <a id="10701" href="present.html#10463" class="Generalizable">ys</a> <a id="10704" href="present.html#10466" class="Generalizable">zs</a> <a id="10707" class="Symbol">→</a> <a id="10709" href="present.html#10544" class="Datatype">Reshape</a> <a id="10717" href="present.html#10460" class="Generalizable">xs</a> <a id="10720" href="present.html#10463" class="Generalizable">ys</a> 
+          <a id="10734" class="Symbol">→</a> <a id="10736" href="present.html#10544" class="Datatype">Reshape</a> <a id="10744" href="present.html#10460" class="Generalizable">xs</a> <a id="10747" href="present.html#10466" class="Generalizable">zs</a>
+    <a id="Rshp.Reshape.split"></a><a id="10754" href="present.html#10754" class="InductiveConstructor">split</a> <a id="10760" class="Symbol">:</a> <a id="10762" href="present.html#10544" class="Datatype">Reshape</a> <a id="10770" class="Symbol">(</a><a id="10771" href="present.html#2546" class="Field">ι</a> <a id="10773" class="Symbol">(</a><a id="10774" href="present.html#10447" class="Generalizable">x</a> <a id="10776" href="Agda.Builtin.Nat.html#522" class="Primitive Operator">*</a> <a id="10778" href="present.html#10449" class="Generalizable">y</a><a id="10779" class="Symbol">))</a> <a id="10782" class="Symbol">(</a><a id="10783" href="present.html#2546" class="Field">ι</a> <a id="10785" href="present.html#10447" class="Generalizable">x</a> <a id="10787" href="present.html#2563" class="Field Operator">⊗</a> <a id="10789" href="present.html#2546" class="Field">ι</a> <a id="10791" href="present.html#10449" class="Generalizable">y</a><a id="10792" class="Symbol">)</a>
+    <a id="Rshp.Reshape.flat"></a><a id="10798" href="present.html#10798" class="InductiveConstructor">flat</a>  <a id="10804" class="Symbol">:</a> <a id="10806" href="present.html#10544" class="Datatype">Reshape</a> <a id="10814" class="Symbol">(</a><a id="10815" href="present.html#2546" class="Field">ι</a> <a id="10817" href="present.html#10447" class="Generalizable">x</a> <a id="10819" href="present.html#2563" class="Field Operator">⊗</a> <a id="10821" href="present.html#2546" class="Field">ι</a> <a id="10823" href="present.html#10449" class="Generalizable">y</a><a id="10824" class="Symbol">)</a> <a id="10826" class="Symbol">(</a><a id="10827" href="present.html#2546" class="Field">ι</a> <a id="10829" class="Symbol">(</a><a id="10830" href="present.html#10447" class="Generalizable">x</a> <a id="10832" href="Agda.Builtin.Nat.html#522" class="Primitive Operator">*</a> <a id="10834" href="present.html#10449" class="Generalizable">y</a><a id="10835" class="Symbol">))</a>
+  
+  <a id="Rshp.rev"></a><a id="10843" href="present.html#10843" class="Function">rev</a> <a id="10847" class="Symbol">:</a> <a id="10849" href="present.html#10544" class="Datatype">Reshape</a> <a id="10857" href="present.html#10460" class="Generalizable">xs</a> <a id="10860" href="present.html#10463" class="Generalizable">ys</a> <a id="10863" class="Symbol">→</a> <a id="10865" href="present.html#10544" class="Datatype">Reshape</a> <a id="10873" href="present.html#10463" class="Generalizable">ys</a> <a id="10876" href="present.html#10460" class="Generalizable">xs</a>
+  <a id="Rshp._⟨_⟩"></a><a id="10881" href="present.html#10881" class="Function Operator">_⟨_⟩</a> <a id="10886" class="Symbol">:</a> <a id="10888" class="Symbol">∀</a> <a id="10890" class="Symbol">{</a><a id="10891" href="present.html#10891" class="Bound">s</a> <a id="10893" href="present.html#10893" class="Bound">p</a><a id="10894" class="Symbol">}</a> <a id="10896" class="Symbol">→</a> <a id="10898" href="present.html#2522" class="Field">P</a> <a id="10900" href="present.html#10893" class="Bound">p</a> <a id="10902" class="Symbol">→</a> <a id="10904" href="present.html#10544" class="Datatype">Reshape</a> <a id="10912" href="present.html#10891" class="Bound">s</a> <a id="10914" href="present.html#10893" class="Bound">p</a> <a id="10916" class="Symbol">→</a> <a id="10918" href="present.html#2522" class="Field">P</a> <a id="10920" href="present.html#10891" class="Bound">s</a>
+
+  <a id="Rshp.reshape"></a><a id="10925" href="present.html#10925" class="Function">reshape</a> <a id="10933" class="Symbol">:</a> <a id="10935" class="Symbol">∀</a> <a id="10937" class="Symbol">{</a><a id="10938" href="present.html#10938" class="Bound">a</a> <a id="10940" href="present.html#10940" class="Bound">b</a> <a id="10942" href="present.html#10942" class="Bound">X</a><a id="10943" class="Symbol">}</a> <a id="10945" class="Symbol">→</a> <a id="10947" href="present.html#10544" class="Datatype">Reshape</a> <a id="10955" href="present.html#10938" class="Bound">a</a> <a id="10957" href="present.html#10940" class="Bound">b</a> <a id="10959" class="Symbol">→</a> <a id="10961" href="present.html#2674" class="Field">Ar</a> <a id="10964" href="present.html#10938" class="Bound">a</a> <a id="10966" href="present.html#10942" class="Bound">X</a> <a id="10968" class="Symbol">→</a>  <a id="10971" href="present.html#2674" class="Field">Ar</a> <a id="10974" href="present.html#10940" class="Bound">b</a> <a id="10976" href="present.html#10942" class="Bound">X</a>
+  <a id="10980" href="present.html#10925" class="Function">reshape</a> <a id="10988" href="present.html#10988" class="Bound">r</a> <a id="10990" href="present.html#10990" class="Bound">a</a> <a id="10992" class="Symbol">=</a> <a id="10994" href="present.html#2988" class="Function">imap</a> <a id="10999" class="Symbol">λ</a> <a id="11001" href="present.html#11001" class="Bound">ix</a> <a id="11004" class="Symbol">→</a> <a id="11006" href="present.html#10990" class="Bound">a</a> <a id="11008" href="present.html#3025" class="Function Operator">[</a> <a id="11010" href="present.html#11001" class="Bound">ix</a> <a id="11013" href="present.html#10881" class="Function Operator">⟨</a> <a id="11015" href="present.html#10988" class="Bound">r</a> <a id="11017" href="present.html#10881" class="Function Operator">⟩</a> <a id="11019" href="present.html#3025" class="Function Operator">]</a>
+</pre>
+<!--
+<pre class="Agda">  <a id="11036" href="present.html#10843" class="Function">rev</a> <a id="11040" href="present.html#10576" class="InductiveConstructor">eq</a> <a id="11043" class="Symbol">=</a> <a id="11045" href="present.html#10576" class="InductiveConstructor">eq</a>
+  <a id="11050" href="present.html#10843" class="Function">rev</a> <a id="11054" class="Symbol">(</a><a id="11055" href="present.html#11055" class="Bound">r</a> <a id="11057" href="present.html#10602" class="InductiveConstructor Operator">⊕</a> <a id="11059" href="present.html#11059" class="Bound">r₁</a><a id="11061" class="Symbol">)</a> <a id="11063" class="Symbol">=</a> <a id="11065" href="present.html#10843" class="Function">rev</a> <a id="11069" href="present.html#11055" class="Bound">r</a> <a id="11071" href="present.html#10602" class="InductiveConstructor Operator">⊕</a> <a id="11073" href="present.html#10843" class="Function">rev</a> <a id="11077" href="present.html#11059" class="Bound">r₁</a>
+  <a id="11082" href="present.html#10843" class="Function">rev</a> <a id="11086" class="Symbol">(</a><a id="11087" href="present.html#11087" class="Bound">r</a> <a id="11089" href="present.html#10685" class="InductiveConstructor Operator">∙</a> <a id="11091" href="present.html#11091" class="Bound">r₁</a><a id="11093" class="Symbol">)</a> <a id="11095" class="Symbol">=</a> <a id="11097" href="present.html#10843" class="Function">rev</a> <a id="11101" href="present.html#11091" class="Bound">r₁</a> <a id="11104" href="present.html#10685" class="InductiveConstructor Operator">∙</a> <a id="11106" href="present.html#10843" class="Function">rev</a> <a id="11110" href="present.html#11087" class="Bound">r</a>
+  <a id="11114" href="present.html#10843" class="Function">rev</a> <a id="11118" href="present.html#10754" class="InductiveConstructor">split</a> <a id="11124" class="Symbol">=</a> <a id="11126" href="present.html#10798" class="InductiveConstructor">flat</a>
+  <a id="11133" href="present.html#10843" class="Function">rev</a> <a id="11137" href="present.html#10798" class="InductiveConstructor">flat</a> <a id="11142" class="Symbol">=</a> <a id="11144" href="present.html#10754" class="InductiveConstructor">split</a>
+
+  <a id="11153" href="present.html#11153" class="Bound">i</a> <a id="11155" href="present.html#10881" class="Function Operator">⟨</a> <a id="11157" href="present.html#10576" class="InductiveConstructor">eq</a> <a id="11160" href="present.html#10881" class="Function Operator">⟩</a> <a id="11162" class="Symbol">=</a> <a id="11164" href="present.html#11153" class="Bound">i</a>
+  <a id="11168" href="present.html#11168" class="Bound">i</a> <a id="11170" href="present.html#10881" class="Function Operator">⟨</a> <a id="11172" href="present.html#11172" class="Bound">r</a> <a id="11174" href="present.html#10602" class="InductiveConstructor Operator">⊕</a> <a id="11176" href="present.html#11176" class="Bound">r₁</a> <a id="11179" href="present.html#10881" class="Function Operator">⟩</a> <a id="11181" class="Symbol">=</a> <a id="11183" class="Symbol">(</a><a id="11184" href="present.html#2916" class="Function">fst</a> <a id="11188" href="present.html#11168" class="Bound">i</a> <a id="11190" href="present.html#10881" class="Function Operator">⟨</a> <a id="11192" href="present.html#11172" class="Bound">r</a> <a id="11194" href="present.html#10881" class="Function Operator">⟩</a><a id="11195" class="Symbol">)</a> <a id="11197" href="present.html#2875" class="Function Operator">⊛</a> <a id="11199" class="Symbol">(</a><a id="11200" href="present.html#2952" class="Function">snd</a> <a id="11204" href="present.html#11168" class="Bound">i</a> <a id="11206" href="present.html#10881" class="Function Operator">⟨</a> <a id="11208" href="present.html#11176" class="Bound">r₁</a> <a id="11211" href="present.html#10881" class="Function Operator">⟩</a><a id="11212" class="Symbol">)</a>
+  <a id="11216" href="present.html#11216" class="Bound">i</a> <a id="11218" href="present.html#10881" class="Function Operator">⟨</a> <a id="11220" href="present.html#11220" class="Bound">r</a> <a id="11222" href="present.html#10685" class="InductiveConstructor Operator">∙</a> <a id="11224" href="present.html#11224" class="Bound">r₁</a> <a id="11227" href="present.html#10881" class="Function Operator">⟩</a> <a id="11229" class="Symbol">=</a> <a id="11231" href="present.html#11216" class="Bound">i</a> <a id="11233" href="present.html#10881" class="Function Operator">⟨</a> <a id="11235" href="present.html#11220" class="Bound">r</a> <a id="11237" href="present.html#10881" class="Function Operator">⟩</a> <a id="11239" href="present.html#10881" class="Function Operator">⟨</a> <a id="11241" href="present.html#11224" class="Bound">r₁</a> <a id="11244" href="present.html#10881" class="Function Operator">⟩</a>
+  <a id="11248" href="present.html#11248" class="Bound">i</a> <a id="11250" href="present.html#10881" class="Function Operator">⟨</a> <a id="11252" href="present.html#10754" class="InductiveConstructor">split</a> <a id="11258" href="present.html#10881" class="Function Operator">⟩</a> <a id="11260" class="Symbol">=</a> <a id="11262" href="present.html#2825" class="Function">φ</a> <a id="11264" href="Function.Base.html#1928" class="Function Operator">$</a> <a id="11266" href="Data.Fin.Base.html#4509" class="Function">combine</a> <a id="11274" class="Symbol">(</a><a id="11275" href="present.html#2850" class="Function">ψ</a> <a id="11277" href="Function.Base.html#1928" class="Function Operator">$</a> <a id="11279" href="present.html#2916" class="Function">fst</a> <a id="11283" href="present.html#11248" class="Bound">i</a><a id="11284" class="Symbol">)</a> <a id="11286" class="Symbol">(</a><a id="11287" href="present.html#2850" class="Function">ψ</a> <a id="11289" href="Function.Base.html#1928" class="Function Operator">$</a> <a id="11291" href="present.html#2952" class="Function">snd</a> <a id="11295" href="present.html#11248" class="Bound">i</a><a id="11296" class="Symbol">)</a>
+  <a id="11300" href="present.html#11300" class="Bound">i</a> <a id="11302" href="present.html#10881" class="Function Operator">⟨</a> <a id="11304" href="present.html#10798" class="InductiveConstructor">flat</a> <a id="11309" href="present.html#10881" class="Function Operator">⟩</a> <a id="11311" class="Symbol">=</a> <a id="11313" class="Keyword">let</a> <a id="11317" href="present.html#11317" class="Bound">a</a> <a id="11319" href="Agda.Builtin.Sigma.html#218" class="InductiveConstructor Operator">,</a> <a id="11321" href="present.html#11321" class="Bound">b</a> <a id="11323" class="Symbol">=</a> <a id="11325" href="Data.Fin.Base.html#4399" class="Function">remQuot</a> <a id="11333" class="Symbol">_</a> <a id="11335" class="Symbol">(</a><a id="11336" href="present.html#2850" class="Function">ψ</a> <a id="11338" href="present.html#11300" class="Bound">i</a><a id="11339" class="Symbol">)</a> <a id="11341" class="Keyword">in</a> <a id="11344" href="present.html#2825" class="Function">φ</a> <a id="11346" href="present.html#11317" class="Bound">a</a> <a id="11348" href="present.html#2875" class="Function Operator">⊛</a> <a id="11350" href="present.html#2825" class="Function">φ</a> <a id="11352" href="present.html#11321" class="Bound">b</a>
+</pre>-->
+</section>
+<section id="respecting-reshaping" class="slide level2">
+<h2>Respecting Reshaping</h2>
+<div style="font-size: 0.9em;">
+<pre class="Agda"><a id="11425" class="Keyword">module</a> <a id="Respect"></a><a id="11432" href="present.html#11432" class="Module">Respect</a> 
+  <a id="11443" class="Symbol">(</a><a id="11444" href="present.html#11444" class="Bound">A</a> <a id="11446" class="Symbol">:</a> <a id="11448" href="present.html#2476" class="Record">Array</a><a id="11453" class="Symbol">)</a> 
+  <a id="11458" class="Symbol">(</a><a id="11459" href="present.html#11459" class="Bound Operator">_⊠_</a> <a id="11463" class="Symbol">:</a> <a id="11465" href="present.html#2373" class="Generalizable">X</a> <a id="11467" class="Symbol">→</a> <a id="11469" href="present.html#2375" class="Generalizable">Y</a> <a id="11471" class="Symbol">→</a> <a id="11473" href="present.html#2377" class="Generalizable">Z</a><a id="11474" class="Symbol">)</a> <a id="11476" class="Symbol">(</a><a id="11477" href="present.html#11477" class="Bound">ε</a> <a id="11479" class="Symbol">:</a> <a id="11481" href="present.html#2377" class="Generalizable">Z</a><a id="11482" class="Symbol">)</a> <a id="11484" class="Symbol">(</a><a id="11485" href="present.html#11485" class="Bound Operator">_⊞_</a> <a id="11489" class="Symbol">:</a> <a id="11491" href="present.html#2377" class="Generalizable">Z</a> <a id="11493" class="Symbol">→</a> <a id="11495" href="present.html#2377" class="Generalizable">Z</a> <a id="11497" class="Symbol">→</a> <a id="11499" href="present.html#2377" class="Generalizable">Z</a><a id="11500" class="Symbol">)</a>
+  <a id="11504" class="Symbol">(</a><a id="11505" href="present.html#11505" class="Bound">sum</a> <a id="11509" class="Symbol">:</a> <a id="11511" class="Symbol">∀</a> <a id="11513" class="Symbol">{</a><a id="11514" href="present.html#11514" class="Bound">X</a> <a id="11516" href="present.html#11516" class="Bound">s</a><a id="11517" class="Symbol">}</a> <a id="11519" class="Symbol">→</a> <a id="11521" class="Symbol">(</a><a id="11522" href="present.html#11514" class="Bound">X</a> <a id="11524" class="Symbol">→</a> <a id="11526" href="present.html#11514" class="Bound">X</a> <a id="11528" class="Symbol">→</a> <a id="11530" href="present.html#11514" class="Bound">X</a><a id="11531" class="Symbol">)</a> <a id="11533" class="Symbol">→</a> <a id="11535" href="present.html#11514" class="Bound">X</a> <a id="11537" class="Symbol">→</a> <a id="11539" href="present.html#2674" class="Field">Array.Ar</a> <a id="11548" href="present.html#11444" class="Bound">A</a> <a id="11550" href="present.html#11516" class="Bound">s</a> <a id="11552" href="present.html#11514" class="Bound">X</a> <a id="11554" class="Symbol">→</a> <a id="11556" href="present.html#11514" class="Bound">X</a><a id="11557" class="Symbol">)</a>
+</pre>
+<!--
+<pre class="Agda">  <a id="11574" class="Keyword">where</a>
+  <a id="11582" class="Keyword">open</a> <a id="11587" href="present.html#2476" class="Module">Array</a> <a id="11593" href="present.html#11444" class="Bound">A</a><a id="11594" class="Symbol">;</a> <a id="11596" class="Keyword">open</a> <a id="11601" href="present.html#2783" class="Module">ArOps</a> <a id="11607" href="present.html#11444" class="Bound">A</a><a id="11608" class="Symbol">;</a> <a id="11610" class="Keyword">open</a> <a id="11615" href="present.html#10368" class="Module">Rshp</a> <a id="11620" href="present.html#11444" class="Bound">A</a>
+
+  <a id="11625" class="Keyword">open</a> <a id="11630" href="present.html#5217" class="Module">MMnaive</a> <a id="11638" href="present.html#11444" class="Bound">A</a> <a id="11640" href="present.html#11459" class="Bound Operator">_⊠_</a> <a id="11644" href="present.html#11477" class="Bound">ε</a> <a id="11646" href="present.html#11485" class="Bound Operator">_⊞_</a> <a id="11650" href="present.html#11505" class="Bound">sum</a>
+  <a id="11656" class="Keyword">variable</a>
+    <a id="11669" href="present.html#11669" class="Generalizable">s′</a> <a id="11672" href="present.html#11672" class="Generalizable">p′</a> <a id="11675" href="present.html#11675" class="Generalizable">q′</a> <a id="11678" class="Symbol">:</a> <a id="11680" href="present.html#2507" class="Function">S</a>
+</pre>-->
+<pre class="Agda">  <a id="Respect.sum-stable"></a><a id="11696" href="present.html#11696" class="Function">sum-stable</a> <a id="11707" class="Symbol">:</a> <a id="11709" class="Symbol">(</a><a id="11710" href="present.html#11710" class="Bound">r</a> <a id="11712" class="Symbol">:</a> <a id="11714" href="present.html#10544" class="Datatype">Reshape</a> <a id="11722" href="present.html#5443" class="Generalizable">s</a> <a id="11724" href="present.html#11669" class="Generalizable">s′</a><a id="11726" class="Symbol">)</a> <a id="11728" class="Symbol">(</a><a id="11729" href="present.html#11729" class="Bound">a</a> <a id="11731" class="Symbol">:</a> <a id="11733" href="present.html#2674" class="Function">Ar</a> <a id="11736" href="present.html#5443" class="Generalizable">s</a> <a id="11738" href="present.html#11473" class="Bound">Z</a><a id="11739" class="Symbol">)</a> 
+             <a id="11755" class="Symbol">→</a> <a id="11757" href="present.html#11505" class="Bound">sum</a> <a id="11761" href="present.html#11485" class="Bound Operator">_⊞_</a> <a id="11765" href="present.html#11477" class="Bound">ε</a> <a id="11767" href="present.html#11729" class="Bound">a</a> <a id="11769" href="Agda.Builtin.Equality.html#133" class="Datatype Operator">≡</a> <a id="11771" href="present.html#11505" class="Bound">sum</a> <a id="11775" href="present.html#11485" class="Bound Operator">_⊞_</a> <a id="11779" href="present.html#11477" class="Bound">ε</a> <a id="11781" class="Symbol">(</a><a id="11782" href="present.html#10925" class="Function">reshape</a> <a id="11790" href="present.html#11710" class="Bound">r</a> <a id="11792" href="present.html#11729" class="Bound">a</a><a id="11793" class="Symbol">)</a>
+
+  <a id="Respect.mm-stable"></a><a id="11798" href="present.html#11798" class="Function">mm-stable</a> <a id="11808" class="Symbol">:</a> <a id="11810" class="Symbol">(</a><a id="11811" href="present.html#11811" class="Bound">rs</a> <a id="11814" class="Symbol">:</a> <a id="11816" href="present.html#10544" class="Datatype">Reshape</a> <a id="11824" href="present.html#5443" class="Generalizable">s</a> <a id="11826" href="present.html#11669" class="Generalizable">s′</a><a id="11828" class="Symbol">)</a> <a id="11830" class="Symbol">(</a><a id="11831" href="present.html#11831" class="Bound">rp</a> <a id="11834" class="Symbol">:</a> <a id="11836" href="present.html#10544" class="Datatype">Reshape</a> <a id="11844" href="present.html#5445" class="Generalizable">p</a> <a id="11846" href="present.html#11672" class="Generalizable">p′</a><a id="11848" class="Symbol">)</a>
+              <a id="11864" class="Symbol">(</a><a id="11865" href="present.html#11865" class="Bound">rq</a> <a id="11868" class="Symbol">:</a> <a id="11870" href="present.html#10544" class="Datatype">Reshape</a> <a id="11878" href="present.html#5447" class="Generalizable">q</a> <a id="11880" href="present.html#11675" class="Generalizable">q′</a><a id="11882" class="Symbol">)</a> <a id="11884" class="Symbol">(</a><a id="11885" href="present.html#11885" class="Bound">a</a> <a id="11887" class="Symbol">:</a> <a id="11889" href="present.html#2674" class="Function">Ar</a> <a id="11892" class="Symbol">(</a><a id="11893" href="present.html#5443" class="Generalizable">s</a> <a id="11895" href="present.html#2563" class="Function Operator">⊗</a> <a id="11897" href="present.html#5445" class="Generalizable">p</a><a id="11898" class="Symbol">)</a> <a id="11900" href="present.html#11465" class="Bound">X</a><a id="11901" class="Symbol">)</a>
+              <a id="11917" class="Symbol">(</a><a id="11918" href="present.html#11918" class="Bound">b</a> <a id="11920" class="Symbol">:</a> <a id="11922" href="present.html#2674" class="Function">Ar</a> <a id="11925" class="Symbol">(</a><a id="11926" href="present.html#5445" class="Generalizable">p</a> <a id="11928" href="present.html#2563" class="Function Operator">⊗</a> <a id="11930" href="present.html#5447" class="Generalizable">q</a><a id="11931" class="Symbol">)</a> <a id="11933" href="present.html#11469" class="Bound">Y</a><a id="11934" class="Symbol">)</a>
+      <a id="11942" class="Symbol">→</a> <a id="11944" href="present.html#5475" class="Function">mm-canon</a> <a id="11953" class="Symbol">(</a><a id="11954" href="present.html#10925" class="Function">reshape</a> <a id="11962" class="Symbol">(</a><a id="11963" href="present.html#11811" class="Bound">rs</a> <a id="11966" href="present.html#10602" class="InductiveConstructor Operator">⊕</a> <a id="11968" href="present.html#11831" class="Bound">rp</a><a id="11970" class="Symbol">)</a> <a id="11972" href="present.html#11885" class="Bound">a</a><a id="11973" class="Symbol">)</a> <a id="11975" class="Symbol">(</a><a id="11976" href="present.html#10925" class="Function">reshape</a> <a id="11984" class="Symbol">(</a><a id="11985" href="present.html#11831" class="Bound">rp</a> <a id="11988" href="present.html#10602" class="InductiveConstructor Operator">⊕</a> <a id="11990" href="present.html#11865" class="Bound">rq</a><a id="11992" class="Symbol">)</a> <a id="11994" href="present.html#11918" class="Bound">b</a><a id="11995" class="Symbol">)</a> 
+        <a id="12006" href="present.html#3972" class="Function Operator">≈ₐ</a> <a id="12009" href="present.html#10925" class="Function">reshape</a> <a id="12017" class="Symbol">(</a><a id="12018" href="present.html#11811" class="Bound">rs</a> <a id="12021" href="present.html#10602" class="InductiveConstructor Operator">⊕</a> <a id="12023" href="present.html#11865" class="Bound">rq</a><a id="12025" class="Symbol">)</a> <a id="12027" class="Symbol">(</a><a id="12028" href="present.html#5475" class="Function">mm-canon</a> <a id="12037" href="present.html#11885" class="Bound">a</a> <a id="12039" href="present.html#11918" class="Bound">b</a><a id="12040" class="Symbol">)</a>
+</pre>
+<!--
+<pre class="Agda">  <a id="12057" href="present.html#11696" class="Function">sum-stable</a> <a id="12068" class="Symbol">=</a> <a id="12070" href="present.html#2398" class="Postulate">⋯</a>
+  <a id="12074" href="present.html#11798" class="Function">mm-stable</a> <a id="12084" href="present.html#12084" class="Bound">rs</a> <a id="12087" href="present.html#12087" class="Bound">rp</a> <a id="12090" href="present.html#12090" class="Bound">rq</a> <a id="12093" href="present.html#12093" class="Bound">a</a> <a id="12095" href="present.html#12095" class="Bound">b</a> <a id="12097" class="Symbol">=</a> <a id="12099" href="present.html#2398" class="Postulate">⋯</a> <a id="12101" class="Comment">-- sym $ trans (sum-thm (rp) _) ?</a>
+</pre>-->
+</div>
+</section></section>
+<section id="useful-models" class="title-slide slide level1">
+<h1>Useful Models</h1>
+<pre class="Agda"><a id="12172" class="Keyword">module</a> <a id="Models"></a><a id="12179" href="present.html#12179" class="Module">Models</a> <a id="12186" class="Keyword">where</a>
+  <a id="Models.Vec"></a><a id="12194" href="present.html#12194" class="Function">Vec</a> <a id="12198" class="Symbol">:</a> <a id="12200" href="present.html#2476" class="Record">Array</a>
+  <a id="12208" href="present.html#2507" class="Field">Array.S</a>    <a id="12219" href="present.html#12194" class="Function">Vec</a> <a id="12223" class="Symbol">=</a> <a id="12225" href="Agda.Builtin.Nat.html#186" class="Datatype">ℕ</a>
+  <a id="12229" href="present.html#2522" class="Field">Array.P</a>    <a id="12240" href="present.html#12194" class="Function">Vec</a> <a id="12244" class="Symbol">=</a> <a id="12246" href="Data.Fin.Base.html#1135" class="Datatype">Fin</a>
+  <a id="12252" href="present.html#2546" class="Field">Array.ι</a>    <a id="12263" href="present.html#12194" class="Function">Vec</a> <a id="12267" class="Symbol">=</a> <a id="12269" href="Function.Base.html#624" class="Function">id</a>
+  <a id="12274" href="present.html#2563" class="Field Operator">Array._⊗_</a>  <a id="12285" href="present.html#12194" class="Function">Vec</a> <a id="12289" class="Symbol">=</a> <a id="12291" href="Agda.Builtin.Nat.html#522" class="Primitive Operator">_*_</a>
+  <a id="12297" href="present.html#2674" class="Field">Array.Ar</a>   <a id="12308" href="present.html#12194" class="Function">Vec</a> <a id="12312" class="Symbol">=</a> <a id="12314" class="Symbol">λ</a> <a id="12316" href="present.html#12316" class="Bound">n</a> <a id="12318" href="present.html#12318" class="Bound">X</a> <a id="12320" class="Symbol">→</a> <a id="12322" href="Data.Fin.Base.html#1135" class="Datatype">Fin</a> <a id="12326" href="present.html#12316" class="Bound">n</a> <a id="12328" class="Symbol">→</a> <a id="12330" href="present.html#12318" class="Bound">X</a>
+</pre>
+<!--
+<pre class="Agda">  <a id="12347" href="present.html#2589" class="Field">Array.ι-↔</a>   <a id="12359" href="present.html#12194" class="Function">Vec</a> <a id="12363" class="Symbol">=</a> <a id="12365" href="present.html#2398" class="Postulate">⋯</a>
+  <a id="12369" href="present.html#2624" class="Field">Array.⊗-↔</a>   <a id="12381" href="present.html#12194" class="Function">Vec</a> <a id="12385" class="Symbol">=</a> <a id="12387" href="present.html#2398" class="Postulate">⋯</a>
+  <a id="12391" href="present.html#2699" class="Field">Array.Ar-↔</a>  <a id="12403" href="present.html#12194" class="Function">Vec</a> <a id="12407" class="Symbol">=</a> <a id="12409" href="present.html#2398" class="Postulate">⋯</a>
+  <a id="12413" class="Keyword">open</a> <a id="12418" class="Keyword">import</a> <a id="12425" href="Data.List.Relation.Unary.All.html" class="Module">Data.List.Relation.Unary.All</a>
+</pre>-->
+<pre class="Agda">  <a id="Models.Lst"></a><a id="12468" href="present.html#12468" class="Function">Lst</a> <a id="12472" class="Symbol">:</a> <a id="12474" href="present.html#2476" class="Record">Array</a>
+  <a id="12482" href="present.html#2507" class="Field">Array.S</a>     <a id="12494" href="present.html#12468" class="Function">Lst</a> <a id="12498" class="Symbol">=</a> <a id="12500" href="Agda.Builtin.List.html#130" class="Datatype">List</a> <a id="12505" href="Agda.Builtin.Nat.html#186" class="Datatype">ℕ</a>
+  <a id="12509" href="present.html#2522" class="Field">Array.P</a>     <a id="12521" href="present.html#12468" class="Function">Lst</a> <a id="12525" class="Symbol">=</a> <a id="12527" href="Data.List.Relation.Unary.All.html#1453" class="Datatype">All</a> <a id="12531" href="Data.Fin.Base.html#1135" class="Datatype">Fin</a>
+  <a id="12537" href="present.html#2546" class="Field">Array.ι</a>     <a id="12549" href="present.html#12468" class="Function">Lst</a> <a id="12553" class="Symbol">=</a> <a id="12555" href="Agda.Builtin.List.html#182" class="InductiveConstructor Operator">_∷</a> <a id="12558" href="Agda.Builtin.List.html#167" class="InductiveConstructor">[]</a>
+  <a id="12563" href="present.html#2563" class="Field Operator">Array._⊗_</a>   <a id="12575" href="present.html#12468" class="Function">Lst</a> <a id="12579" class="Symbol">=</a> <a id="12581" href="Data.List.Base.html#1819" class="Function Operator">_++_</a>
+  <a id="12588" href="present.html#2674" class="Field">Array.Ar</a>    <a id="12600" href="present.html#12468" class="Function">Lst</a> <a id="12604" class="Symbol">=</a> <a id="12606" class="Symbol">λ</a> <a id="12608" href="present.html#12608" class="Bound">l</a> <a id="12610" href="present.html#12610" class="Bound">X</a> <a id="12612" class="Symbol">→</a> <a id="12614" href="Data.List.Relation.Unary.All.html#1453" class="Datatype">All</a> <a id="12618" href="Data.Fin.Base.html#1135" class="Datatype">Fin</a> <a id="12622" href="present.html#12608" class="Bound">l</a> <a id="12624" class="Symbol">→</a> <a id="12626" href="present.html#12610" class="Bound">X</a>
+</pre>
+<!--
+<pre class="Agda">  <a id="12643" href="present.html#2589" class="Field">Array.ι-↔</a>   <a id="12655" href="present.html#12468" class="Function">Lst</a> <a id="12659" class="Symbol">=</a> <a id="12661" href="present.html#2398" class="Postulate">⋯</a>
+  <a id="12665" href="present.html#2624" class="Field">Array.⊗-↔</a>   <a id="12677" href="present.html#12468" class="Function">Lst</a> <a id="12681" class="Symbol">=</a> <a id="12683" href="present.html#2398" class="Postulate">⋯</a>
+  <a id="12687" href="present.html#2699" class="Field">Array.Ar-↔</a>  <a id="12699" href="present.html#12468" class="Function">Lst</a> <a id="12703" class="Symbol">=</a> <a id="12705" href="present.html#2398" class="Postulate">⋯</a>
+  
+</pre>-->
+</section>
+
+<section id="arrays-as-cwfs" class="title-slide slide level1">
+<h1>Arrays as CwFs</h1>
+<pre class="x"><code>Con : Set                    S       : Set
+Sub : Con → Con → Set        Reshape : S → S → Set
+Tm  : Con → Ty  → Set        Ar      : S → Set → Set</code></pre>
+</section>
+
+<section id="conclusions" class="title-slide slide level1">
+<h1>Conclusions</h1>
+<ul>
+<li>Rank-polymorphic array theory</li>
+<li>Induction over shape structure (blocking)</li>
+<li>Relation to CwFs</li>
+<li>Extraction into existing array languages</li>
+</ul>
+</section>
+
+<section id="thank-you" class="title-slide slide level1">
+<h1>Thank you</h1>
+
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/math/math.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'linear',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 960,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
