@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Artem Shinkarov - Presenting at FHPNC'23</title>
+        <link rel="stylesheet" href="../css/notosans.css" />
+        <link rel="stylesheet" href="../css/merriweather.css" />
+        <link rel="stylesheet" href="../css/sakura.css" />
+        <link rel="stylesheet" href="../css/tema.css" />
+    </head>
+    <script>
+      function visibilityToggle(id) {
+         var x = document.getElementById(id);
+         //alert("display of " + id + " = " + x.style.display)
+         if (x.style.display === "none") {
+           x.style.display = "block";
+         } else {
+           x.style.display = "none";
+         }
+      }
+    </script>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">Artem Shinkarov</a>
+            </div>
+            <nav>
+                <a href="../">About</a>
+                <a href="../publications.html">Publications</a>
+                <a href="../archive.html">Posts</a>
+                <a href="../links.html">Links</a>
+            </nav>
+        </header>
+        <hr style="border:1px solid #e4e4e4;" />
+        <main role="main">
+            <article>
+    <section class="header">
+        
+    </section>
+    <section>
+        <p>I gave (half) a talk at <a href="https://icfp23.sigplan.org/home/FHPNC-2023">FHPNC’23</a> about
+implementation of effiecient blocked algorithms in rank-polymorphic
+array languages and proving that they are correct.</p>
+<p>The slides are <a href="../talks/2023-fhpnc">available here</a>, and the
+paper <a href="https://dl.acm.org/doi/10.1145/3609024.3609410">can be found here</a>
+The abstract follows.</p>
+<p>Many numerical algorithms on matrices or tensors can be formulated in a
+blocking style which improves performance due to better cache locality.
+In imperative languages, blocking is achieved by introducing additional
+layers of loops in a nested fashion alongside with suitable adjustments
+in index computations. While this process is tedious and error-prone, it
+is also difficult to implement a generically blocked version that would
+support arbitrary levels of blocking.</p>
+<p>At the example of matrix multiply, this paper demonstrates how
+rank-polymorphic array languages enable the specification of such
+generically blocked algorithms in a simple, recursive form. The depth of
+the blocking as well as blocking factors can be encoded in the structure
+of array shapes. In turn, reshaping arrays makes it possible to switch
+between blocked and non-blocked arrays. Through rank-polymorphic array
+combinators, any specification of loop boundaries or explicit index
+computations can be avoided.</p>
+<p>Firstly, we propose a dependently-typed framework for rank-polymorphic
+arrays. We use it to demonstrate that all blocked algorithms can be
+naturally derived by induction on the argument shapes. Our framework
+guarantees lack of out-of-bound indexing, and we also prove that all the
+blocked versions compute the same results as the canonical algorithm.
+Secondly, we translate our specification to the array language SaC. Not
+only do we show that we achieve similar conciseness in the
+implementation, but we also observe good performance of the generated
+code. We achieve a 7% improvement compared to the highly-optimised
+OpenBLAS library, and 3% compared to Intel’s MKL library when running on
+a 32-core shared-memory system.</p>
+    </section>
+    <p align="right">
+      <i>June 12, 2023</i>
+    </p>
+</article>
+
+        </main>
+    </body>
+</html>
