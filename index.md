@@ -5,16 +5,15 @@ sharing: false
 ---
 
 
-I am a Research Associate in the 
-[School of Mathematical and Computer Sciences](http://www.macs.hw.ac.uk/)
-at [Heriot-Watt University](https://www.hw.ac.uk/).  Also, I am a visiting researcher
-in the [Functional Programming Lab](https://www.nottingham.ac.uk/research/groups/fp-lab/)
-at the [University of Nottingham](https://www.nottingham.ac.uk/) where I
-spend most of my working hours these days.
-
+I am an assistant professor at the
+[Cyber Phisical Systems](https://www.southampton.ac.uk/research/groups/cyber-physical-systems)
+group at the [University of Southampton](https://www.southampton.ac.uk/).
 My research is on compilers and programming languages.  I
 am interested in bringing ideas from type theory and mathematics into
 high-performance compilers.
+
+I am _looking for PhD students_ who would be interested in working on type theory
+and programming languages.
 
 ### Contact
 
@@ -26,6 +25,13 @@ high-performance compilers.
 In the official documents, e.g. my publications, the spelling of my name is *Artjoms Šinkarovs*.
 While it is unusual to have multiple spellings of your name, [here is why I do](/name.html).
 
+
+<!--I am a Research Associate in the 
+[School of Mathematical and Computer Sciences](http://www.macs.hw.ac.uk/)
+at [Heriot-Watt University](https://www.hw.ac.uk/).  Also, I am a visiting researcher
+in the [Functional Programming Lab](https://www.nottingham.ac.uk/research/groups/fp-lab/)
+at the [University of Nottingham](https://www.nottingham.ac.uk/) where I
+spend most of my working hours these days. -->
 
 
 

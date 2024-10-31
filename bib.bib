@@ -39,6 +39,21 @@
     That's it!
 */
 
+@article{2024-correctness,
+      title={Correctness is Demanding, Performance is Frustrating}, 
+      author={Artjoms Sinkarovs and Thomas Koopman and Sven-Bodo Scholz},
+      date={2024-06-14},
+      year={2024},
+      eprint={2406.10405},
+      archivePrefix={arXiv},
+      primaryClass={cs.PL},
+      url={/pubs/2024-correctness.pdf}, 
+      abstract={
+       In this paper we demonstrate a technique for developing high performance applications with strong correctness guarantees. We use a theorem prover to derive a high-level specification of the application that includes correctness invariants of our choice. After that, within the same theorem prover, we implement an extraction of the specified application into a high-performance language of our choice. Concretely, we are using Agda to specify a framework for automatic differentiation (reverse mode) that is focused on index-safe tensors. This framework comes with an optimiser for tensor expressions and the ability to translate these expressions into SaC and C. We specify a canonical convolutional neural network within the proposed framework, compute the derivatives needed for the training phase and then demonstrate that the generated code matches the performance of hand-written code when running on a multi-core machine.
+      }
+}
+
+
 @InProceedings{2022-types,
   author =	{Altenkirch, Thorsten and Kaposi, Ambrus and \v{S}inkarovs, Artjoms and V\'{e}gh, Tam\'{a}s},
   title =	{{The M\"{u}nchhausen Method in Type Theory}},

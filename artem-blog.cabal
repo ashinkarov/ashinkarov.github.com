@@ -27,20 +27,20 @@ executable artem-blog
     -- Modules included in this executable, other than Main.
     other-modules:    BibHakyll,
                       Bib
-		      
+          
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
-    build-depends:    base ^>=4.16.4.0,
-    		      text >= 1.2.5,
+    build-depends:    base >=4.16.4.0,
+                      text >= 1.2.5,
                       hakyll >= 4.7,
-		      time >= 1.11.1.1,
-		      pandoc >= 3.1.2,
-		      pandoc-types >= 1.23,
-		      binary >= 0.8.9.0,
-		      bytestring >= 0.11.4.0,
-		      containers >= 0.6.5.1,
-		      typed-process >= 0.2.11.0,
-		      extra >= 1.7.13,
-		      parsec >= 3.0
+                      time >= 1.11.1.1,
+                      pandoc >= 3.1.2,
+                      pandoc-types >= 1.23,
+                      binary >= 0.8.9.0,
+                      bytestring >= 0.11.4.0,
+                      containers >= 0.6.5.1,
+                      typed-process >= 0.2.11.0,
+                      extra >= 1.7.13,
+                      parsec >= 3.0
 
     default-language: Haskell2010
