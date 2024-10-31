@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Artem Shinkarov - 2024-correctness</title>
+        <link rel="stylesheet" href="../css/notosans.css" />
+        <link rel="stylesheet" href="../css/merriweather.css" />
+        <link rel="stylesheet" href="../css/sakura.css" />
+        <link rel="stylesheet" href="../css/tema.css" />
+    </head>
+    <script>
+      function visibilityToggle(id) {
+         var x = document.getElementById(id);
+         //alert("display of " + id + " = " + x.style.display)
+         if (x.style.display === "none") {
+           x.style.display = "block";
+         } else {
+           x.style.display = "none";
+         }
+      }
+    </script>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">Artem Shinkarov</a>
+            </div>
+            <nav>
+                <a href="../">About</a>
+                <a href="../publications.html">Publications</a>
+                <a href="../archive.html">Posts</a>
+                <a href="../links.html">Links</a>
+            </nav>
+        </header>
+        <hr style="border:1px solid #e4e4e4;" />
+        <main role="main">
+            <div class="paper-img-desc">
+  <a class="paper-img" href="../pubs/2024-correctness.pdf
+">
+  
+    <img src="../pubs/2024-correctness.png" style="width:30rem">
+  
+  </a>
+  <h2>Correctness is Demanding, Performance is Frustrating
+</h2>
+  
+  <p>A. Sinkarovs, T. Koopman, and S.-B. Scholz, <span>“Correctness is
+demanding, performance is frustrating,”</span> Jun. 2024, Available: <a href="https://arxiv.org/abs/2406.10405">https://arxiv.org/abs/2406.10405</a></p>
+
+  <p class="bibpdf">
+    <a href="../pubs/2024-correctness.pdf
+">[URL]</a>
+    <a href="javascript:visibilityToggle('bibtex-box');">[BibTeX]</a>
+  </p>
+</div>
+
+<code class="bibinfo" id="bibtex-box" style="display:none;">@article{2024-correctness,
+	title = {Correctness is Demanding, Performance is Frustrating},
+	author = {Artjoms Sinkarovs and Thomas Koopman and Sven-Bodo Scholz},
+	year = {2024},
+	eprint = {2406.10405},
+	archiveprefix = {arXiv},
+	primaryclass = {cs.PL}}</code>
+
+
+<h3>Abstract</h3>
+<p><p><span> In this paper we demonstrate a technique for developing high
+performance applications with strong correctness guarantees. We use a
+theorem prover to derive a high-level specification of the application
+that includes correctness invariants of our choice. After that, within
+the same theorem prover, we implement an extraction of the specified
+application into a high-performance language of our choice. Concretely,
+we are using Agda to specify a framework for automatic differentiation
+(reverse mode) that is focused on index-safe tensors. This framework
+comes with an optimiser for tensor expressions and the ability to
+translate these expressions into SaC and C. We specify a canonical
+convolutional neural network within the proposed framework, compute the
+derivatives needed for the training phase and then demonstrate that the
+generated code matches the performance of hand-written code when running
+on a multi-core machine. </span></p></p>
+
+
+
+
+        </main>
+    </body>
+</html>
